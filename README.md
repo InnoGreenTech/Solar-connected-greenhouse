@@ -1,17 +1,33 @@
-# Solar-connected-greenhouse
-This is a project to create a autonome greenhouse with solar panels, a tank of water and a composter.
+Solar connected greenhouse
+==========================
 
-This project is building around a Arduino Atmega and a ESP8266. The ESP8266 is optionnal.
+Description:
+------------
 
-You can found drawing to built the same garden, greenhouse and lombricomposter.
-There are also any stl files to make boxes for sensors and actuator. 
+This is a autonome greenhouse with solar panels, a tank of water and a composter. It is also possible to control a garden.
 
-You can also follow this project on innogreentech.fr 
+This project is building around a Arduino Atmega 2560 and a ESP8266. The ESP8266 is optional, it allows to send data in a Json format. 
 
-There are three parts with any sensors and actuators.
+There are a lot of functionalities like spray, heating, orthicole lamp, fan, cat proof, … each is power by 24 Vdc provide by the solar pane. It can work with 48 Vdc or relay to work over voltage.
 
-Part One:
+The system can measure humidity, temperature, moisture, CO2, level of water, … in several places. Each data can be send at a data center.
 
-	A green house with a solar panel and a tank of water
+You can find drawing to build the same garden, greenhouse and lombricompost. I have provided the drawings.
 
-	
+There are also any stl files to make boxes for sensors and actuators. 
+
+And the most important the drawings and PCB to make a main board with a
+touch screen, a remote for the garden and a remote for the greenhouse.
+
+
+
+[*You can also follow this project here*](http://innogreentech.fr) 
+
+[*A complete description to make electronic boards*](http://innogreentech.fr/en/green-side/green-food/20-serre-connectee/53-electronic-board-for-the-solar-greenhouse)
+	![electronic boards](http://innogreentech.fr/images/Serre/cartes_electroniques/cards_sensors_test.JPG)
+
+
+
+[*A dash board to follow my personal project*](http://innogreentech.fr/fr/cote-green/nourriture/serre-et-potager-connectes/45-serre-connectee-en-direct)
+
+![Picture of current status](http://innogreentech.fr/images/Serre/statut/statut_greenhouse.png)
