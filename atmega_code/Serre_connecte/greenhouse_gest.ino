@@ -100,5 +100,5 @@ float get_luminosity(){
 void day_detect(){
 
   if (luminosity_greenhouse<50 and night_day==0){night_day=1;}
-  else if (luminosity_greenhouse<200 and night_day==1){night_day=0;}
+  else if (luminosity_greenhouse>200 and night_day==1){night_day=0;}
 }

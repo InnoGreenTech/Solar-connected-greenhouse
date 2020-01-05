@@ -1,0 +1,339 @@
+Cmp-Mod V01 Created by PcbNew   date = 24/11/2019 17:16:10
+
+BeginCmp
+TimeStamp = 5DC67A07
+Path = /5DD516F4
+Reference = J2;
+ValeurCmp = Output IDC;
+IdModule  = Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67B3F
+Path = /5DEC0A5B
+Reference = J8;
+ValeurCmp = Output4;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type101_RT01606HBWC_1x06_P5.08mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC679D9
+Path = /5DB601A1
+Reference = J1;
+ValeurCmp = Input IDC;
+IdModule  = Connector_IDC:IDC-Header_2x08_P2.54mm_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D77
+Path = /5DFBBC65
+Reference = R2;
+ValeurCmp = 10k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67DA5
+Path = /5DFBBC5E
+Reference = R4;
+ValeurCmp = 0;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E8B
+Path = /5DBEB471
+Reference = R14;
+ValeurCmp = 5k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67994
+Path = /5DC6EABC
+Reference = F1;
+ValeurCmp = Fuse;
+IdModule  = Fuse:Fuse_Littelfuse_395Series;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67A6B
+Path = /5DCEF7C0
+Reference = J5;
+ValeurCmp = Output3;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type101_RT01606HBWC_1x06_P5.08mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67B8D
+Path = /5DC7772E
+Reference = J9;
+ValeurCmp = Output1;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type101_RT01606HBWC_1x06_P5.08mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67CAD
+Path = /5DCE3D9F
+Reference = J13;
+ValeurCmp = Output2;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type101_RT01606HBWC_1x06_P5.08mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67CC7
+Path = /5DC60A83
+Reference = Q1;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67CE1
+Path = /5DC94170
+Reference = Q2;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67CFB
+Path = /5DCA5C45
+Reference = Q3;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D15
+Path = /5DCE3D91
+Reference = Q4;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D2F
+Path = /5DCE3DB2
+Reference = Q5;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D49
+Path = /5DCE3DCD
+Reference = Q6;
+ValeurCmp = IRLZ34N;
+IdModule  = Package_TO_SOT_THT:TO-220-3_Vertical;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D60
+Path = /5DC775FA
+Reference = R1;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67D8E
+Path = /5DC054B2
+Reference = R3;
+ValeurCmp = 10k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67DBC
+Path = /5DC05422
+Reference = R5;
+ValeurCmp = 0;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67DD3
+Path = /5DC94177
+Reference = R6;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67DEA
+Path = /5DCA5C4C
+Reference = R7;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E01
+Path = /5DFCD840
+Reference = R8;
+ValeurCmp = 10k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E18
+Path = /5DFD36A5
+Reference = R9;
+ValeurCmp = 10k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E2F
+Path = /5DFCD839
+Reference = R10;
+ValeurCmp = 0;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E46
+Path = /5DFD369E
+Reference = R11;
+ValeurCmp = 0;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E5D
+Path = /5DCE3D98
+Reference = R12;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67E74
+Path = /5DBEB3C9
+Reference = R13;
+ValeurCmp = 5k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67EA2
+Path = /5DFD96B0
+Reference = R15;
+ValeurCmp = 2k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67EB9
+Path = /5DCE3DB9
+Reference = R16;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67ED0
+Path = /5DFD96A9
+Reference = R17;
+ValeurCmp = 10k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC67EE7
+Path = /5DCE3DD4
+Reference = R18;
+ValeurCmp = 1k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC77CEC
+Path = /5DBFEDBB
+Reference = R19;
+ValeurCmp = nc;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DC77D03
+Path = /5DBFEDC2
+Reference = R20;
+ValeurCmp = nc;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72452
+Path = /5DDBD181
+Reference = F2;
+ValeurCmp = Fuse;
+IdModule  = Fuse:Fuse_Littelfuse_395Series;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72464
+Path = /5DD42E3D
+Reference = J3;
+ValeurCmp = 24 V;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type101_RT01602HBWC_1x02_P5.08mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE724B9
+Path = /5DC09298
+Reference = J6;
+ValeurCmp = Input1;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03406HBLC_1x06_P3.81mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72538
+Path = /5DBEA981
+Reference = J7;
+ValeurCmp = serial port;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03404HBLC_1x04_P3.81mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72595
+Path = /5DC1FFE4
+Reference = J10;
+ValeurCmp = Input2;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03406HBLC_1x06_P3.81mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72614
+Path = /5DC38425
+Reference = J12;
+ValeurCmp = Input3;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03406HBLC_1x06_P3.81mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE726A9
+Path = /5DDB5DA3
+Reference = R21;
+ValeurCmp = 5k;
+IdModule  = Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE73241
+Path = /5DBEAA46
+Reference = J11;
+ValeurCmp = I²C port;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03404HBLC_1x04_P3.81mm_Horizontal;
+EndCmp
+
+BeginCmp
+TimeStamp = 5DE72C13
+Path = /5DB5F479
+Reference = J4;
+ValeurCmp = IN 5V;
+IdModule  = TerminalBlock_MetzConnect:TerminalBlock_MetzConnect_Type086_RT03402HBLC_1x02_P3.81mm_Horizontal;
+EndCmp
+
+EndListe
