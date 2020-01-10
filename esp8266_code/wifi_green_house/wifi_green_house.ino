@@ -64,6 +64,7 @@
     #define CODE_ECO_TEMPERATURE_COMPOST                16
     #define CODE_SPRAY_COMPOST                          17
     #define CODE_CLEAN_COMPOST                          18
+    #define CODE_OUTPUT_GARDEN                          19
     
     
     #define CODE_TEMPERATURE_OUT                        20
@@ -94,6 +95,7 @@
     #define CODE_SETTING_TEMPERATURE_SOIL_GREENHOUSE    46
     #define CODE_SETTING_HUMIDITY_GREENHOUSE            47
     #define CODE_SETTING_CO2_GREENHOUSE                 48
+    #define CODE_OUTPUT_GREENHOUSE                      49
     
     #define CODE_DATE                                   50
     #define CODE_HEURE                                  51
@@ -153,7 +155,8 @@
     byte    desactive_greenhouse=0;
 
     unsigned int time_heat_greenhouse;
-    unsigned int time_cooling_greenhouse;
+    unsigned int time_fan_cooling_greenhouse;
+    unsigned int time_pump_cooling_greenhouse;
     unsigned int time_spray_greenhouse;
     unsigned int time_vmc_greenhouse;
     unsigned int time_lamp_greenhouse;
@@ -162,7 +165,8 @@
     int          flap_ventilation_greenhouse;
 
     unsigned int time_heat_greenhouse_1;
-    unsigned int time_cooling_greenhouse_1;
+    unsigned int time_fan_cooling_greenhouse_1;
+    unsigned int time_pump_cooling_greenhouse_1;
     unsigned int time_spray_greenhouse_1;
     unsigned int time_vmc_greenhouse_1;
     unsigned int time_lamp_greenhouse_1;

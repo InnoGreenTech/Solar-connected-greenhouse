@@ -5,7 +5,7 @@ void send_data(){
      
 if(millis()-period_sent>PERIOD_SENT){
   
-     byte code[31]={
+     byte code[33]={
             CODE_TEMPERATURE_COMPOST,    
             CODE_HUMIDITY_COMPOST,
             CODE_PUMP_COMPOST,
@@ -18,7 +18,8 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_LEVEL_WATER_GARDEN,
             CODE_SPRAY_GARDEN,
             CODE_TEMPERATURE_SOIL_GARDEN,
-            CODE_MOISTURE_GARDEN,   
+            CODE_MOISTURE_GARDEN,
+            CODE_OUTPUT_GARDEN,   
     
             CODE_TEMPERATURE_GREENHOUSE,
             CODE_HUMIDITY_GREENHOUSE,
@@ -35,6 +36,7 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_VMC_GREENHOUSE,
             CODE_FLAP_VENTILATION_GREENHOUSE,
             CODE_HUMIDIFICATOR_GREENHOUSE,
+            CODE_OUTPUT_GREENHOUSE,
     
             CODE_AVERAGE_V_BATTERY,
             CODE_GENERAL_PUMP,
@@ -42,7 +44,7 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_AVERAGE_A_LOAD  
             }; 
                 
-       float  valeur[31]={
+       float  valeur[33]={
             temperature_compost,    
             humidity_compost,
             time_pump_compost,
@@ -54,7 +56,8 @@ if(millis()-period_sent>PERIOD_SENT){
             level_water_garden,
             time_spray_garden,
             temperature_soil_garden,
-            moisture_garden,   
+            moisture_garden,
+            ourput_garden,   
     
             temperature_greenhouse,
             humidity_greenhouse,
@@ -71,6 +74,7 @@ if(millis()-period_sent>PERIOD_SENT){
             time_vmc_greenhouse,
             flap_ventilation_greenhouse,
             time_humidificator_greenhouse,
+            output_greenhouse,
     
             v_battery,
             time_main_pump,

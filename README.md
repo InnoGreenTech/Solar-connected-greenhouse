@@ -19,6 +19,20 @@ There are also any stl files to make boxes for sensors and actuators.
 And the most important the drawings and PCB to make a main board with a
 touch screen, a remote for the garden and a remote for the greenhouse.
 
+Statut of project:
+-----------------
+
+Sensors of greenhouse:
+
+1. color:green Temperature
+2. color:green Humidity
+3. color:green Temperature of soil
+4. color:green Humidity of soil
+5. color:green Temperature of water
+6. color:green Level of water
+7. color:green CO2
+8. color:green Luminosity
+
 
 
 [*You can also follow this project here*](http://innogreentech.fr) 

@@ -1,21 +1,11 @@
 void send_data(){
 
     
-    /*if ( WiFi.status()!= WL_CONNECTED)
-    
-        {
-        if (nb_cycle_lost_wifi<NB_TRYING_CONNECT)                            // test the wifi connection  if lost it, reset the module
-                      {
-                      nb_cycle_lost_wifi++;
-                      last_message = last_message+30000;
-                      return;              
-                      } 
 
-        else {ESP.reset();}  // if the lost of wifi
-        }*/
 
-      String ip=WiFi.localIP().toString().c_str();
-      String data;
+      String ip=WiFi.localIP().toString().c_str();    // Allow at the server to know the new address if it have changed
+      String data; 
+      
       /* Création des données json */
 
       
@@ -49,8 +39,8 @@ void send_data(){
      root["a1"]=time_main_pump;
          
      root["a2"]=time_vmc_greenhouse;
-     root["a3"]=time_cooling_greenhouse;
-     root["a4"]=time_cooling_greenhouse;
+     root["a3"]=time_fan_cooling_greenhouse;
+     root["a4"]=time_pump_cooling_greenhouse;
      root["a5"]=time_heat_greenhouse;
      root["a6"]=time_spray_greenhouse; 
      root["a7"]=time_lamp_greenhouse;
@@ -83,12 +73,10 @@ void send_data(){
      //Serial.println(payload);
      http.end();  //Close connection 
      last_message= millis();
-     average_v_battery;          
-     average_a_battery;
-     average_a_load;
-     index_average=0;
-
-             
+     average_v_battery=0;          
+     average_a_battery=0;
+     average_a_load=0;
+     index_average=0;             
       
   
 }

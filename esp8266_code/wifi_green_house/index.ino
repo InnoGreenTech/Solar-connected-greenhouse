@@ -36,27 +36,38 @@ String indexPage(){
                                  page +=version_module;
                                  page +=F("</li></ul></section>");
       
-                                 page +=F("<section id='outdoor'><h2> Greenhouse </h2><ul><li>Température: ");
+                                 page +=F("<section id='greenhouse'><h2> Greenhouse </h2><ul><li>Température: ");
                                  page +=temperature_greenhouse;
                                  page +=F(" °c</li><li> Humidité:");
                                  page +=humidity_greenhouse;
-                                 page +=F(" %</li></ul></section>");
-      
-                                 
-                                 page +=F("<section id='indoor'><h2> Garden </h2><ul><li>Température: ");
+                                 page +=F(" %</li><li> CO2:");
+                                 page +=co2_greenhouse;
+                                 page +=F(" ppm</li><li> Luminosite:");    
+                                 page +=luminosity_greenhouse;
+                                 page +=F(" luxe</li><li> Humidité sol:");
+                                 page +=moisture_greenhouse;
+                                 page +=F(" luxe</li><li> Température sol:");
+                                 page +=temperature_soil_greenhouse;
+                                 page +=F(" °C</li><li> Température eau:");
+                                 page +=temperature_water_greenhouse;
+                                 page +=F(" °C</li></ul></section>");   
+                                       
+                                 page +=F("<section id='garden'><h2> Garden </h2><ul><li>Température: ");
                                  page +=temperature_out;
                                  page +=F(" °c</li><li> Humidité: ");
                                  page +=humidity_out;
-                                 page +=F(" %</li><li> Température: ");
+                                 page +=F(" %</li><li> Température sol: ");
                                  page +=temperature_soil_garden;
-                                 page +=F(" °C</li></ul></section>");
+                                 page +=F(" °C</li><li> Humidité sol:");
+                                 page +=moisture_garden;
+                                 page +=F(" %</li></ul></section>");
                            
-                                 page +=F("<section id='energie'><h2> Compost  </h2><ul><li>Température: ");
-                                 page +=v_battery;
+                                 page +=F("<section id='compost'><h2> Compost  </h2><ul><li>Température: ");
+                                 page +=average_v_battery;
                                  page +=F(" Volts</li><li>Courant battery: ");
-                                 page +=a_battery;
+                                 page +=average_a_battery;
                                  page +=F(" Ampéres</li><li>Courant load: ");
-                                 page +=a_load;
+                                 page +=average_a_load;
                                  page +=F(" Ampéres</li><li> Température compost: ");
                                  page +=temperature_compost;
                                  page +=F(" °C</li><li> Humidité compost ");

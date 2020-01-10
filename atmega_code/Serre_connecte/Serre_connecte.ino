@@ -231,6 +231,7 @@
     #define CODE_ECO_TEMPERATURE_COMPOST                16
     #define CODE_SPRAY_COMPOST                          17
     #define CODE_CLEAN_COMPOST                          18
+    #define CODE_OUTPUT_GARDEN                          19
     
     
     #define CODE_TEMPERATURE_OUT                        20
@@ -261,6 +262,7 @@
     #define CODE_SETTING_TEMPERATURE_SOIL_GREENHOUSE    46
     #define CODE_SETTING_HUMIDITY_GREENHOUSE            47
     #define CODE_SETTING_CO2_GREENHOUSE                 48
+    #define CODE_OUTPUT_GREENHOUSE                      49
     
     #define CODE_DATE                                   50
     #define CODE_HEURE                                  51
