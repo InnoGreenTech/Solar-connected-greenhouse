@@ -23,15 +23,16 @@ Statut of project:
 -----------------
 
 Sensors of greenhouse:
-
-1. color:green Temperature
-2. color:green Humidity
-3. color:green Temperature of soil
-4. color:green Humidity of soil
-5. color:green Temperature of water
-6. color:green Level of water
-7. color:green CO2
-8. color:green Luminosity
+color:green
+1. Temperature
+2. Humidity
+3. Temperature of soil
+4. Humidity of soil
+5. Temperature of water
+6. Level of water
+7. CO2
+8. Luminosity
+color:black
 
 
 
