@@ -47,7 +47,7 @@ if(refresh_demand==1)
         
         if (!bitRead(desactive_greenhouse,VMC_GREENHOUSE))
           {
-            if (bitRead(output_greenhouse,VMC_GREENHOUSE)){
+            if (bitRead(output_greenhouse,VMC_GREENHOUSE) || bitRead(forced_greenhouse,VMC_GREENHOUSE)){
               digitalWrite(GREENHOUSE_VMC,1);
               time_vmc_greenhouse=time_vmc_greenhouse+REFRESH_SCREEN_SECONDS;
             }
@@ -57,15 +57,27 @@ if(refresh_demand==1)
         
         /* Lamp control */
         
-        if (!bitRead(desactive_greenhouse,LAMP_GREENHOUSE) and v_battery>25)
+        if (!bitRead(desactive_greenhouse,LAMP_GREENHOUSE))
           {
-            if (bitRead(output_greenhouse,LAMP_GREENHOUSE)){
+            if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>25) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
               digitalWrite(GREENHOUSE_LAMP,1);
               time_lamp_greenhouse=time_lamp_greenhouse+REFRESH_SCREEN_SECONDS;
             }
             else{digitalWrite(GREENHOUSE_LAMP,0);}
           }
         else{digitalWrite(GREENHOUSE_LAMP,0);}
+
+       /* Heat soil control */
+
+               if (!bitRead(desactive_greenhouse,HEATING_GREENHOUSE))
+          {
+            if ((bitRead(output_greenhouse,HEATING_GREENHOUSE) and v_battery>25)|| bitRead(forced_greenhouse,HEATING_GREENHOUSE)){
+              digitalWrite(GREENHOUSE_HEATING,1);
+              time_heat_greenhouse=time_heat_greenhouse+REFRESH_SCREEN_SECONDS;
+            }
+            else{digitalWrite(GREENHOUSE_HEATING,0);}
+          }
+        else{digitalWrite(GREENHOUSE_HEATING,0);}
   }
 
 }

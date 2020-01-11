@@ -57,7 +57,7 @@ if(millis()-period_sent>PERIOD_SENT){
             time_spray_garden,
             temperature_soil_garden,
             moisture_garden,
-            ourput_garden,   
+            output_garden,   
     
             temperature_greenhouse,
             humidity_greenhouse,
