@@ -273,7 +273,7 @@ void setup() {
               Serial.begin(115200);
               Serial.setDebugOutput(0);
               delay(10);
-              
+              Serial.println("");
               /* Read EEPROM */
             
               EEPROM.begin(512);                             
@@ -308,12 +308,14 @@ void setup() {
 
               carac='1';                
               a=0;
-              while (!(carac=='\0')&&a<100){carac=char (EEPROM.read(MEM_SSID+a));if (!(carac=='\0')){ssid +=carac;} a++;}  //récupération du lien d'information
+              while (!(carac=='\0')&&a<100){carac=char (EEPROM.read(MEM_SSID+a));
+              if (!(carac=='\0')){ssid +=carac;} a++;}  //récupération du lien d'information
               if (ssid=='\0'||a>50){ssid=F("");}
             
               carac='1';
               a=0;
-              while (!(carac=='\0')&&a<100){carac=char (EEPROM.read(MEM_PASSWORD+a));if (!(carac=='\0')){password +=carac;} a++;}  //récupération du lien d'information
+              while (!(carac=='\0')&&a<100){carac=char (EEPROM.read(MEM_PASSWORD+a));
+              if (!(carac=='\0')){password +=carac;} a++;}  //récupération du lien d'information
               if (password=='\0'||a>50){password=F("");}
 
 
@@ -326,10 +328,11 @@ void setup() {
            c =ssid.length()+1;
            char char_ssid[50];
            ssid.toCharArray(char_ssid, c);
-        
+
            c =password.length()+1;
            char char_password[50];
            password.toCharArray(char_password, c);
+
         
            WiFi.begin(char_ssid,char_password);
            
@@ -372,7 +375,7 @@ void setup() {
               /*Read the houre and date on internet */
             
               NTP.begin("pool.ntp.org", 1, true);  //configuration de la récupération de la date,  Serveur+1 heure, Heure été/hivers
-              NTP.setInterval(3600);                // Toute les heures
+              NTP.setInterval(3600);                // Toutes les heures
                       
               /*information of module*/
 

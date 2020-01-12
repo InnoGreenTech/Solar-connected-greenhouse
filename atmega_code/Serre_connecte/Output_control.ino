@@ -11,7 +11,7 @@ if(refresh_demand==1)
          /* Cooling system */
         if (!bitRead(desactive_greenhouse,FAN_COOLING_GREENHOUSE))
           { 
-            if (bitRead(output_greenhouse,FAN_COOLING_GREENHOUSE) && v_battery>24 || bitRead(forced_greenhouse,FAN_COOLING_GREENHOUSE)) 
+            if (bitRead(output_greenhouse,FAN_COOLING_GREENHOUSE)|| bitRead(forced_greenhouse,FAN_COOLING_GREENHOUSE)) 
                     {
                       digitalWrite(GREENHOUSE_FAN_COOLING,1);
                       time_cooling_greenhouse=time_cooling_greenhouse+REFRESH_SCREEN_SECONDS;
@@ -22,9 +22,9 @@ if(refresh_demand==1)
         
         if (!bitRead(desactive_greenhouse,PUMP_COOLING_GREENHOUSE))
           {
-            if (bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) && v_battery>24 || bitRead(forced_greenhouse,PUMP_COOLING_GREENHOUSE)) 
+            if (bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) || bitRead(forced_greenhouse,PUMP_COOLING_GREENHOUSE)) 
                     {
-                      analogWrite(GREENHOUSE_PUMP_COOLING, 130);
+                      analogWrite(GREENHOUSE_PUMP_COOLING, 100);
                       
                     }
             else{analogWrite(GREENHOUSE_PUMP_COOLING,0);}
@@ -59,7 +59,7 @@ if(refresh_demand==1)
         
         if (!bitRead(desactive_greenhouse,LAMP_GREENHOUSE))
           {
-            if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>25) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
+            if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>24) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
               digitalWrite(GREENHOUSE_LAMP,1);
               time_lamp_greenhouse=time_lamp_greenhouse+REFRESH_SCREEN_SECONDS;
             }

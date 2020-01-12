@@ -233,10 +233,6 @@ Text GLabel 8300 3100 2    50   BiDi ~ 0
 I2.3
 Text GLabel 8300 3300 2    50   BiDi ~ 0
 I2.4
-Wire Wire Line
-	3500 1600 3500 1400
-Wire Wire Line
-	3500 1400 2100 1400
 Text GLabel 4000 1700 0    50   BiDi ~ 0
 RX1
 Text GLabel 4400 1800 0    50   BiDi ~ 0
@@ -245,8 +241,6 @@ Text GLabel 4000 2300 0    50   BiDi ~ 0
 SDA1
 Text GLabel 4400 2400 0    50   BiDi ~ 0
 SCL1
-Wire Wire Line
-	2100 1500 5400 1500
 Wire Wire Line
 	3500 1600 5400 1600
 Wire Wire Line
@@ -879,4 +873,14 @@ Text GLabel 8600 5600 2    50   BiDi ~ 0
 O2.10
 Wire Wire Line
 	8000 5600 8600 5600
+Wire Wire Line
+	2100 1500 3500 1500
+Wire Wire Line
+	3500 1500 3500 1600
+Wire Wire Line
+	2100 1400 3650 1400
+Wire Wire Line
+	3650 1400 3650 1500
+Wire Wire Line
+	3650 1500 5400 1500
 $EndSCHEMATC

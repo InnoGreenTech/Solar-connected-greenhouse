@@ -4,7 +4,7 @@ void recep_data(){
  
  if(Serial.available()>0){
                         char a;
-                        char command[2];
+                        char command[3];
                         char what[2];
                         int  what_is;
                         String content="";
@@ -12,6 +12,7 @@ void recep_data(){
                         delay(2);                            // wait first 
                         command[0]=Serial.read();
                         command[1]=Serial.read();
+                        command[2]=Serial.read();
                         if (command!=CODE_COMMAND_INFO&&command!=CODE_COMMAND_READ&&command!=CODE_COMMAND_WRITE)
                         {Serial.flush();return;}
                         what[0]=Serial.read();

@@ -11,13 +11,6 @@ void handleRoot(){
                                   }                       
       } 
 
-      /*if ( server.hasArg("set_temp") ) {       // si reception 
-      ssid=server.arg("seuil");
-      int c = ssid.length() + 1;         // longueur de la chaîne de caractéres
-      for (int i = 0; i < c; i++) { 
-                                  EEPROM.write((i+MEM_SET_TEMP),ssid[i]);  // Réglage du pointeur sur l'adresse mémoire
-                                  }                    
-      } */
       
       if ( server.hasArg("PASSWORD") ) {       // si reception 
       password=server.arg("PASSWORD");
@@ -25,7 +18,8 @@ void handleRoot(){
       for (int i = 0; i < c; i++) { 
                                   EEPROM.write((i+MEM_PASSWORD),password[i]);  // Réglage du pointeur sur l'adresse mémoire
                                   }
-             EEPROM.commit();     // Enregistrement dnas la mémoire flash
+                  
+             EEPROM.commit();     // Enregistrement dans la mémoire flash
              delay (500);
              ESP.restart();
                                                                

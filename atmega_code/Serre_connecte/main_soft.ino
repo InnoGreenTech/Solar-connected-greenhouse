@@ -23,6 +23,9 @@ void loop(void){
 
   output_garden_control();
 
+recep_wifi();
+  send_data();
+
   switch(flag_screen){
 
              case B00000001:
