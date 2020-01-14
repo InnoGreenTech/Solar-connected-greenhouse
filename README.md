@@ -8,9 +8,9 @@ This is a autonome greenhouse with solar panels, a tank of water and a composter
 
 This project is building around a Arduino Atmega 2560 and a ESP8266. The ESP8266 is optional, it allows to send data in a Json format. 
 
-There are a lot of functionalities like spray, heating, orthicole lamp, fan, cat proof, … each is power by 24 Vdc provide by the solar pane. It can work with 48 Vdc or relay to work over voltage.
+There are a lot of functionalities like spray, heating, orthicole lamp, fan, cat proof, â€¦ each is power by 24 Vdc provide by the solar pane. It can work with 48 Vdc or relay to work over voltage.
 
-The system can measure humidity, temperature, moisture, CO2, level of water, … in several places. Each data can be send at a data center.
+The system can measure humidity, temperature, moisture, CO2, level of water, â€¦ in several places. Each data can be send at a data center.
 
 You can find drawing to build the same garden, greenhouse and lombricompost. I have provided the drawings.
 
@@ -46,3 +46,10 @@ color:black
 [*A dash board to follow my personal project*](http://innogreentech.fr/fr/cote-green/nourriture/serre-et-potager-connectes/45-serre-connectee-en-direct)
 
 ![Picture of current status](http://innogreentech.fr/images/Serre/statut/statut_greenhouse.png)
+
+Contributing
+Fork it
+Create your feature branch (git checkout -b my-new-feature)
+Commit your changes (git commit -am 'Add some feature')
+Push to the branch (git push origin my-new-feature)
+Create new Pull Request
