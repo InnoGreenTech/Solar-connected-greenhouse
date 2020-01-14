@@ -47,7 +47,8 @@ color:black
 
 ![Picture of current status](http://innogreentech.fr/images/Serre/statut/statut_greenhouse.png)
 
-Contributing
+**Contributing**
+
 Fork it
 Create your feature branch (git checkout -b my-new-feature)
 Commit your changes (git commit -am 'Add some feature')
