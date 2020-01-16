@@ -74,6 +74,7 @@ void setup(void){
   
   Serial.begin(9600);     
   Serial1.begin(115200);    // set communication with ESP8266
+  Serial2.begin(9600);    
   Serial3.begin(9600);      // Start communication with CO2 sensor  MH_Z19_RX
 
    /*********************************************************************************************** 

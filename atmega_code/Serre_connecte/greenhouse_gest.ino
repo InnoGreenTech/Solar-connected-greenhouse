@@ -37,16 +37,14 @@ void greenhouse_gest(){
 
 
 void get_water_level(){
-  int distance= water_level.ping_cm();
-  //Serial.println(distance);
-  level_water_greenhouse = set_deep_water-distance;
-  if (level_water_greenhouse>set_deep_water){level_water_greenhouse=0;}
-  else if (level_water_greenhouse<0){level_water_greenhouse=set_deep_water;}
-}
+  
+  int distance=water_level.ping_cm();
+  if (distance>set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
+
+  }
 
 void get_moisture_greenhouse(){
   int read_pin=analogRead(MOISTURE_GREENHOUSE);
-  Serial.println(read_pin);
   read_pin=read_pin-80;
   moisture_greenhouse= 100-(read_pin*10/90);
   if(moisture_greenhouse>100){moisture_greenhouse=100;}

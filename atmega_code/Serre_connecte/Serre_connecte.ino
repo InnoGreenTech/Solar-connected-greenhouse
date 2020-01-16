@@ -220,7 +220,8 @@
 
     #define CODE_COMMAND_INFO                           "$I$"
     #define CODE_COMMAND_READ                           "$R$" 
-    #define CODE_COMMAND_WRITE                          "$W$"        
+    #define CODE_COMMAND_WRITE                          "$W$"
+     
     
     #define CODE_TEMPERATURE_COMPOST                    10     
     #define CODE_HUMIDITY_COMPOST                       11

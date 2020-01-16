@@ -4,21 +4,32 @@ void recep_data(){
  
  if(Serial.available()>0){
                         char a;
-                        char command[3];
-                        char what[2];
+                        String command="";
+                        String what="";
                         int  what_is;
                         String content="";
                                                 
-                        delay(2);                            // wait first 
-                        command[0]=Serial.read();
-                        command[1]=Serial.read();
-                        command[2]=Serial.read();
+                        delay(2);                            // wait first to receive every data
+                        for(int i=0;i<3;i++){
+                            a=Serial.read();
+                            command +=(char)a;
+                          }
+                          
+
                         if (command!=CODE_COMMAND_INFO&&command!=CODE_COMMAND_READ&&command!=CODE_COMMAND_WRITE)
-                        {Serial.flush();return;}
-                        what[0]=Serial.read();
-                        what[1]=Serial.read();
-                        content=what;
-                        what_is=content.toInt();        
+                          {
+                           
+                            while (Serial.available()>0){        //read content
+                            Serial.read();}
+                            Serial.flush();return;
+                            }
+                                                  
+                        for(int i=0;i<2;i++){
+                            a=Serial.read();
+                            what +=(char)a;
+                          }
+
+                        what_is=what.toInt();        
                         content = "";
                         while (Serial.available()>0){        //read content
                         a=Serial.read();

@@ -12,29 +12,29 @@ void indexRoot(){
 
 
 String indexPage(){
-                    String page =F("<!DOCTYPE html> <html lang=fr-FR><head><meta charset='utf-8'><link rel='stylesheet'type='text/css'href='style.css'><title>Capteur Maison</title></head>");
+                    String page =F("<!DOCTYPE html> <html lang=fr-FR><head><meta charset='utf-8'><link rel='stylesheet'type='text/css'href='style.css'><title>Solar Greenhouse</title></head>");
                            page +=F("<body>");
-                           page +=F("<nav> <ul id='menu'><li><a href='index.html'> Accueil </a></li><li><a href='reglage.html'> Réglages </a></li><li><a href='mail.html'> Mails </a> </li></ul></nav>");
+                           page +=F("<nav> <ul id='menu'><li><a href='index.html'> Accueil </a></li><li><a href='firmware'> Update </a></li></ul></nav>");
                           
                            page +=F("<div id='page'>");
                            
-                           page +=F("<header><h1>Centrale maison</h1></header>");
+                           page +=F("<header><h1>Solar greenhouse</h1></header>");
 
-                           page +=F("<div id='contenu'>");
+                           page +=F("<div id='corp'>");
                                  page +=F("<section id='datedujour'><h2>");
                                  page +=NTP.getDateStr();
                                  page +=F("</h2><h3>");
                                  page +=NTP.getTimeStr();
                                  page +=F("</h3>");
-                                 page +=F("<ul><li>Serveur: ");
+                                 page +=F("<Table><tr><td>Serveur:</td><td>");
                                  page +=ip_server;
-                                 page +=F("</li><li> Port serveur: ");
+                                 page +=F("</td></tr><tr><td>Port serveur:</td><td>");
                                  page +=port_server;
-                                 page +=F("</li><li> Adresse MAC: ");
+                                 page +=F("</td></tr><tr><td>Adresse MAC:</td><td>");
                                  page +=local_mac;
-                                 page +=F("</li><li> Version: ");
+                                 page +=F("</td></tr><tr><td>Version</td><td>");
                                  page +=version_module;
-                                 page +=F("</li></ul></section>");
+                                 page +=F("</td></tr></tr></Table></section>");
       
                                  page +=F("<section id='greenhouse'><h2> Greenhouse </h2><ul><li>Température: ");
                                  page +=temperature_greenhouse;
@@ -44,9 +44,9 @@ String indexPage(){
                                  page +=co2_greenhouse;
                                  page +=F(" ppm</li><li> Luminosite:");    
                                  page +=luminosity_greenhouse;
-                                 page +=F(" luxe</li><li> Humidité sol:");
+                                 page +=F(" lux</li><li> Humidité sol:");
                                  page +=moisture_greenhouse;
-                                 page +=F(" luxe</li><li> Température sol:");
+                                 page +=F(" %</li><li> Température sol:");
                                  page +=temperature_soil_greenhouse;
                                  page +=F(" °C</li><li> Température eau:");
                                  page +=temperature_water_greenhouse;
@@ -70,7 +70,7 @@ String indexPage(){
                                  page +=average_a_load;
                                  page +=F(" Ampéres</li><li> Température compost: ");
                                  page +=temperature_compost;
-                                 page +=F(" °C</li><li> Humidité compost ");
+                                 page +=F(" °C</li><li> Humidité compost: ");
                                  page +=humidity_compost;                           
                                  page +=F("  %</li></ul></section>");
 
@@ -81,7 +81,7 @@ String indexPage(){
                                  
                            page +=F("</div>");
                            
-                           page +=F("<footer><a href='http://www.lepal.com'>InnoGreenTech</a><a href='mailto: fabricebaudin@outlook.fr'>Contactez moi</a></footer>");
-                           page +=F("/div></body></html>");                 
+                           page +=F("<footer><a href='http://innogreentech.fr'>InnoGreenTech  </a><a href='mailto: info@innogreentech.fr'>Contactez moi</a></footer>");
+                           page +=F("</body></html>");                 
                            return page;
                           }

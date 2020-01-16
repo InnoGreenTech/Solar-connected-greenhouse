@@ -5,13 +5,13 @@ void send_data(){
      
 if(millis()-period_sent>PERIOD_SENT){
   
-     byte code[33]={
+     int code[32]={
             CODE_TEMPERATURE_COMPOST,    
             CODE_HUMIDITY_COMPOST,
             CODE_PUMP_COMPOST,
             CODE_HEAT_COMPOST,
             CODE_SPRAY_COMPOST,
-            CODE_CLEAN_COMPOST,
+
        
             CODE_TEMPERATURE_OUT,
             CODE_HUMIDITY_OUT,
@@ -44,50 +44,54 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_AVERAGE_A_LOAD  
             }; 
                 
-       float  valeur[33]={
-            temperature_compost,    
-            humidity_compost,
-            time_pump_compost,
-            time_heat_compost,
-            time_spray_compost,
+       String  valeur[32]={
+            String(temperature_compost),    
+            String(humidity_compost),
+            String(time_pump_compost),
+            String(time_heat_compost),
+            String(time_spray_compost),
        
-            temperature_out,
-            humidity_out,
-            level_water_garden,
-            time_spray_garden,
-            temperature_soil_garden,
-            moisture_garden,
-            output_garden,   
+            String(temperature_out),
+            String(humidity_out),
+            String(level_water_garden),
+            String(time_spray_garden),
+            String(temperature_soil_garden),
+            String(moisture_garden),
+            String(output_garden),   
     
-            temperature_greenhouse,
-            humidity_greenhouse,
-            co2_greenhouse,
-            level_water_greenhouse,
-            time_spray_greenhouse,
-            time_lamp_greenhouse,
-            time_heat_greenhouse,
-            time_cooling_greenhouse,
-            time_cooling_greenhouse,
-            temperature_water_greenhouse,
-            temperature_soil_greenhouse,
-            moisture_greenhouse,
-            time_vmc_greenhouse,
-            flap_ventilation_greenhouse,
-            time_humidificator_greenhouse,
-            output_greenhouse,
+            String(temperature_greenhouse),
+            String(humidity_greenhouse),
+            String(co2_greenhouse),
+            String(level_water_greenhouse),
+            String(time_spray_greenhouse),
+            String(time_lamp_greenhouse),
+            String(time_heat_greenhouse),
+            String(time_cooling_greenhouse),
+            String(time_cooling_greenhouse),
+            String(temperature_water_greenhouse),
+            String(temperature_soil_greenhouse),
+            String(moisture_greenhouse),
+            String(time_vmc_greenhouse),
+            String(flap_ventilation_greenhouse),
+            String(time_humidificator_greenhouse),
+            String(output_greenhouse),
     
-            v_battery,
-            time_main_pump,
-            a_battery,
-            a_load                     
+            String(v_battery),
+            String(time_main_pump),
+            String(a_battery),
+            String(a_load)                     
        } ;  
-       if (index_sent<31){  
-       Serial1.print(CODE_COMMAND_INFO);         
+       if (index_sent<32){  
+       Serial1.print(CODE_COMMAND_INFO);
+       Serial.print(CODE_COMMAND_INFO);       
        Serial1.print(code[index_sent]);    // Envoi des valeurs au module Wifi
-       Serial1.print(valeur[index_sent],2); 
+       Serial.print(code[index_sent]);
+       Serial1.print(valeur[index_sent]); 
+       Serial.println(valeur[index_sent]); 
          }
        index_sent++; 
-       if (index_sent== 31){index_sent=0;period_sent=millis(); } // remise à zéro de l'index
+       if (index_sent== 32){index_sent=0;} // remise à zéro de l'index
+       period_sent=millis(); 
     }  
   
 }
