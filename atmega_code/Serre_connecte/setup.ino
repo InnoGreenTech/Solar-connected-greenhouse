@@ -83,7 +83,7 @@ void setup(void){
 
   greenhouse_dht.begin();
   outdoor_dht.begin();
-  water_level.ping_median(5,100);
+  water_level.ping_median(1,100);
 
   /*Set and start BME280 sensor, COMPOSTomposter*/
 
@@ -117,6 +117,8 @@ void setup(void){
   pinMode(GREENHOUSE_LAMP,OUTPUT);
   pinMode(GREENHOUSE_HEATING,OUTPUT);
   pinMode(GREENHOUSE_HUMIDIFICATOR,OUTPUT);
+
+  servo_vmc.attach(GREENHOUSE_SERVO_VMC);
 
  /* Garden/Compost output */
 

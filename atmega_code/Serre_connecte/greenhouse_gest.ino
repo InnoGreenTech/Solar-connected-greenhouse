@@ -39,7 +39,8 @@ void greenhouse_gest(){
 void get_water_level(){
   
   int distance=water_level.ping_cm();
-  if (distance>set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
+  Serial.println(distance);
+  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
 
   }
 
@@ -59,16 +60,21 @@ void control_spray_greenhouse(){
 }
 
 void vmc_control(){
-  if (temperature_greenhouse>set_temperature_greenhouse){
+
+  int calculate_humidity=humidity_out*temperature_greenhouse/temperature_out;
+  int difference_humidity= humidity_greenhouse-set_humidity_greenhouse;
+
+  if (temperature_greenhouse>set_temperature_greenhouse){             // security too protect hot temperature
   bitSet(output_greenhouse,GREENHOUSE_VMC);
+  servo_vmc.write(100);
   }
-  else if( humidity_out*temperature_greenhouse/temperature_out<humidity_greenhouse && humidity_greenhouse>set_humidity_greenhouse+5){
-  bitSet(output_greenhouse,GREENHOUSE_VMC); 
-  }
-  else if( humidity_out*temperature_greenhouse/temperature_out>humidity_greenhouse && humidity_greenhouse<set_humidity_greenhouse-5){
-  bitSet(output_greenhouse,GREENHOUSE_VMC); 
-  }
-  else{bitClear(output_greenhouse,GREENHOUSE_VMC);}  
+  else if( calculate_humidity<humidity_greenhouse && difference_humidity>5){
+        int open_servo= map(difference_humidity,0,20,10,100);
+        servo_vmc.write(open_servo);
+        if (difference_humidity>20){bitSet(output_greenhouse,GREENHOUSE_VMC);}
+       }
+  else{bitClear(output_greenhouse,GREENHOUSE_VMC);servo_vmc.write(10);}  
+  Serial.println(servo_vmc.read());
  }
 
 void lamp_run(){

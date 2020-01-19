@@ -62,7 +62,7 @@ String indexPage(){
                                  page +=moisture_garden;
                                  page +=F(" %</td></tr></table></section>");
                            
-                                 page +=F("<section id='compost'><h2> Compost  </h2><table><tr><td>Température:</td><td></td><td>");
+                                 page +=F("<section id='compost'><h2> Compost  </h2><table><tr><td>Battery voltage:</td><td></td><td>");
                                  page +=average_v_battery;
                                  page +=F(" V</td></tr><tr><td>Courant battery:</td><td></td><td>");
                                  page +=average_a_battery;

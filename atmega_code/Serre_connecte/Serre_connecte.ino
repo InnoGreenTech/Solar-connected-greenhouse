@@ -26,6 +26,7 @@
     #include <printf.h>
     #include <registers.h> 
     #include <pin_magic.h>
+    #include <Servo.h>
 
 /************************
  *   Set memory adress  *
@@ -501,6 +502,8 @@
     #define   ECHO_SONAR      I2_2// Broche ECHO
     NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
 
+
+
 /* Garden and lompricomposte sensors */
 
     #define MOISTURE_GARDEN     A1_4
@@ -526,6 +529,8 @@
     #define GREENHOUSE_LAMP          O2_1
     #define GREENHOUSE_HEATING       O2_0  
     #define GREENHOUSE_HUMIDIFICATOR O2_5 
+    #define GREENHOUSE_SERVO_VMC     O2_6          // this a 5 V servo
+    Servo servo_vmc;
 
 /* Garden card output*/
 

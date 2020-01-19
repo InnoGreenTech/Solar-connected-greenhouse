@@ -117,7 +117,7 @@ void recep_data(){
                                   temperature_water_greenhouse=content.toFloat();
                                   break;
                               case CODE_TEMPERATURE_SOIL_GREENHOUSE:
-                                  temperature_water_greenhouse=content.toFloat();
+                                  temperature_soil_greenhouse=content.toFloat();
                                   break;
                               case CODE_MOISTURE_GREENHOUSE:
                                   moisture_greenhouse=content.toFloat();

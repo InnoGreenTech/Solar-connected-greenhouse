@@ -83,11 +83,11 @@ if(millis()-period_sent>PERIOD_SENT){
        } ;  
        if (index_sent<32){  
        Serial1.print(CODE_COMMAND_INFO);
-       Serial.print(CODE_COMMAND_INFO);       
+       //Serial.print(CODE_COMMAND_INFO);       
        Serial1.print(code[index_sent]);    // Envoi des valeurs au module Wifi
-       Serial.print(code[index_sent]);
+       //Serial.print(code[index_sent]);
        Serial1.print(valeur[index_sent]); 
-       Serial.println(valeur[index_sent]); 
+       //Serial.println(valeur[index_sent]); 
          }
        index_sent++; 
        if (index_sent== 32){index_sent=0;} // remise à zéro de l'index

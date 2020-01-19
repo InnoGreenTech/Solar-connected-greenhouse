@@ -28,7 +28,7 @@ void read_values_compost(){
 
 float tension_battery(){
   float read_pin=analogRead(V_BATTERY);
-  v_battery= (read_pin*30/1023)/1.07;
+  v_battery= 1+((read_pin*30/1023)/1.07);
   return v_battery;
   
   /*moyenne flottante = 0;
