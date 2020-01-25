@@ -76,7 +76,18 @@ void send_data(){
      average_v_battery=0;          
      average_a_battery=0;
      average_a_load=0;
-     index_average=0;             
+     index_average=0; 
+     time_pump_compost_1=0;
+     time_heat_compost_1=0;
+     time_spray_compost_1=0;   
+     time_spray_garden_1=0;
+     time_spray_greenhouse_1=0;
+     time_lamp_greenhouse_1=0;
+     time_fan_cooling_greenhouse_1=0;
+     time_pump_cooling_greenhouse_1=0;
+     time_vmc_greenhouse_1=0;
+     time_humidificator_greenhouse_1=0;
+     time_main_pump_1 =0;        
       
   
 }

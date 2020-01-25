@@ -83,7 +83,7 @@ void setup(void){
 
   greenhouse_dht.begin();
   outdoor_dht.begin();
-  water_level.ping_median(1,100);
+  water_level.ping_median(3,200);
 
   /*Set and start BME280 sensor, COMPOSTomposter*/
 

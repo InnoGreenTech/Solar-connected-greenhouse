@@ -24,7 +24,7 @@ void greenhouse_gest(){
 
  void cooling_system(){
 
-   if(temperature_greenhouse>temperature_water_greenhouse+5 || temperature_greenhouse<temperature_water_greenhouse-5 || temperature_greenhouse<2){
+   if(((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0) || ((temperature_greenhouse<temperature_water_greenhouse-5) && temperature_greenhouse<5.1)  || temperature_greenhouse<2){
     
             bitSet(output_greenhouse,FAN_COOLING_GREENHOUSE);
             bitSet(output_greenhouse,PUMP_COOLING_GREENHOUSE);
@@ -60,7 +60,7 @@ void control_spray_greenhouse(){
 }
 
 void vmc_control(){
-
+  
   int calculate_humidity=humidity_out*temperature_greenhouse/temperature_out;
   int difference_humidity= humidity_greenhouse-set_humidity_greenhouse;
 
@@ -74,6 +74,7 @@ void vmc_control(){
         if (difference_humidity>20){bitSet(output_greenhouse,GREENHOUSE_VMC);}
        }
   else{bitClear(output_greenhouse,GREENHOUSE_VMC);servo_vmc.write(10);}  
+
   Serial.println(servo_vmc.read());
  }
 

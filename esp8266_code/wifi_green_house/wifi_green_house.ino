@@ -74,7 +74,7 @@
     #define CODE_TEMPERATURE_SOIL_GARDEN                24
     #define CODE_MOISTURE_GARDEN                        25
     #define CODE_SETTING_MOISTURE_GARDEN                26
-    
+    #define CODE_LUMINOSITY_GREENHOUSE                  27   
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -364,6 +364,7 @@ void setup() {
                 local_mac = WiFi.macAddress();
                 delay(100);
                 server.begin();
+
               
               }
 

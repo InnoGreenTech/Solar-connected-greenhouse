@@ -24,8 +24,7 @@ if(refresh_demand==1)
           {
             if (bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) || bitRead(forced_greenhouse,PUMP_COOLING_GREENHOUSE)) 
                     {
-                      analogWrite(GREENHOUSE_PUMP_COOLING, 100);
-                      
+                      analogWrite(GREENHOUSE_PUMP_COOLING,100);                                          
                     }
             else{analogWrite(GREENHOUSE_PUMP_COOLING,0);}
           }

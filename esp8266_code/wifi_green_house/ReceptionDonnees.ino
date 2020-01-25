@@ -45,15 +45,15 @@ void recep_data(){
                                    humidity_compost=content.toInt();            
                                    break;
                                 case CODE_PUMP_COMPOST:                      //calcul the time of work between two sent              
-                                   if (index_average==1){ time_pump_compost_1= content.toInt();} 
+                                   if (time_pump_compost_1==0){ time_pump_compost_1= content.toInt();} 
                                    else{time_pump_compost=content.toInt()-time_pump_compost_1;}          
                                    break;
                                 case CODE_HEAT_COMPOST:
-                                  if (index_average==1){ time_heat_compost_1=content.toInt();}
+                                  if (time_heat_compost_1==0){ time_heat_compost_1=content.toInt();}
                                   else{time_heat_compost=content.toInt()- time_heat_compost_1;}
                                   break;
                                 case CODE_SPRAY_COMPOST:
-                                  if (index_average==1){time_spray_compost_1=content.toInt();}
+                                  if (time_spray_compost_1==0){time_spray_compost_1=content.toInt();}
                                   else{time_spray_compost=content.toInt()- time_spray_compost_1;}
                                   
 
@@ -67,7 +67,7 @@ void recep_data(){
                                   level_water_garden=content.toInt();
                                   break;
                                case CODE_SPRAY_GARDEN:
-                                  if (index_average==1){time_spray_garden_1=content.toInt();}
+                                  if (time_spray_garden_1==0){time_spray_garden_1=content.toInt();}
                                   else{time_spray_garden=content.toInt()- time_spray_garden_1;}
                                   break;
                                case CODE_TEMPERATURE_SOIL_GARDEN:
@@ -78,7 +78,10 @@ void recep_data(){
                                   break;
                                case CODE_OUTPUT_GARDEN:
                                   output_garden=content.toInt();
-                                  break;                                  
+                                  break;  
+                               case CODE_LUMINOSITY_GREENHOUSE:
+                                  luminosity_greenhouse=content.toInt();
+                                  break;                                 
                       
 
                               case CODE_TEMPERATURE_GREENHOUSE:
@@ -94,23 +97,23 @@ void recep_data(){
                                   level_water_greenhouse=content.toInt();
                                   break;
                               case CODE_SPRAY_GREENHOUSE:
-                                   if (index_average==1){time_spray_greenhouse_1=content.toInt();}
+                                   if (time_spray_greenhouse_1==0){time_spray_greenhouse_1=content.toInt();}
                                   else{time_spray_greenhouse=content.toInt()- time_spray_greenhouse_1;}
                                   break;                                 
                               case CODE_LAMP_GREENHOUSE:
-                                  if (index_average==1){time_lamp_greenhouse_1=content.toInt();}
+                                  if (time_lamp_greenhouse_1==0){time_lamp_greenhouse_1=content.toInt();}
                                   else{time_lamp_greenhouse=content.toInt()- time_lamp_greenhouse_1;}
                                   break;                              
                               case CODE_HEAT_GREENHOUSE:
-                                  if (index_average==1){time_heat_greenhouse_1=content.toInt();}
+                                  if (time_heat_greenhouse_1==0){time_heat_greenhouse_1=content.toInt();}
                                   else{time_heat_greenhouse=content.toInt()- time_heat_greenhouse_1;}
                                   break;                                  
                               case CODE_FAN_COOLING_GREENHOUSE:
-                                  if (index_average==1){time_fan_cooling_greenhouse_1=content.toInt();}
+                                  if (time_fan_cooling_greenhouse_1==0){time_fan_cooling_greenhouse_1=content.toInt();}
                                   else{time_fan_cooling_greenhouse=content.toInt()- time_fan_cooling_greenhouse_1;}
                                   break;                        
                               case CODE_PUMP_COOLING_GREENHOUSE:
-                                  if (index_average==1){time_pump_cooling_greenhouse_1=content.toInt();}
+                                  if (time_pump_cooling_greenhouse_1==0){time_pump_cooling_greenhouse_1=content.toInt();}
                                   else{time_pump_cooling_greenhouse=content.toInt()- time_pump_cooling_greenhouse_1;}
                                   break;                               
                               case CODE_TEMPERATURE_WATER_GREENHOUSE:
@@ -123,14 +126,14 @@ void recep_data(){
                                   moisture_greenhouse=content.toFloat();
                                   break;
                               case CODE_VMC_GREENHOUSE:
-                                  if (index_average==1){time_vmc_greenhouse_1=content.toInt();}
+                                  if (time_vmc_greenhouse_1==0){time_vmc_greenhouse_1=content.toInt();}
                                   else{time_vmc_greenhouse=content.toInt()- time_vmc_greenhouse_1;}
                                   break;               
                               case CODE_FLAP_VENTILATION_GREENHOUSE:
                                   flap_ventilation_greenhouse=content.toInt();
                                   break;
                               case CODE_HUMIDIFICATOR_GREENHOUSE:
-                                  if (index_average==1){time_humidificator_greenhouse_1=content.toInt();}
+                                  if (time_humidificator_greenhouse_1==0){time_humidificator_greenhouse_1=content.toInt();}
                                   else{time_humidificator_greenhouse=content.toInt()- time_humidificator_greenhouse_1;}
                                   break;
                               case CODE_OUTPUT_GREENHOUSE:
@@ -143,7 +146,7 @@ void recep_data(){
                                   average_v_battery= v_battery/index_average;
                                   break;
                               case CODE_GENERAL_PUMP:
-                                  if (index_average==1){time_main_pump_1=content.toInt();}
+                                  if (time_main_pump_1==0){time_main_pump_1=content.toInt();}
                                   else{time_main_pump=content.toInt()- time_main_pump_1;}
                                   break;                           
                               
