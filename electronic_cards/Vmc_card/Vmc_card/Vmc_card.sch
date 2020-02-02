@@ -26,12 +26,12 @@ F 3 "~" H 5950 3800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x04 J1
+L Connector:Screw_Terminal_01x06 J1
 U 1 1 5E2A04F7
 P 4500 4050
 F 0 "J1" H 4420 4367 50  0000 C CNN
 F 1 "Input" H 4420 4276 50  0000 C CNN
-F 2 "TerminalBlock_4Ucon:TerminalBlock_4Ucon_1x04_P3.50mm_Horizontal" H 4500 4050 50  0001 C CNN
+F 2 "TerminalBlock_4Ucon:TerminalBlock_4Ucon_1x06_P3.50mm_Horizontal" H 4500 4050 50  0001 C CNN
 F 3 "~" H 4500 4050 50  0001 C CNN
 	1    4500 4050
 	-1   0    0    -1  
@@ -48,28 +48,7 @@ F 3 "~" H 5950 4500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4700 4150 5450 4150
-Wire Wire Line
-	5450 4150 5450 4500
-Wire Wire Line
-	5450 4500 5750 4500
-Wire Wire Line
-	4700 4250 5350 4250
-Wire Wire Line
-	5350 4250 5350 4600
-Wire Wire Line
 	5350 4600 5750 4600
-Wire Wire Line
-	5450 4150 5450 3900
-Wire Wire Line
-	5450 3900 5750 3900
-Connection ~ 5450 4150
-Wire Wire Line
-	4700 4050 5150 4050
-Wire Wire Line
-	5350 4050 5350 3800
-Wire Wire Line
-	5350 3800 5750 3800
 $Comp
 L power:GND #PWR0101
 U 1 1 5E2A0C39
@@ -92,27 +71,43 @@ F 3 "" H 5350 4600 50  0001 C CNN
 	1    5350 4600
 	1    0    0    1   
 $EndComp
-$Comp
-L power:+5V #PWR0103
-U 1 1 5E2A0C97
-P 5150 4050
-F 0 "#PWR0103" H 5150 3900 50  0001 C CNN
-F 1 "+5V" H 5165 4223 50  0000 C CNN
-F 2 "" H 5150 4050 50  0001 C CNN
-F 3 "" H 5150 4050 50  0001 C CNN
-	1    5150 4050
-	1    0    0    -1  
-$EndComp
+Wire Wire Line
+	4700 4250 5400 4250
+Wire Wire Line
+	5400 4250 5400 4500
+Wire Wire Line
+	5400 4500 5750 4500
+Wire Wire Line
+	4700 4350 5350 4350
+Wire Wire Line
+	5350 4350 5350 4600
 Connection ~ 5350 4600
 Wire Wire Line
-	5700 4150 5450 4150
-Connection ~ 5150 4050
+	4700 4050 4800 4050
 Wire Wire Line
-	5150 4050 5350 4050
+	5700 4050 5700 4150
 Wire Wire Line
-	4700 3950 4900 3950
+	5750 3900 5700 3900
 Wire Wire Line
-	4900 3950 4900 3700
+	5700 3900 5700 4050
+Connection ~ 5700 4050
 Wire Wire Line
-	4900 3700 5750 3700
+	4700 4150 4800 4150
+Wire Wire Line
+	4800 4150 4800 4050
+Connection ~ 4800 4050
+Wire Wire Line
+	4800 4050 5700 4050
+Wire Wire Line
+	4700 3950 5200 3950
+Wire Wire Line
+	5200 3950 5200 3800
+Wire Wire Line
+	5200 3800 5750 3800
+Wire Wire Line
+	4700 3850 4800 3850
+Wire Wire Line
+	4800 3850 4800 3700
+Wire Wire Line
+	4800 3700 5750 3700
 $EndSCHEMATC

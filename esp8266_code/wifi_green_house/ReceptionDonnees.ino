@@ -55,10 +55,12 @@ void recep_data(){
                                 case CODE_SPRAY_COMPOST:
                                   if (time_spray_compost_1==0){time_spray_compost_1=content.toInt();}
                                   else{time_spray_compost=content.toInt()- time_spray_compost_1;}
+                                  break;
                                   
 
                                 case CODE_TEMPERATURE_OUT:
                                   temperature_out=content.toFloat();
+                                  if (temperature_out != temperature_out){temperature_out=0;}
                                   break;
                                case CODE_HUMIDITY_OUT:
                                   humidity_out=content.toFloat();
@@ -81,11 +83,12 @@ void recep_data(){
                                   break;  
                                case CODE_LUMINOSITY_GREENHOUSE:
                                   luminosity_greenhouse=content.toInt();
-                                  break;                                 
+                                  break;                                
                       
 
                               case CODE_TEMPERATURE_GREENHOUSE:
                                   temperature_greenhouse=content.toFloat();
+                                  if (temperature_greenhouse != temperature_greenhouse){temperature_greenhouse=0;}
                                   break;
                               case CODE_HUMIDITY_GREENHOUSE:
                                   humidity_greenhouse=content.toInt();

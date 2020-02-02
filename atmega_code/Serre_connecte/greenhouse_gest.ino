@@ -39,7 +39,7 @@ void greenhouse_gest(){
 void get_water_level(){
   
   int distance=water_level.ping_cm();
-  Serial.println(distance);
+  //Serial.println(distance);
   if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
 
   }
@@ -61,26 +61,35 @@ void control_spray_greenhouse(){
 
 void vmc_control(){
   
-  int calculate_humidity=humidity_out*temperature_greenhouse/temperature_out;
+  int calculate_humidity;
   int difference_humidity= humidity_greenhouse-set_humidity_greenhouse;
+  
+  if(humidity_out<95 and !bitRead(output_greenhouse,VMC_GREENHOUSE)){calculate_humidity=(humidity_out*temperature_out/temperature_greenhouse)+5;}
+  else if (humidity_out<95){calculate_humidity=(humidity_out*temperature_out/temperature_greenhouse);}  
+  else{calculate_humidity=100;}
 
-  if (temperature_greenhouse>set_temperature_greenhouse){             // security too protect hot temperature
-  bitSet(output_greenhouse,GREENHOUSE_VMC);
+  if (temperature_greenhouse>set_temperature_greenhouse || bitRead(forced_greenhouse,VMC_GREENHOUSE)){             // security too protect hot temperature
+  bitSet(output_greenhouse,VMC_GREENHOUSE);
   servo_vmc.write(100);
   }
-  else if( calculate_humidity<humidity_greenhouse && difference_humidity>5){
-        int open_servo= map(difference_humidity,0,20,10,100);
-        servo_vmc.write(open_servo);
-        if (difference_humidity>20){bitSet(output_greenhouse,GREENHOUSE_VMC);}
+  else if( calculate_humidity<(humidity_greenhouse-10) && difference_humidity>5 && night_day==0){                // Control: humidity not use during the night
+        int open_servo= map(difference_humidity,0,10,10,100);
+        if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
+        if (difference_humidity>15){bitSet(output_greenhouse,VMC_GREENHOUSE);}
        }
-  else{bitClear(output_greenhouse,GREENHOUSE_VMC);servo_vmc.write(10);}  
+  else if (co2_greenhouse>set_co2_greenhouse){
+        int open_servo= map(co2_greenhouse,set_co2_greenhouse,1700,10,100);
+        if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
+        if (co2_greenhouse>set_co2_greenhouse+300){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        
+        }
+  else {bitClear(output_greenhouse,VMC_GREENHOUSE);servo_vmc.write(10);}  
 
-  Serial.println(servo_vmc.read());
  }
 
 void lamp_run(){
   if (night_day==0){
-    bitClear(output_greenhouse,LAMP_GREENHOUSE);light_use=0;
+    bitClear(output_greenhouse,LAMP_GREENHOUSE);light_use=0;                                 // reset memory use,wait night to switch on the lamp
   }
   else if (!bitRead(output_greenhouse,LAMP_GREENHOUSE) and !light_use)
         {bitSet(output_greenhouse,LAMP_GREENHOUSE); time_lamp_day=millis();}

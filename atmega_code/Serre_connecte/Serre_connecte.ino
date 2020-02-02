@@ -512,7 +512,7 @@
     #define INTENSITY_LOAD      A1_2   
     #define CAT_PROOF_DETECT    I1_1
     
-    DHT     outdoor_dht(I1_0,DHT21);    //Outdoor sensor
+    DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
     uint8_t address_soil_garden[] = {  0x28,  0x7D,  0x97,  0x79,  0x97,  0x7,  0x3,  0xCF};
 
