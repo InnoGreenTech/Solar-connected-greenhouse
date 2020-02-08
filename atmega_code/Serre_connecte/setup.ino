@@ -54,13 +54,19 @@ void setup(void){
   for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_CO2_GREENHOUSE + a);} 
   set_co2_greenhouse = mem[0] | mem[1] << 8; 
   
-  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_ECO_BATTERY  +a);}
-  set_eco_batterie = mem[0] | mem[1] << 8;
+  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_V_OFFSET_BATTERY  +a);}
+  set_v_offset_battery = mem[0] | mem[1] << 8;
 
-  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_SAFE_BATTERY  +a);}
-  set_safe_batterie = mem[0] | mem[1] << 8;
+  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_A_OFFSET_BATTERY  +a);}
+  set_a_offset_battery = mem[0] | mem[1] << 8;
 
-  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_LUMINOSITY + a);} 
+  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_A_OFFSET_LOAD  +a);}
+  set_a_offset_load = mem[0] | mem[1] << 8;
+
+  for (int a = 0; a < 2; a++){mem[a]= EEPROM.read (MEM_SETTING_CAPACITY_BATTERY  +a);}
+  set_capacity_battery = mem[0] | mem[1] << 8;  
+
+  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_LUMINOSITY  + a);} 
   set_luminosity = mem[0] | mem[1] << 8; 
 
   for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_DEEP_WATER + a);} 
@@ -82,7 +88,7 @@ void setup(void){
   ***********************************************************************************************/
 
   greenhouse_dht.begin();
-  outdoor_dht.begin();
+  //outdoor_dht.begin();
   water_level.ping_median(3,100);
 
   /*Set and start BME280 sensor, COMPOSTomposter*/
@@ -95,6 +101,20 @@ void setup(void){
   compost_sensor.settings.tempOverSample = 1 ;
   compost_sensor.settings.pressOverSample = 1;
   compost_sensor.settings.humidOverSample = 1;
+
+  delay(10);                                              // Necessary time to start sensor
+
+  
+  /*Set and start BME280 sensor, sensoromposter*/
+
+  out_sensor.settings.commInterface = I2C_MODE;  // I have worked with the example of http://gilles.thebault.free.fr/
+  out_sensor.settings.I2CAddress = 0x77;
+  out_sensor.settings.runMode = 3; 
+  out_sensor.settings.tStandby = 0;
+  out_sensor.settings.filter = 0;
+  out_sensor.settings.tempOverSample = 1 ;
+  out_sensor.settings.pressOverSample = 1;
+  out_sensor.settings.humidOverSample = 1;
 
   delay(10);                                              // Necessary time to start sensor
 

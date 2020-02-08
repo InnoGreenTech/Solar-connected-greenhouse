@@ -3,8 +3,7 @@ void garden_gest(){
   { 
     onewire_garden.select(address_soil_garden);
     temperature_soil_garden=onewire_garden.getTempC();
-    temperature_out= float(outdoor_dht.readTemperature()); 
-    humidity_out=float(outdoor_dht.readHumidity());    
+    read_values_out();
     read_values_compost();
     tension_battery();
     intensity_battery();
@@ -21,14 +20,20 @@ void garden_gest(){
 
 void read_values_compost(){
   temperature_compost=compost_sensor.readTempC();
-  pression_compost=compost_sensor.readFloatPressure();
+  pressure_compost=compost_sensor.readFloatPressure();
   humidity_compost=compost_sensor.readFloatHumidity();
+}
+
+void read_values_out(){
+  temperature_out=out_sensor.readTempC();
+  pressure_out=out_sensor.readFloatPressure();
+  humidity_out=out_sensor.readFloatHumidity();
 }
 
 
 float tension_battery(){
   float read_pin=analogRead(V_BATTERY);
-  v_battery= 1+((read_pin*30/1023)/1.07);
+  v_battery= 1+((read_pin*30/1023)/1.07)+ float(set_v_offset_battery/100);
   return v_battery;
   
   /*moyenne flottante = 0;
@@ -40,7 +45,7 @@ float tension_battery(){
 float intensity_battery(){
   
   float read_pin=analogRead(INTENSITY_BATTERY)-512;
-  a_battery= (read_pin*25/512);   //100 mV/A
+  a_battery= (read_pin*25/512)- float(set_a_offset_battery/100);   //100 mV/A
   return a_battery;
 
 }
@@ -48,7 +53,7 @@ float intensity_battery(){
 float intensity_load(){
   
   float read_pin=analogRead(INTENSITY_LOAD)-512;  
-  a_load= (read_pin*25/512);
+  a_load= (read_pin*25/512)- float(set_a_offset_load/100);
   return a_load;
 
 }
@@ -83,8 +88,9 @@ void get_moisture_garden(){
   int read_pin=analogRead(MOISTURE_GARDEN);
   read_pin=read_pin-80;
   moisture_garden= 100-(read_pin*10/90);
-  if(moisture_garden>100){moisture_garden=100;}
-  else if(moisture_garden<0){moisture_garden=0;}
+  //if(moisture_garden>100){moisture_garden=100;}
+  //else if(moisture_garden<0){moisture_garden=0;}
+  if(moisture_garden<0){moisture_garden=0;}
   return moisture_garden;}
 
 void spray_control_garden(){

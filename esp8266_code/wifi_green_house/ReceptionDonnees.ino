@@ -63,8 +63,11 @@ void recep_data(){
                                   if (temperature_out != temperature_out){temperature_out=0;}
                                   break;
                                case CODE_HUMIDITY_OUT:
-                                  humidity_out=content.toFloat();
+                                  humidity_out=content.toInt();
                                   break;
+                               case CODE_PRESSURE_OUT:
+                                  pressure_out=content.toInt();
+                                  break;                                  
                                case CODE_LEVEL_WATER_GARDEN:
                                   level_water_garden=content.toInt();
                                   break;

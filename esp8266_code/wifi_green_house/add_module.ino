@@ -61,9 +61,11 @@ String answer_add_module(){
          page +=F("probe;p5;moist_greenhouse;MOISTURE_SOIL\r\n");
          page +=F("probe;p6;temp_soil_greenhouse;DS18b20\r\n");
          page +=F("probe;p7;temp_water_greenhouse;DS18b20\r\n");
+         page +=F("probe;p19;level_water_greenhouse;sonar_level\r\n");
          
-         page +=F("probe;p8;temp_out;DHT_21_temp\r\n");
-         page +=F("probe;p9;hum_out;DHT_21_hum\r\n");
+         page +=F("probe;p8;temp_out;BME280_temp\r\n");
+         page +=F("probe;p9;hum_out;BME280_hum\r\n");
+         page +=F("probe;p18;pres_out;BME280_pre\r\n"); 
          page +=F("probe;p10;temp_compost;BME280_temp\r\n");
          page +=F("probe;p11;hum_compost;BME280_hum\r\n");
          page +=F("probe;p12;pres_compost;BME280_pre\r\n");
@@ -72,7 +74,8 @@ String answer_add_module(){
          
          page +=F("probe;p15;v_battery;ANA_ARDUINO_V\r\n");          
          page +=F("probe;p16;a_battery;ACS712\r\n");
-         page +=F("probe;p17;a_load;ACS712\r\n");       
+         page +=F("probe;p17;a_load;ACS712\r\n");
+                 
          page +=F("actuator;a1;main_pump;MOSFET\r\n");
          
          page +=F("actuator;a2;vmc_greenhouse;MOSFET\r\n");

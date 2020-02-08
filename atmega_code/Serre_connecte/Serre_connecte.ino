@@ -43,12 +43,14 @@
     #define MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE       11      // set of temperature of greenhouse green
     #define MEM_SETTING_HUMIDITY_GREENHOUSE                 13      // Set of humidity of greenhouse
     #define MEM_SETTING_CO2_GREENHOUSE                      15      // Set of CO2 of Greenhouse 
-    #define MEM_SETTING_ECO_BATTERY                         17      // Set tension of batterie to enter in eco mode
-    #define MEM_SETTING_SAFE_BATTERY                        19      // Set tension of batterie to enter in safe mode  
+    #define MEM_SETTING_V_OFFSET_BATTERY                    17      
+    #define MEM_SETTING_A_OFFSET_BATTERY                    19       
     #define MEM_SETTING_LUMINOSITY                          21      // Set luminosity detect night
     #define MEM_SETTING_DEEP_WATER                          23      // Set the deep of tank water
     #define MEM_SETTING_TEMPERATURE_GREENHOUSE              25      // Set the max temperature of the green house
-    #define MEM_SETTING_MAX_INTENSITY                               27      // Set the max temperature of the green house
+    #define MEM_SETTING_MAX_INTENSITY                       27      
+    #define MEM_SETTING_A_OFFSET_LOAD                       29
+    #define MEM_SETTING_CAPACITY_BATTERY                    31
 
 /****************************
  *      Screen setting      *
@@ -243,8 +245,8 @@
     #define CODE_TEMPERATURE_SOIL_GARDEN                24
     #define CODE_MOISTURE_GARDEN                        25
     #define CODE_SETTING_MOISTURE_GARDEN                26
-    #define CODE_LUMINOSITY_GREENHOUSE                   27   
-    
+    #define CODE_LUMINOSITY_GREENHOUSE                  27   
+    #define CODE_PRESSURE_OUT                           28
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -278,8 +280,10 @@
     #define CODE_GENERAL_PUMP                           61
     #define CODE_AVERAGE_A_BATTERY                      62
     #define CODE_AVERAGE_A_LOAD                         63
-    #define CODE_SETTING_ECO_BATTERIE                   64
-    #define CODE_SETTING_SAFE_BATTERIE                  65
+    #define CODE_SETTING_V_OFFSET_BATTERIE              64
+    #define CODE_SETTING_A_OFFSET_BATTERIE              65
+    #define CODE_SETTING_A_OFFSET_LOAD                  66
+    #define CODE_SETTING_CAPACITY_BATTERIE              67
 
 /**************************************************
  *                RAM Memory map                  *
@@ -289,7 +293,7 @@
 
     float   temperature_compost;
     int     humidity_compost;
-    float   pression_compost=1000;
+    float   pressure_compost=1000;
     
     float   a_battery;
     float   a_load;
@@ -298,6 +302,7 @@
     
     float   temperature_out;
     int     humidity_out;
+    int     pressure_out;
     int     moisture_garden;
     float   temperature_soil_garden;
     int     level_water_garden;
@@ -387,9 +392,11 @@
     int     set_temperature_greenhouse;
     int     set_humidity_greenhouse;
     int     set_co2_greenhouse;
-    int     set_eco_batterie;
+    int     set_v_offset_battery;
+    int     set_a_offset_load;
+    int     set_a_offset_battery; 
+    int     set_capacity_battery;
     int     set_max_intensity;
-    int     set_safe_batterie; 
     int     set_luminosity;
     int     set_deep_water;
     
@@ -512,11 +519,12 @@
     #define INTENSITY_LOAD      A1_2   
     #define CAT_PROOF_DETECT    I1_1
     
-    DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
+    //DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
     uint8_t address_soil_garden[] = {  0x28,  0x7D,  0x97,  0x79,  0x97,  0x7,  0x3,  0xCF};
 
     BME280  compost_sensor;             // BME280 sensor
+    BME280  out_sensor;
 
  /*********************************************************************************************** 
   *                                   output define                                             *

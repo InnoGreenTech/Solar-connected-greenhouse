@@ -24,9 +24,11 @@ void send_data(){
      root["p5"]=moisture_greenhouse;
      root["p6"]=temperature_soil_greenhouse;
      root["p7"]=temperature_water_greenhouse;
-         
+     root["p19"]=level_water_greenhouse;
+        
      root["p8"]=temperature_out;
      root["p9"]=humidity_out;
+     root["p18"]=pressure_out;
      root["p10"]=temperature_compost;
      root["p11"]=humidity_compost;
      root["p12"]=pression_compost;

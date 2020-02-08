@@ -74,7 +74,8 @@
     #define CODE_TEMPERATURE_SOIL_GARDEN                24
     #define CODE_MOISTURE_GARDEN                        25
     #define CODE_SETTING_MOISTURE_GARDEN                26
-    #define CODE_LUMINOSITY_GREENHOUSE                  27   
+    #define CODE_LUMINOSITY_GREENHOUSE                  27
+    #define CODE_PRESSURE_OUT                           28   
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -108,8 +109,11 @@
     #define CODE_GENERAL_PUMP                           61
     #define CODE_AVERAGE_A_BATTERY                      62
     #define CODE_AVERAGE_A_LOAD                         63
-    #define CODE_SETTING_ECO_BATTERIE                   64
-    #define CODE_SETTING_SAFE_BATTERIE                  65
+    #define CODE_SETTING_V_OFFSET_BATTERIE              64
+    #define CODE_SETTING_A_OFFSET_BATTERIE              65
+    #define CODE_SETTING_A_OFFSET_LOAD                  66
+    #define CODE_SETTING_CAPACITY_BATTERIE              67
+
 
 /**************************************************
  *                RAM Memory map                  *
@@ -119,7 +123,7 @@
 
     float   temperature_compost;
     int     humidity_compost;
-    float   pression_compost=1000;
+    int     pressure_compost=1000;
     
     float   a_battery;
     float   average_a_battery;
@@ -130,6 +134,7 @@
     
     float   temperature_out;
     int     humidity_out;
+    int     pressure_out;
     int     moisture_garden;
     float   temperature_soil_garden;
     int     level_water_garden;
@@ -214,9 +219,11 @@
     int     set_temperature_greenhouse;
     int     set_humidity_greenhouse;
     int     set_co2_greenhouse;
-    int     set_eco_batterie;
+    int     set_v_offset_battery;
+    int     set_a_offset_load;
+    int     set_a_offset_battery; 
+    int     set_capacity_battery;
     int     set_max_intensity;
-    int     set_safe_batterie; 
     int     set_luminosity;
     int     set_deep_water;
     
