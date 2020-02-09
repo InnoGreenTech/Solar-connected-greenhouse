@@ -16,6 +16,8 @@ void garden_gest(){
     temperature_control_compost();
     spray_control_garden();    
   }
+  
+  
 }
 
 void read_values_compost(){
@@ -32,28 +34,36 @@ void read_values_out(){
 
 
 float tension_battery(){
-  float read_pin=analogRead(V_BATTERY);
-  v_battery= 1+((read_pin*30/1023)/1.07)+ float(set_v_offset_battery/100);
+  float read_pin=0;
+  for (int i = 0; i <100; i ++) {
+  read_pin = read_pin +float( analogRead(V_BATTERY))/100; 
+  }
+  //float read_pin= float(analogRead(V_BATTERY));
+  v_battery= 1+((read_pin*30/1023)/1.07)+ float(set_v_offset_battery)/100;
   return v_battery;
   
-  /*moyenne flottante = 0;
-  for (int i = 0; i <1000; i ++) {
-  moyenne = moyenne + (.19 * analogRead (A0) -25) / 1000;
- }*/
 }
 
 float intensity_battery(){
-  
-  float read_pin=analogRead(INTENSITY_BATTERY)-512;
-  a_battery= (read_pin*25/512)- float(set_a_offset_battery/100);   //100 mV/A
+  float read_pin=0;
+  for (int i = 0; i <500; i ++) {
+  read_pin = read_pin +float( analogRead(INTENSITY_BATTERY))/500; 
+  }
+  read_pin=read_pin-512;
+  //float read_pin= float(analogRead(INTENSITY_BATTERY)-512);
+  a_battery= (read_pin*25/512)- float(set_a_offset_battery)/100;   //100 mV/A
   return a_battery;
 
 }
 
 float intensity_load(){
-  
-  float read_pin=analogRead(INTENSITY_LOAD)-512;  
-  a_load= (read_pin*25/512)- float(set_a_offset_load/100);
+  float read_pin=0;
+  for (int i = 0; i <500; i ++) {
+  read_pin = read_pin +float( analogRead(INTENSITY_LOAD))/500; 
+  }
+  read_pin=read_pin-512;
+  //float read_pin=float(analogRead(INTENSITY_LOAD)-512);  
+  a_load= (read_pin*25/512)- float(set_a_offset_load)/100;
   return a_load;
 
 }
@@ -88,16 +98,16 @@ void get_moisture_garden(){
   int read_pin=analogRead(MOISTURE_GARDEN);
   read_pin=read_pin-80;
   moisture_garden= 100-(read_pin*10/90);
-  //if(moisture_garden>100){moisture_garden=100;}
-  //else if(moisture_garden<0){moisture_garden=0;}
-  if(moisture_garden<0){moisture_garden=0;}
+  if(moisture_garden>100){moisture_garden=100;}
+  else if(moisture_garden<0){moisture_garden=0;}
   return moisture_garden;}
 
 void spray_control_garden(){
 
-  if(moisture_garden<set_moisture_garden and luminosity_greenhouse<200){
+  if(moisture_garden<set_moisture_garden and night_day==1){
     bitSet(output_garden,SPRAY_GARDEN);
-   }  
+   } 
+ else{bitClear(output_garden,SPRAY_GARDEN);}
 }
 
 void cat_proof_control(){

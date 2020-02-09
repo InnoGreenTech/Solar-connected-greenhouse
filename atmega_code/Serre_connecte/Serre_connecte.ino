@@ -52,6 +52,7 @@
     #define MEM_SETTING_A_OFFSET_LOAD                       29
     #define MEM_SETTING_CAPACITY_BATTERY                    31
 
+
 /****************************
  *      Screen setting      *
  ****************************/

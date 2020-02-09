@@ -119,6 +119,7 @@ void setup(void){
   delay(10);                                              // Necessary time to start sensor
 
   compost_sensor.begin();
+  out_sensor.begin();
 
   /*cat proof sensor */
 

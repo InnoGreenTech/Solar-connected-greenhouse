@@ -68,11 +68,11 @@ void vmc_control(){
   else if (humidity_out<95){calculate_humidity=(humidity_out*temperature_out/temperature_greenhouse);}  
   else{calculate_humidity=100;}
 
-  if (temperature_greenhouse>set_temperature_greenhouse || bitRead(forced_greenhouse,VMC_GREENHOUSE)){             // security too protect hot temperature
+  if (temperature_greenhouse>set_temperature_greenhouse || bitRead(forced_greenhouse,VMC_GREENHOUSE)){             // security to protect hot temperature
   bitSet(output_greenhouse,VMC_GREENHOUSE);
   servo_vmc.write(100);
   }
-  else if( calculate_humidity<(humidity_greenhouse-10) && difference_humidity>5 && night_day==0){                // Control: humidity not use during the night
+  else if( calculate_humidity<(humidity_greenhouse-5) && difference_humidity>5){                
         int open_servo= map(difference_humidity,0,10,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
         if (difference_humidity>15){bitSet(output_greenhouse,VMC_GREENHOUSE);}
