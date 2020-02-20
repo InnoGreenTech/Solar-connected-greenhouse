@@ -33,8 +33,38 @@ color:green
 7. CO2
 8. Luminosity
 color:black
+Sensors of compost:
+color:green
+1. Temperature compost
+2. Humidity compost
+3. Voltage battery
+4. Intensity battery
+5. Intensity Load
+color:black
+Sensor of garden:
+color:green
+1. Temperature out
+2. Humidity out
+3. Temperature soil
+4. Humidity soil
+color:black
+Actuators of greenhouse:
+color:green
+1. Pump of cooling system
+2. Fans of cooling system
+3. Fan of VMC
+4. Servo motor of VMC clap
+5. Horticol lamp
+color:black
+Actuators of Compost and garden:
+color:green
+1. Heating compost
+2. Main pump spray
+3. EV spray Green house
+4. EV spray garden
+5. EV spray lombric
 
-
+color:black
 
 [*You can also follow this project here*](http://innogreentech.fr) 
 
