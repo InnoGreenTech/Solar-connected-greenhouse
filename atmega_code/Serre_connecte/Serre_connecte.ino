@@ -489,7 +489,8 @@
 #include <OneWire.h>
 #include <DS18B20.h>
 #include <NewPing.h>
-#include "SparkFunBME280.h"  
+#include "SparkFunBME280.h"
+#include "Adafruit_VL53L0X.h" 
 #include "Wire.h"            
 #include "SPI.h"
 
@@ -509,7 +510,9 @@
 
     #define   TRIGGER_SONAR   I2_3// Broche TRIGGER
     #define   ECHO_SONAR      I2_2// Broche ECHO
-    NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
+    //NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
+
+    Adafruit_VL53L0X water_level = Adafruit_VL53L0X();
 
 
 

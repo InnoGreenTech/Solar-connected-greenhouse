@@ -24,7 +24,7 @@ void greenhouse_gest(){
 
  void cooling_system(){
 
-   if(((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0) || ((temperature_greenhouse<temperature_water_greenhouse-5) && temperature_greenhouse<5.1)  || temperature_greenhouse<2){
+   if(((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0) || ((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)/3)and (temperature_water_greenhouse-temperature_greenhouse)>5) || temperature_greenhouse<2)){
     
             bitSet(output_greenhouse,FAN_COOLING_GREENHOUSE);
             bitSet(output_greenhouse,PUMP_COOLING_GREENHOUSE);
@@ -38,9 +38,18 @@ void greenhouse_gest(){
 
 void get_water_level(){
   
-  int distance=water_level.ping_cm();
+ /*int distance=water_level.ping_cm();
   //Serial.println(distance);
-  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
+  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}*/
+  VL53L0X_RangingMeasurementData_t measure;
+
+  water_level.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+
+  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
+   level_water_greenhouse = set_deep_water-int(measure.RangeMilliMeter/10);
+  } else {
+    Serial.println(" out of range ");
+  }
 
   }
 
@@ -72,7 +81,7 @@ void vmc_control(){
   bitSet(output_greenhouse,VMC_GREENHOUSE);
   servo_vmc.write(100);
   }
-  else if( calculate_humidity<(humidity_greenhouse-5) && difference_humidity>5){                
+  else if( calculate_humidity<(humidity_greenhouse-5) && difference_humidity>5 && night_day==0){               // Control humidity only the night
         int open_servo= map(difference_humidity,0,10,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
         if (difference_humidity>15){bitSet(output_greenhouse,VMC_GREENHOUSE);}

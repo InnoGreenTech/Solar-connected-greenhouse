@@ -9,10 +9,11 @@ void garden_gest(){
     intensity_battery();
     intensity_load();
     get_moisture_garden();
+    cat_proof_control();
 
     
 
-    spray_control_compost();
+    //spray_control_compost(); Automatic mode is not use currently
     temperature_control_compost();
     spray_control_garden();    
   }
@@ -51,7 +52,7 @@ float intensity_battery(){
   }
   read_pin=read_pin-512;
   //float read_pin= float(analogRead(INTENSITY_BATTERY)-512);
-  a_battery= (read_pin*25/512)- float(set_a_offset_battery)/100;   //100 mV/A
+  a_battery= (read_pin*25/512)+ float(set_a_offset_battery)/100;   //100 mV/A
   return a_battery;
 
 }
@@ -63,7 +64,7 @@ float intensity_load(){
   }
   read_pin=read_pin-512;
   //float read_pin=float(analogRead(INTENSITY_LOAD)-512);  
-  a_load= (read_pin*25/512)- float(set_a_offset_load)/100;
+  a_load= (read_pin*25/512)+ float(set_a_offset_load)/100;
   return a_load;
 
 }
