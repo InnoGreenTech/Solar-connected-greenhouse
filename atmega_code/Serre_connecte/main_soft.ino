@@ -6,10 +6,11 @@ void loop(void){
 
   
       
-  if (refresh_demand==2){refresh_demand=1;}
+  if (bitRead(refresh_demand,UPDATE_SCREEN)){bitSet(refresh_demand,REFRESH_SCREEN);}
    
-  if (millis()>refresh_datas+REFRESH_SCREEN){              // demand a refresh screen and lecture of sensor
-      refresh_demand=1;                   
+  if (millis()>refresh_datas+DELAY_REFRESH_SCREEN){              // demand a refresh screen and lecture of sensor
+      bitSet(refresh_demand,REFRESH_DATA);
+      bitSet(refresh_demand,REFRESH_SCREEN);                  
       refresh_datas=millis();
       number_of_samples ++;      
     }
@@ -19,6 +20,8 @@ void loop(void){
   greenhouse_gest();
   
   garden_gest();
+
+  mode();
 
   output_greenhouse_control();
 
@@ -60,6 +63,6 @@ void loop(void){
             } 
 
 
- if(refresh_demand==1){refresh_demand=0;}
+ if(bitRead(refresh_demand,REFRESH_SCREEN)){refresh_demand=0;}
 
 }

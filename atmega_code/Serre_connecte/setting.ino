@@ -29,12 +29,12 @@ if (!bitRead(flag_first_screen,SETTING_SCREEN)){
 /* read and adjust information */
 
 
-char info_set[30][18]={"Temp COMPOST     ","Eco Temp COMPOST ","Hum COMPOST      ","Moist Garden     ","Empty  4         ","Empty  5         ","Empty  6         ","Empty  7         ","Empty  8         ","Empty  9         ",
-                       "Moist Greenhouse ","Temp soil House  ","Hum Greenhouse   ","Temp greenhouse  ","C02 Greenhouse   ","Deep tank water  ","Empty  16        ","Empty  17        ","Empty  18        ","Empty  19        ",
+char info_set[30][18]={"Temp COMPOST     ","Eco Temp COMPOST ","Hum COMPOST      ","Moist Garden     ","Altitude         ","Kmoist  garden   ","Empty  6         ","Empty  7         ","Empty  8         ","Empty  9         ",
+                       "Moist Greenhouse ","Temp soil House  ","Hum Greenhouse   ","Temp greenhouse  ","C02 Greenhouse   ","Deep tank water  ","Kmoist greenhouse","Empty  17        ","Empty  18        ","Empty  19        ",
                        "V offset Battery ","A offset Battery ","Capacity Battery ","A offset load    ","Luminosity       ","Empty  25        ","Empty  26        ","Empty  27        ","Empty  28        ","Empty  29        "};
 
-int mem_address[30]={MEM_SETTING_TEMPEPARTURE_COMPOST ,MEM_SETTING_ECO_TEMPERATURE_COMPOST ,MEM_SETTING_HUMIDITY_COMPOST ,MEM_SETTING_MOISTURE_GARDEN,255 ,255,255,255,255,255,
-                       MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,255,255,255,255,
+int mem_address[30]={MEM_SETTING_TEMPEPARTURE_COMPOST ,MEM_SETTING_ECO_TEMPERATURE_COMPOST ,MEM_SETTING_HUMIDITY_COMPOST ,MEM_SETTING_MOISTURE_GARDEN,MEM_SETTING_ALTITUDE ,MEM_SETTING_K_MOIST_GARDEN,255,255,255,255,
+                       MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,MEM_SETTING_K_MOIST_GREENHOUSE,255,255,255,
                        MEM_SETTING_V_OFFSET_BATTERY,MEM_SETTING_A_OFFSET_BATTERY,MEM_SETTING_CAPACITY_BATTERY,MEM_SETTING_A_OFFSET_LOAD,MEM_SETTING_LUMINOSITY,255,255,255,255,255};
                        
 if (!(new_index==index_setting)){
@@ -67,6 +67,7 @@ if (new_setting==1){
   
   if(four_buttons[ESC].contains(x,y))
     { 
+      if (reset_demand=1){resetFunc();}
       flag_screen=0;  
       flag_first_screen=0;
       bitSet(flag_screen,MAIN_SCREEN); 
@@ -91,6 +92,7 @@ if (new_setting==1){
       new_setting=1;
       int data=setting;
       for (int a=0;a<2;a++){EEPROM.write(mem_address[index_setting]+a,data);data=data>>8;}
+      reset_demand=1;
 
      }
 

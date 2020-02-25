@@ -1,12 +1,7 @@
 
 
-
-
-
-
-
 void output_greenhouse_control(){
-if(refresh_demand==1)
+if(bitRead(refresh_demand,REFRESH_DATA))
   { 
          /* Cooling system */
         if (!bitRead(desactive_greenhouse,FAN_COOLING_GREENHOUSE))
@@ -14,7 +9,7 @@ if(refresh_demand==1)
             if (bitRead(output_greenhouse,FAN_COOLING_GREENHOUSE)|| bitRead(forced_greenhouse,FAN_COOLING_GREENHOUSE)) 
                     {
                       digitalWrite(GREENHOUSE_FAN_COOLING,1);
-                      time_cooling_greenhouse=time_cooling_greenhouse+REFRESH_SCREEN_SECONDS;
+                      time_cooling_greenhouse=time_cooling_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
                     }
             else{digitalWrite(GREENHOUSE_FAN_COOLING,0);}
           }
@@ -36,7 +31,7 @@ if(refresh_demand==1)
           {
             if(bitRead(output_greenhouse,SPRAY_GREENHOUSE) || bitRead(forced_greenhouse,SPRAY_GREENHOUSE)){
               digitalWrite(EV_GREENHOUSE_SPRAY,1);
-              time_spray_greenhouse=time_spray_greenhouse+REFRESH_SCREEN_SECONDS;
+              time_spray_greenhouse=time_spray_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
               }
             else {digitalWrite(EV_GREENHOUSE_SPRAY,0);} 
           }
@@ -48,7 +43,7 @@ if(refresh_demand==1)
           {
             if (bitRead(output_greenhouse,VMC_GREENHOUSE) || bitRead(forced_greenhouse,VMC_GREENHOUSE)){
               digitalWrite(GREENHOUSE_VMC,1);
-              time_vmc_greenhouse=time_vmc_greenhouse+REFRESH_SCREEN_SECONDS;
+              time_vmc_greenhouse=time_vmc_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
             }
             else{digitalWrite(GREENHOUSE_VMC,0);}
           }
@@ -60,7 +55,7 @@ if(refresh_demand==1)
           {
             if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>24) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
               digitalWrite(GREENHOUSE_LAMP,1);
-              time_lamp_greenhouse=time_lamp_greenhouse+REFRESH_SCREEN_SECONDS;
+              time_lamp_greenhouse=time_lamp_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
             }
             else{digitalWrite(GREENHOUSE_LAMP,0);}
           }
@@ -72,7 +67,7 @@ if(refresh_demand==1)
           {
             if ((bitRead(output_greenhouse,HEATING_GREENHOUSE) and v_battery>25)|| bitRead(forced_greenhouse,HEATING_GREENHOUSE)){
               digitalWrite(GREENHOUSE_HEATING,1);
-              time_heat_greenhouse=time_heat_greenhouse+REFRESH_SCREEN_SECONDS;
+              time_heat_greenhouse=time_heat_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
             }
             else{digitalWrite(GREENHOUSE_HEATING,0);}
           }
@@ -82,14 +77,14 @@ if(refresh_demand==1)
 }
 
 void output_garden_control(){
-if(refresh_demand==1)
+if(bitRead(refresh_demand,REFRESH_DATA))
   { 
       /* Spray garden control */
       if (!bitRead(desactive_garden,SPRAY_GARDEN))
         {
           if(bitRead(output_garden,SPRAY_GARDEN) || bitRead(forced_garden,SPRAY_GARDEN)|| bitRead(output_garden,CAT_PROOF_GARDEN)){
             digitalWrite(EV_GARDEN_SPRAY,1);
-            time_spray_garden=time_spray_garden+REFRESH_SCREEN_SECONDS;
+            time_spray_garden=time_spray_garden+DELAY_REFRESH_SCREEN_SECONDS;
             }
           else {digitalWrite(EV_GARDEN_SPRAY,0);}  
         }
@@ -101,7 +96,7 @@ if(refresh_demand==1)
         {
           if(bitRead(output_garden,SPRAY_COMPOST) || bitRead(forced_garden,SPRAY_COMPOST)){
             digitalWrite(EV_COMPOST_SPRAY,1);
-            time_spray_compost=time_spray_compost+REFRESH_SCREEN_SECONDS;
+            time_spray_compost=time_spray_compost+DELAY_REFRESH_SCREEN_SECONDS;
             }
           else {digitalWrite(EV_COMPOST_SPRAY,0);}    
         }
@@ -113,7 +108,7 @@ if(refresh_demand==1)
         {
           if(bitRead(output_garden,PUMP_COMPOST) || bitRead(forced_garden,PUMP_COMPOST)){
             analogWrite(COMPOST_DRAIN_PUMP, 100);
-            time_pump_compost=time_spray_compost+REFRESH_SCREEN_SECONDS;
+            time_pump_compost=time_spray_compost+DELAY_REFRESH_SCREEN_SECONDS;
             }
           else {analogWrite(COMPOST_DRAIN_PUMP, 0);} 
         }
@@ -126,7 +121,7 @@ if(refresh_demand==1)
         {
           if(bitRead(output_garden,HEATING_COMPOST) || bitRead(forced_garden,HEATING_COMPOST)){
                 digitalWrite(COMPOST_HEATING,true);
-                time_heat_compost=time_heat_compost+REFRESH_SCREEN_SECONDS;
+                time_heat_compost=time_heat_compost+DELAY_REFRESH_SCREEN_SECONDS;
                 }
           else{digitalWrite(COMPOST_HEATING,false);}
         }

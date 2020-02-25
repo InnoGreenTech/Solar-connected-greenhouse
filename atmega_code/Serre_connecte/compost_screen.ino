@@ -41,7 +41,7 @@ if (!bitRead(flag_first_screen,COMPOST_SCREEN)){
 
 /* write current values */
 
-if(refresh_demand==1){
+if(bitRead(refresh_demand,REFRESH_SCREEN)){
 
   garden_buttons_design();
   tft.setTextSize(1); 

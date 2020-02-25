@@ -77,7 +77,7 @@ bitSet(flag_first_screen,MAIN_SCREEN);
  *                Write  information                *
  ****************************************************/
 
-if(refresh_demand==1){
+if(bitRead(refresh_demand,REFRESH_SCREEN)){
     
   tft.setTextSize(1); 
   tft.setTextColor(GREEN,FOND);
@@ -113,6 +113,8 @@ if(refresh_demand==1){
   tft.setCursor(270,85);
   tft.print (moisture_garden);
   tft.print F(" % ");
+  tft.setCursor(240,40);
+  tft.print (weather_string[forecasts_weather-1]);
 
   tft.setCursor(270,145);
   tft.print (temperature_compost,2); 

@@ -47,7 +47,7 @@ if (!bitRead(flag_first_screen,GREENHOUSE_SCREEN)){
 
 /* write current values */
 
-if(refresh_demand==1){
+if(bitRead(refresh_demand,REFRESH_SCREEN)){
 
   tft.setTextSize(1); 
   tft.setTextColor(GREEN,FOND);

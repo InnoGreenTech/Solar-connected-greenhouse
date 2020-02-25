@@ -77,6 +77,15 @@ void setup(void){
 
   for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_MAX_INTENSITY  + a);} 
   set_max_intensity = mem[0] | mem[1] << 8; 
+
+  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_ALTITUDE  + a);} 
+  set_altitude = mem[0] | mem[1] << 8; 
+
+  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_K_MOIST_GARDEN  + a);} 
+  set_k_moist_garden = mem[0] | mem[1] << 8; 
+
+  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_K_MOIST_GREENHOUSE  + a);} 
+  set_k_moist_greenhouse = mem[0] | mem[1] << 8; 
   
   Serial.begin(9600);     
   Serial1.begin(115200);    // set communication with ESP8266
@@ -88,9 +97,8 @@ void setup(void){
   ***********************************************************************************************/
 
   greenhouse_dht.begin();
-  //outdoor_dht.begin();
-  //water_level.ping_median(5,200);
-  water_level.begin();
+  water_level.ping_median(5,200);
+
 
   /*Set and start BME280 sensor, COMPOSTomposter*/
 
@@ -106,7 +114,7 @@ void setup(void){
   delay(10);                                              // Necessary time to start sensor
 
   
-  /*Set and start BME280 sensor, sensoromposter*/
+  /*Set and start BME280 sensor, sensor out*/
 
   out_sensor.settings.commInterface = I2C_MODE;  // I have worked with the example of http://gilles.thebault.free.fr/
   out_sensor.settings.I2CAddress = 0x77;
@@ -116,6 +124,8 @@ void setup(void){
   out_sensor.settings.tempOverSample = 1 ;
   out_sensor.settings.pressOverSample = 1;
   out_sensor.settings.humidOverSample = 1;
+
+  
 
   delay(10);                                              // Necessary time to start sensor
 

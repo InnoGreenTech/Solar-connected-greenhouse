@@ -1,5 +1,5 @@
 void garden_gest(){
-  if(refresh_demand==1)
+  if(bitRead(refresh_demand,REFRESH_DATA))
   { 
     onewire_garden.select(address_soil_garden);
     temperature_soil_garden=onewire_garden.getTempC();
@@ -29,9 +29,22 @@ void read_values_compost(){
 
 void read_values_out(){
   temperature_out=out_sensor.readTempC();
-  pressure_out=out_sensor.readFloatPressure();
+  pressure_out=(out_sensor.readFloatPressure())/100;
   humidity_out=out_sensor.readFloatHumidity();
+
+  // take samples in one hour to do average , use for the weather forecasts
+  
+  pressure_corrected= pressure_out * pow((1 - ((0.0065 * set_altitude) / (temperature_out + 0.0065 * set_altitude + 273.15))), -5.257);
+  if (!(current_sample_pressure>=total_samples_pressure)){current_average_pressure=current_average_pressure+(pressure_corrected/total_samples_pressure);}
+  else{
+    rotate_index++;
+    if (rotate_index>NUMBER_SAMPLES_HOUR){rotate_index=0;}
+    average_pressure[rotate_index]= current_average_pressure;
+    current_average_pressure=0;
+    current_sample_pressure=0;    
+  }
 }
+
 
 
 float tension_battery(){
@@ -96,9 +109,14 @@ void temperature_control_compost(){
   }
 
 void get_moisture_garden(){
-  int read_pin=analogRead(MOISTURE_GARDEN);
-  read_pin=read_pin-80;
-  moisture_garden= 100-(read_pin*10/90);
+  //int read_pin=analogRead(MOISTURE_GARDEN);
+  float read_pin=0;
+  for (int i = 0; i <500; i ++) {
+  read_pin = read_pin +float( MOISTURE_GARDEN)/500; 
+  }
+  //read_pin=read_pin-80;
+  //moisture_garden= 100-(read_pin*10/90);
+  moisture_garden=int(float(set_k_moist_garden*100)/read_pin);
   if(moisture_garden>100){moisture_garden=100;}
   else if(moisture_garden<0){moisture_garden=0;}
   return moisture_garden;}
@@ -106,9 +124,14 @@ void get_moisture_garden(){
 void spray_control_garden(){
 
   if(moisture_garden<set_moisture_garden and night_day==1){
-    bitSet(output_garden,SPRAY_GARDEN);
+    if(start_timer_spray_garden==0)
+      {start_timer_spray_garden=1; start_timer_spray_garden=millis();bitSet(output_garden,SPRAY_GARDEN); }
+    else if (millis()-start_timer_spray_garden >DELAY_SPRAY and start_timer_spray_garden==1)
+      {start_timer_spray_garden=2;start_timer_spray_garden=millis();bitClear(output_garden,SPRAY_GARDEN);}
+    else if (millis()-start_timer_spray_garden >DELAY_PAUSE_SPRAY and start_timer_spray_garden==2)
+      {start_timer_spray_garden=0;}    
    } 
- else{bitClear(output_garden,SPRAY_GARDEN);}
+ else{bitClear(output_garden,SPRAY_GARDEN);start_timer_spray_garden=0;}
 }
 
 void cat_proof_control(){

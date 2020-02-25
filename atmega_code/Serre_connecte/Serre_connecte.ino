@@ -51,6 +51,10 @@
     #define MEM_SETTING_MAX_INTENSITY                       27      
     #define MEM_SETTING_A_OFFSET_LOAD                       29
     #define MEM_SETTING_CAPACITY_BATTERY                    31
+    #define MEM_SETTING_ALTITUDE                            33      // altitude in meters
+    #define MEM_SETTING_K_MOIST_GARDEN                   35
+    #define MEM_SETTING_K_MOIST_GREENHOUSE               37
+    
 
 
 /****************************
@@ -168,10 +172,14 @@
     unsigned long button_delay;          // delay of push buttom
     #define BUTTON_DELAY 200    // delay filter for the buttom 
     
-    #define REFRESH_SCREEN 5000
-    #define REFRESH_SCREEN_SECONDS 5
+    #define DELAY_REFRESH_SCREEN         5000
+    #define DELAY_REFRESH_SCREEN_SECONDS 5
     unsigned long refresh_datas=0;   // delay to refresh screen and data, every 10 seconds*
+    
     byte          refresh_demand=1;
+    #define       REFRESH_SCREEN    0  
+    #define       REFRESH_DATA      1   
+    #define       UPDATE_SCREEN     2
     
     int x=0;                    // value X touch
     int y=0;                    // value y touch
@@ -197,18 +205,25 @@
     byte index_setting;                         //Index to change value or parameter
     byte new_index;
     byte new_setting;
-    
+    byte reset_demand=0;
     
     
     byte flag=0;                                 // flag for the system work
     #define MODE_CONSIGNE       0                // Use to set the value
     #define MODE_CONSIGNE_BK    1                // Use to set the value
     #define PUSH_BUTTON         2
-    #define WINTER_MODE         3
-    #define SPRING_MODE         4
-    #define SUMMER_MODE         5
-    #define AUTUMN_MODE         6
-    #define ECO_MODE            7
+
+
+    byte mode_flag;
+    #define ECO_MODE           0
+    #define SAFE_MODE          1
+    #define WINTER_MODE        2
+    #define SUMMER_MODE        3
+    #define SPRING_MODE        4
+    #define FALL_MODE          5
+
+
+   
     
     int index_sent=0;                           //allow to sent data one by one with PERIOD_SENT bettween each
     #define PERIOD_SENT 100                     //one information every 100 ms;
@@ -248,6 +263,7 @@
     #define CODE_SETTING_MOISTURE_GARDEN                26
     #define CODE_LUMINOSITY_GREENHOUSE                  27   
     #define CODE_PRESSURE_OUT                           28
+    #define CODE_SETTING_ALTITUDE                       30
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -295,6 +311,7 @@
     float   temperature_compost;
     int     humidity_compost;
     float   pressure_compost=1000;
+    float   pressure_corrected=1000;
     
     float   a_battery;
     float   a_load;
@@ -379,13 +396,45 @@
 
    #define         TIME_LAMP_DAY  3600000   // Time of work of lamp by day
 
+
+/* meteo memory */
+    #define         NUMBER_SAMPLES_HOUR 12
+
+    float           average_pressure[NUMBER_SAMPLES_HOUR];            // take 6 samples per hour
+    float           current_average_pressure;
+    int             total_samples_pressure=(3600/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_HOUR;
+    int             current_sample_pressure;
+    byte            rotate_index=0;     
+
+    byte current_weather=1;
+    byte forecasts_weather=1;
+    #define STABLE             0
+    #define SUNNY              1
+    #define CLOUDLY            2
+    #define RAIN               3
+    #define THUNDERSTORM       4
+    #define UNKNOWN            5
+
+    String weather_string[4]={"Soleil","Couvert","Pluie","Orage"};
+
+
+/* timer for spray garden and greenhouse, it allows to spray step by step */
+
+    #define DELAY_SPRAY       60000            // Delay to spray
+    #define DELAY_PAUSE_SPRAY 300000    // Give the at the water to rich probe
+    
+    unsigned long start_timer_spray_garden;
+    byte    step_spray_garden;                       // =0 spray =1 pause 
+    unsigned long start_timer_spray_greenhouse;
+    byte    step_spray_greenhouse;                       // =0 spray =1 pause
+
 /**************************************************
  *                RAM Memory for setting          *
  **************************************************/
 
 
-    int     set_temperature_compost;
-    int     set_eco_temperature_compost;
+    int     set_temperature_compost;                       
+    int     set_eco_temperature_compost;                  
     int     set_humidity_compost; 
     int     set_moisture_garden;
     int     set_moisture_greenhouse;
@@ -393,13 +442,16 @@
     int     set_temperature_greenhouse;
     int     set_humidity_greenhouse;
     int     set_co2_greenhouse;
-    int     set_v_offset_battery;
-    int     set_a_offset_load;
-    int     set_a_offset_battery; 
+    int     set_v_offset_battery;                               // 0,0x
+    int     set_a_offset_load;                                  //0,0x
+    int     set_a_offset_battery;                               //0,0x
     int     set_capacity_battery;
     int     set_max_intensity;
     int     set_luminosity;
     int     set_deep_water;
+    int     set_altitude;
+    int     set_k_moist_garden;
+    int     set_k_moist_greenhouse;
     
     int     setting;
 
@@ -490,7 +542,6 @@
 #include <DS18B20.h>
 #include <NewPing.h>
 #include "SparkFunBME280.h"
-#include "Adafruit_VL53L0X.h" 
 #include "Wire.h"            
 #include "SPI.h"
 
@@ -510,9 +561,7 @@
 
     #define   TRIGGER_SONAR   I2_3// Broche TRIGGER
     #define   ECHO_SONAR      I2_2// Broche ECHO
-    //NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
-
-    Adafruit_VL53L0X water_level = Adafruit_VL53L0X();
+    NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
 
 
 
@@ -553,3 +602,5 @@
     #define EV_COMPOST_SPRAY        O1_4
     #define COMPOST_HEATING         O1_3
     #define COMPOST_DRAIN_PUMP      O1_2
+
+    void(* resetFunc) (void) = 0;//declare reset function at address 0

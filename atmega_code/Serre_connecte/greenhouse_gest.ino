@@ -1,5 +1,5 @@
 void greenhouse_gest(){
-  if (refresh_demand==1)
+  if(bitRead(refresh_demand,REFRESH_DATA))
   {
              temperature_greenhouse= float(greenhouse_dht.readTemperature()); 
              humidity_greenhouse=float(greenhouse_dht.readHumidity()); 
@@ -7,7 +7,7 @@ void greenhouse_gest(){
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
              onewire_greenhouse.select(address_water_greenhouse);
              temperature_water_greenhouse=onewire_greenhouse.getTempC();
-             get_water_level();
+             //get_water_level();
              get_moisture_greenhouse();
              co2_greenhouse=readCO2();
              get_luminosity();
@@ -23,47 +23,66 @@ void greenhouse_gest(){
 
 
  void cooling_system(){
-
-   if(((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0) || ((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)/3)and (temperature_water_greenhouse-temperature_greenhouse)>5) || temperature_greenhouse<2)){
+    byte cooling_day=0;
+    byte cooling_night=0;
     
+    if((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0){cooling_day=1;} // control cooling during the day
+    else{cooling_day=0;}
+
+
+    if (bitRead(mode_flag,ECO_MODE)){
+          if((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)*2/3)and (temperature_water_greenhouse-temperature_greenhouse)>5))
+          {cooling_night=1;}
+      }
+    else if (!bitRead(mode_flag,SAFE_MODE)){
+          if((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)/3)and (temperature_water_greenhouse-temperature_greenhouse)>5))
+          {cooling_night=1;}
+          }
+    if (cooling_night==0){ 
+          if((temperature_water_greenhouse>temperature_greenhouse) and temperature_greenhouse<5)
+          {cooling_night=1;}
+      }
+    if(cooling_day==1 || cooling_night==1){    
             bitSet(output_greenhouse,FAN_COOLING_GREENHOUSE);
             bitSet(output_greenhouse,PUMP_COOLING_GREENHOUSE);
-   }
-   else{
+      }   
+    else{
             bitClear(output_greenhouse,FAN_COOLING_GREENHOUSE);
             bitClear(output_greenhouse,PUMP_COOLING_GREENHOUSE);    
-   }
+    }
   }
 
 
 void get_water_level(){
   
- /*int distance=water_level.ping_cm();
+  int distance=water_level.ping_cm();
   //Serial.println(distance);
-  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}*/
-  VL53L0X_RangingMeasurementData_t measure;
+  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
 
-  water_level.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
-
-  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
-   level_water_greenhouse = set_deep_water-int(measure.RangeMilliMeter/10);
-  } else {
-    Serial.println(" out of range ");
-  }
 
   }
 
 void get_moisture_greenhouse(){
-  int read_pin=analogRead(MOISTURE_GREENHOUSE);
-  read_pin=read_pin-80;
-  moisture_greenhouse= 100-(read_pin*10/90);
+  //int read_pin=analogRead(MOISTURE_GREENHOUSE);
+  float read_pin=0;
+  for (int i = 0; i <500; i ++) {
+  read_pin = read_pin +float( MOISTURE_GREENHOUSE)/500; 
+  }
+  //read_pin=read_pin-80;
+  //moisture_greenhouse= 100-(read_pin*10/90);
+  moisture_greenhouse=int(float(set_k_moist_greenhouse*100)/read_pin);
   if(moisture_greenhouse>100){moisture_greenhouse=100;}
   else if(moisture_greenhouse<0){moisture_greenhouse=0;}
   return moisture_greenhouse;}
 
 void control_spray_greenhouse(){
   if (moisture_greenhouse<set_moisture_greenhouse and night_day==1){
-  bitSet(output_greenhouse,SPRAY_GREENHOUSE);  
+    if(start_timer_spray_greenhouse==0)
+      {start_timer_spray_greenhouse=1; start_timer_spray_greenhouse=millis();bitSet(output_greenhouse,SPRAY_GREENHOUSE); }
+    else if (millis()-start_timer_spray_greenhouse >DELAY_SPRAY and start_timer_spray_greenhouse==1)
+      {start_timer_spray_greenhouse=2;start_timer_spray_greenhouse=millis();bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
+    else if (millis()-start_timer_spray_greenhouse >DELAY_PAUSE_SPRAY and start_timer_spray_greenhouse==2)
+      {start_timer_spray_greenhouse=0;}  
   }
   else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
 }

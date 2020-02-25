@@ -31,7 +31,7 @@ void send_data(){
      root["p18"]=pressure_out;
      root["p10"]=temperature_compost;
      root["p11"]=humidity_compost;
-     root["p12"]=pression_compost;
+     root["p12"]=pressure_compost;
      root["p13"]=moisture_garden;
      root["p14"]=temperature_soil_garden;
          
