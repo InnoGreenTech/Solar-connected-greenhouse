@@ -21,9 +21,9 @@ if (!bitRead(flag_first_screen,MAIN_SCREEN)){
   tft.setTextColor(GREEN); 
   tft.setCursor(50,10);                     // Describe content
   tft.print F("SERRE");
-  tft.setTextColor(CYAN);
-  tft.setCursor(185,10);
-  tft.print F("JARDINIERE");
+  //tft.setTextColor(CYAN);
+  //tft.setCursor(185,10);
+  //tft.print F("JARDINIERE");
   tft.setTextColor(YELLOW);
   tft.setCursor(195,115);
   tft.print F("COMPOSTE");
@@ -78,6 +78,15 @@ bitSet(flag_first_screen,MAIN_SCREEN);
  ****************************************************/
 
 if(bitRead(refresh_demand,REFRESH_SCREEN)){
+
+  tft.setTextSize(2); 
+  tft.setTextColor(CYAN,FOND); 
+  tft.setCursor(175,5);
+  tft.print (weather_string[current_weather-1]);   
+  tft.setTextColor(ORANGE,FOND); 
+  tft.setCursor(175,25);
+  tft.print (weather_string[forecasts_weather-1]);
+  
     
   tft.setTextSize(1); 
   tft.setTextColor(GREEN,FOND);
@@ -113,8 +122,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
   tft.setCursor(270,85);
   tft.print (moisture_garden);
   tft.print F(" % ");
-  tft.setCursor(240,40);
-  tft.print (weather_string[forecasts_weather-1]);
+
 
   tft.setCursor(270,145);
   tft.print (temperature_compost,2); 
@@ -122,6 +130,11 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
   tft.setCursor(270,160);
   tft.print (humidity_compost);
   tft.print F(" % ");  
+
+  tft.setCursor(280,10);
+  tft.print (pressure_corrected,0);   
+  tft.setCursor(280,30);
+  tft.print ("mb");
   
 } 
 /***********************************************************************************************************************************  

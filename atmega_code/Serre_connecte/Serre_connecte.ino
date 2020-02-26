@@ -415,7 +415,7 @@
     #define THUNDERSTORM       4
     #define UNKNOWN            5
 
-    String weather_string[4]={"Soleil","Couvert","Pluie","Orage"};
+    String weather_string[4]={"SOLEIL ","COUVERT","PLUIE  ","PLUIE  "};
 
 
 /* timer for spray garden and greenhouse, it allows to spray step by step */
