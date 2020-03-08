@@ -183,17 +183,17 @@
     byte    forced_garden=0;
     byte    desactive_garden=0;
 
-    unsigned int time_main_pump;
-    unsigned int time_spray_compost;
-    unsigned int time_heat_compost;
-    unsigned int time_pump_compost;
-    unsigned int time_spray_garden;
+    unsigned int time_main_pump=0;
+    unsigned int time_spray_compost=0;
+    unsigned int time_heat_compost=0;
+    unsigned int time_pump_compost=0;
+    unsigned int time_spray_garden=0;
 
-    unsigned int time_main_pump_1;
-    unsigned int time_spray_compost_1;
-    unsigned int time_heat_compost_1;
-    unsigned int time_pump_compost_1;
-    unsigned int time_spray_garden_1;
+    unsigned int time_main_pump_1=0;
+    unsigned int time_spray_compost_1=0;
+    unsigned int time_heat_compost_1=0;
+    unsigned int time_pump_compost_1=0;
+    unsigned int time_spray_garden_1=0;
     
 /* String for commnunication */
 
