@@ -290,7 +290,7 @@ void setup() {
               int a=0;
               String read_mem="";
               while (!(carac=='\0')&&a<20){carac=char (EEPROM.read(MEM_NAME_MODULE+a));read_mem+= carac; a++;} 
-              if (read_mem=='\0'||a==20){read_mem=F("InnoGreenTech");}
+              if (read_mem!='\0'||a==20){read_mem=F("InnoGreenTech");}
               int c = read_mem.length() + 1;                               // longueur de la chaîne de caractéres
               read_mem.toCharArray(name_module, c); 
              // Serial.println(name_module);        
@@ -299,7 +299,7 @@ void setup() {
               carac='1';
               a=0;
               while (!(carac=='\0')&&a<20){carac=char (EEPROM.read(MEM_ADRESS_SERVER+a));read_mem+= carac; a++;}
-              if (read_mem=='\0'||a==20){read_mem=F("InnoGreenTech");} 
+              if (read_mem!='\0'||a==20){read_mem=F("InnoGreenTech");} 
               c = read_mem.length() + 1;       
               read_mem.toCharArray(ip_server, c);
               //  Serial.println(ip_server);     

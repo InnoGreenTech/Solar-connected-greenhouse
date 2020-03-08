@@ -320,7 +320,7 @@
     
     float   temperature_out;
     int     humidity_out;
-    int     pressure_out;
+    float   pressure_out;
     int     moisture_garden;
     float   temperature_soil_garden;
     int     level_water_garden;
@@ -400,9 +400,9 @@
 /* meteo memory */
     #define         NUMBER_SAMPLES_HOUR 12
 
-    float           average_pressure[NUMBER_SAMPLES_HOUR];            // take 6 samples per hour
+    float           average_pressure[NUMBER_SAMPLES_HOUR];            // take x samples per hour
     float           current_average_pressure;
-    int             total_samples_pressure=(3600/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_HOUR;
+    int             total_samples_pressure=int((3600/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_HOUR);
     int             current_sample_pressure;
     byte            rotate_index=0;     
 

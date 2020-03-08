@@ -35,7 +35,7 @@ void read_values_out(){
   // take samples in one hour to do average , use for the weather forecasts
   
   pressure_corrected= pressure_out * pow((1 - ((0.0065 * set_altitude) / (temperature_out + 0.0065 * set_altitude + 273.15))), -5.257);
-  if (!(current_sample_pressure>=total_samples_pressure)){current_average_pressure=current_average_pressure+(pressure_corrected/total_samples_pressure);}
+  if (current_sample_pressure<total_samples_pressure){current_sample_pressure++;current_average_pressure=current_average_pressure+(pressure_corrected/total_samples_pressure);}
   else{
     rotate_index++;
     if (rotate_index>NUMBER_SAMPLES_HOUR){rotate_index=0;}

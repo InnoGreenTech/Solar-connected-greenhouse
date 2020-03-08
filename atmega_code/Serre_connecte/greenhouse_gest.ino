@@ -84,7 +84,7 @@ void control_spray_greenhouse(){
     else if (millis()-start_timer_spray_greenhouse >DELAY_PAUSE_SPRAY and start_timer_spray_greenhouse==2)
       {start_timer_spray_greenhouse=0;}  
   }
-  else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
+  else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);start_timer_spray_greenhouse=0;}
 }
 
 void vmc_control(){
