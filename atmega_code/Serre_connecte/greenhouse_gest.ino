@@ -103,12 +103,12 @@ void vmc_control(){
   else if( calculate_humidity<(humidity_greenhouse-5) && difference_humidity>5 && night_day==0){               // Control humidity only the night
         int open_servo= map(difference_humidity,0,10,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
-        if (difference_humidity>15){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        if (difference_humidity>15 and temperature_greenhouse>20){bitSet(output_greenhouse,VMC_GREENHOUSE);}
        }
   else if (co2_greenhouse>set_co2_greenhouse){
         int open_servo= map(co2_greenhouse,set_co2_greenhouse,1700,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
-        if (co2_greenhouse>set_co2_greenhouse+300){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        if (co2_greenhouse>set_co2_greenhouse+300 and temperature_greenhouse>20){bitSet(output_greenhouse,VMC_GREENHOUSE);}
         
         }
   else {bitClear(output_greenhouse,VMC_GREENHOUSE);servo_vmc.write(10);}  

@@ -6,7 +6,7 @@ void add_module(){
               {      
               reception=server.arg("ip_server");
               int c = reception.length() + 1;         // longueur de la chaîne de caractéres                    
-              if ( c>15){ Serial.println(F("adresse ip invalide")); return;}
+              if ( c>16){ Serial.println(F("adresse ip invalide")); return;}
               reception.toCharArray(ip_server, c); 
               for (int i = 0; i < c; i++) { 
                                             EEPROM.write((i+MEM_ADRESS_SERVER),reception[i]);  // save adresse IP in EEPROM
