@@ -161,5 +161,8 @@ void setup(void){
   pinMode(COMPOST_HEATING,OUTPUT);          // Note Pwm output
   pinMode(COMPOST_DRAIN_PUMP,OUTPUT);       // Note Pwm output
 
+  
+  wdt_enable(WDTO_4S);
+
 
 }

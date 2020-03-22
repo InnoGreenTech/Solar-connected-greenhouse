@@ -4,7 +4,7 @@
 
 void loop(void){
 
-  
+
       
   if (bitRead(refresh_demand,UPDATE_SCREEN)){bitSet(refresh_demand,REFRESH_SCREEN);}
    
@@ -64,5 +64,7 @@ void loop(void){
 
 
  if(bitRead(refresh_demand,REFRESH_SCREEN)){refresh_demand=0;}
+
+ wdt_reset();
 
 }

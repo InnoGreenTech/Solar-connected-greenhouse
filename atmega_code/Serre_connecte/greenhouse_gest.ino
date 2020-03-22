@@ -35,13 +35,14 @@ void greenhouse_gest(){
           {cooling_night=1;}
       }
     else if (!bitRead(mode_flag,SAFE_MODE)){
-          if((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)/3)and (temperature_water_greenhouse-temperature_greenhouse)>5))
+          if((temperature_greenhouse<(temperature_water_greenhouse-(temperature_water_greenhouse-temperature_out)/4)and (temperature_water_greenhouse-temperature_greenhouse)>5))
           {cooling_night=1;}
           }
     if (cooling_night==0){ 
           if((temperature_water_greenhouse>temperature_greenhouse) and temperature_greenhouse<5)
           {cooling_night=1;}
       }
+      
     if(cooling_day==1 || cooling_night==1){    
             bitSet(output_greenhouse,FAN_COOLING_GREENHOUSE);
             bitSet(output_greenhouse,PUMP_COOLING_GREENHOUSE);
@@ -76,6 +77,8 @@ void get_moisture_greenhouse(){
   return moisture_greenhouse;}
 
 void control_spray_greenhouse(){
+
+  
   if (moisture_greenhouse<set_moisture_greenhouse and night_day==1){
     if(start_timer_spray_greenhouse==0)
       {start_timer_spray_greenhouse=1; start_timer_spray_greenhouse=millis();bitSet(output_greenhouse,SPRAY_GREENHOUSE); }
@@ -103,12 +106,14 @@ void vmc_control(){
   else if( calculate_humidity<(humidity_greenhouse-5) && difference_humidity>5 && night_day==0){               // Control humidity only the night
         int open_servo= map(difference_humidity,0,10,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
-        if (difference_humidity>15 and temperature_greenhouse>20){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        if (difference_humidity>15 and (temperature_greenhouse>20 or temperature_out >= temperature_greenhouse)){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        else {bitClear(output_greenhouse,VMC_GREENHOUSE);}
        }
   else if (co2_greenhouse>set_co2_greenhouse){
         int open_servo= map(co2_greenhouse,set_co2_greenhouse,1700,10,100);
         if( open_servo<100){servo_vmc.write(open_servo);}else{servo_vmc.write(100);}
-        if (co2_greenhouse>set_co2_greenhouse+300 and temperature_greenhouse>20){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        if (co2_greenhouse>set_co2_greenhouse+300 and (temperature_greenhouse>20 or temperature_out >= temperature_greenhouse)){bitSet(output_greenhouse,VMC_GREENHOUSE);}
+        else {bitClear(output_greenhouse,VMC_GREENHOUSE);}
         
         }
   else {bitClear(output_greenhouse,VMC_GREENHOUSE);servo_vmc.write(10);}  
@@ -123,10 +128,9 @@ void lamp_run(){
         {bitSet(output_greenhouse,LAMP_GREENHOUSE); time_lamp_day=millis();}
   else if ((millis()- time_lamp_day) > TIME_LAMP_DAY){
         bitClear(output_greenhouse,LAMP_GREENHOUSE); light_use=1;
-   }    
-
-        
+   }      
   }
+
   
 float get_luminosity(){
   

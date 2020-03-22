@@ -27,6 +27,7 @@
     #include <registers.h> 
     #include <pin_magic.h>
     #include <Servo.h>
+    #include <avr/wdt.h>
 
 /************************
  *   Set memory adress  *
@@ -52,8 +53,8 @@
     #define MEM_SETTING_A_OFFSET_LOAD                       29
     #define MEM_SETTING_CAPACITY_BATTERY                    31
     #define MEM_SETTING_ALTITUDE                            33      // altitude in meters
-    #define MEM_SETTING_K_MOIST_GARDEN                   35
-    #define MEM_SETTING_K_MOIST_GREENHOUSE               37
+    #define MEM_SETTING_K_MOIST_GARDEN                      35
+    #define MEM_SETTING_K_MOIST_GREENHOUSE                  37
     
 
 
@@ -416,6 +417,32 @@
     #define UNKNOWN            5
 
     String weather_string[4]={"SOLEIL ","COUVERT","PLUIE  ","PLUIE  "};
+
+/* average day mesure */
+
+    #define       NUMBER_SAMPLES_DAY   48
+    int           total_samples_day=int(((3600*24)/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_DAY);
+    byte          rotate_day_index=0;
+    int           current_sample_day;
+
+    float         day_temperature_greenhouse[NUMBER_SAMPLES_DAY];
+    float         current_average_temperature_greenhouse;
+    float         average_temperature_greenhouse;
+
+    float         day_humidity_greenhouse[NUMBER_SAMPLES_DAY];
+    float         current_average_humidity_greenhouse;
+    float         average_humidity_greenhouse;
+
+    float         day_temperature_out[NUMBER_SAMPLES_DAY];
+    float         current_average_temperature_out;
+    float         average_temperature_out;
+
+    float         day_humidity_out[NUMBER_SAMPLES_DAY];
+    float         current_average_humidity_out;
+    float         average_humidity_out;
+
+    
+    
 
 
 /* timer for spray garden and greenhouse, it allows to spray step by step */
