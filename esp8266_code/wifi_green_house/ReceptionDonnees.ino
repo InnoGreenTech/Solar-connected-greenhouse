@@ -48,9 +48,9 @@ void recep_data(){
                                 case CODE_HUMIDITY_COMPOST:                              
                                    humidity_compost=int_content;            
                                    break;
-                                case CODE_PUMP_COMPOST:                      //calcul the time of work between two sent              
-                                   if (time_pump_compost_1==0){ time_pump_compost_1= int_content;} 
-                                   else if (int_content>=time_pump_compost_1){time_pump_compost=int_content-time_pump_compost_1;}          
+                                case CODE_PUMP_HYDROPONIE:                      //calcul the time of work between two sent              
+                                   if (time_pump_hydroponie_1==0){ time_pump_hydroponie_1= int_content;} 
+                                   else if (int_content>=time_pump_hydroponie_1){time_pump_hydroponie=int_content-time_pump_hydroponie_1;}          
                                    break;
                                 case CODE_HEAT_COMPOST:
                                   if (time_heat_compost_1==0){ time_heat_compost_1=int_content;}

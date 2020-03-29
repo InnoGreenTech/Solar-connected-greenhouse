@@ -112,13 +112,13 @@
     #define SPRAY_GREENHOUSE              5           // Manual mode  of the humidity system
 
     
-    char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","PumpC","HumGh"};
+    char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","Hydro","HumGh"};
     
     #define SPRAY_GARDEN              0                    
     #define SPRAY_COMPOST             1          
     #define MAIN_PUMP                 2         
     #define HEATING_COMPOST           3
-    #define PUMP_COMPOST              4
+    #define PUMP_HYDROPONIE           4
     #define HUMIDIFICATOR_GREENHOUSE  5
     #define CAT_PROOF_GARDEN          6
     
@@ -245,7 +245,7 @@
     
     #define CODE_TEMPERATURE_COMPOST                    10     
     #define CODE_HUMIDITY_COMPOST                       11
-    #define CODE_PUMP_COMPOST                           12
+    #define CODE_PUMP_HYDROPONIE                        12
     #define CODE_HEAT_COMPOST                           13
     #define CODE_SETTING_TEMPERATURE_COMPOST            14
     #define CODE_SETTING_HUMIDITY_COMPOST               15 
@@ -365,7 +365,7 @@
     unsigned int time_main_pump;
     unsigned int time_spray_compost;
     unsigned int time_heat_compost;
-    unsigned int time_pump_compost;
+    unsigned int time_pump_hydroponie;
     unsigned int time_spray_garden;
     
 /* String for commnunication with ESP8266 */
@@ -376,18 +376,15 @@
     String  gate_way; 
     String  mac_address;    
 
-/* memory for timing washing compost cycle*/
+/* memory for timing pump hydroponie*/
  
-    unsigned long  delay_cleaning_compost=7*24*3600*1000;     // delay betwin two cleaning
-    unsigned long  delay_spray_compost=30*1000;
-    unsigned long  delay_pump_compost=30;
+    unsigned long  delay_hydroponie=600*1000;     // delay betwin two pump
+    unsigned long  delay_pump_hydroponie=30*1000;
 
-    unsigned long  last_cleaning_compost=0;
-    unsigned long  delay_start_spray_compost=0;
-    unsigned long  delay_start_pump_compost=0;
+    unsigned long  last_pump_hydroponie=0;
+    unsigned long  delay_start_pump_hydroponie=0;
 
-    byte           start_cleaning_compost=0;
-    byte           start_pump_compost=0;  
+    byte           start_pump_hydroponie=0;  
 
 /* memory for  lamp of greenhouse */
 
@@ -602,8 +599,9 @@
     //DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
     uint8_t address_soil_garden[] = {  0x28,  0x7D,  0x97,  0x79,  0x97,  0x7,  0x3,  0xCF};
+    uint8_t address_compost[] = {  0x28,  0x9C,  0xA5,  0x97,  0x13,  0x19,  0x1,  0xFA};
 
-    BME280  compost_sensor;             // BME280 sensor
+    /*BME280  compost_sensor; */            // BME280 sensor
     BME280  out_sensor;
 
  /*********************************************************************************************** 
@@ -628,6 +626,6 @@
     #define EV_GREENHOUSE_SPRAY     O1_5
     #define EV_COMPOST_SPRAY        O1_4
     #define COMPOST_HEATING         O1_3
-    #define COMPOST_DRAIN_PUMP      O1_2
+    #define HYDROPONIE_PUMP         O1_2
 
     void(* resetFunc) (void) = 0;//declare reset function at address 0

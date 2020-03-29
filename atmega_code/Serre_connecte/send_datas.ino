@@ -8,7 +8,7 @@ if(millis()-period_sent>PERIOD_SENT){
      int code[34]={
             CODE_TEMPERATURE_COMPOST,    
             CODE_HUMIDITY_COMPOST,
-            CODE_PUMP_COMPOST,
+            CODE_PUMP_HYDROPONIE,
             CODE_HEAT_COMPOST,
             CODE_SPRAY_COMPOST,
        
@@ -48,7 +48,7 @@ if(millis()-period_sent>PERIOD_SENT){
        String  valeur[34]={
             String(temperature_compost),    
             String(humidity_compost),
-            String(time_pump_compost),
+            String(time_pump_hydroponie),
             String(time_heat_compost),
             String(time_spray_compost),
        

@@ -52,7 +52,7 @@ void send_data(){
      root["a10"]=time_spray_garden;
      root["a11"]=time_heat_compost;
      root["a12"]=time_spray_compost;
-     root["a13"]=time_pump_compost;
+     root["a13"]=time_pump_hydroponie;
 
 
      
@@ -79,7 +79,7 @@ void send_data(){
      average_a_battery=0;
      average_a_load=0;
      index_average=0; 
-     time_pump_compost_1=0;
+     time_pump_hydroponie_1=0;
      time_heat_compost_1=0;
      time_spray_compost_1=0;   
      time_spray_garden_1=0;
@@ -90,7 +90,7 @@ void send_data(){
      time_vmc_greenhouse_1=0;
      time_humidificator_greenhouse_1=0;
      time_main_pump_1 =0;        
-     time_pump_compost=0;
+     time_pump_hydroponie=0;
      time_heat_compost=0;
      time_spray_compost=0;   
      time_spray_garden=0;

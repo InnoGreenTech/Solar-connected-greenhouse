@@ -10,10 +10,8 @@ void garden_gest(){
     intensity_load();
     get_moisture_garden();
     cat_proof_control();
+    hydroponie_control();
 
-    
-
-    //spray_control_compost(); Automatic mode is not use currently
     temperature_control_compost();
     spray_control_garden();    
   }
@@ -22,9 +20,14 @@ void garden_gest(){
 }
 
 void read_values_compost(){
-  temperature_compost=compost_sensor.readTempC();
+  /*temperature_compost=compost_sensor.readTempC();
   pressure_compost=compost_sensor.readFloatPressure();
-  humidity_compost=compost_sensor.readFloatHumidity();
+  humidity_compost=compost_sensor.readFloatHumidity();*/
+  onewire_garden.select(address_compost);
+  pressure_compost=1000;
+  humidity_compost=80;
+  temperature_compost=onewire_garden.getTempC();
+  
 }
 
 void read_values_out(){
@@ -49,11 +52,13 @@ void read_values_out(){
 
 float tension_battery(){
   float read_pin=0;
+  float volts;
   for (int i = 0; i <100; i ++) {
   read_pin = read_pin +float( analogRead(V_BATTERY))/100; 
   }
   //float read_pin= float(analogRead(V_BATTERY));
-  v_battery= 1+((read_pin*30/1023)/1.07)+ float(set_v_offset_battery)/100;
+  volts= 1+((read_pin*30/1023)/1.07)+ float(set_v_offset_battery)/100;
+  if (volts<29){v_battery=volts;}
   return v_battery;
   
 }
@@ -83,18 +88,14 @@ float intensity_load(){
 }
 
   
-void spray_control_compost(){
-  if (millis()-last_cleaning_compost>delay_cleaning_compost)
+void hydroponie_control(){
+  if (millis()-last_pump_hydroponie>delay_hydroponie and night_day==0)
       {
-        if (!start_cleaning_compost==1) // first step cleaning tanck
-          { start_cleaning_compost=1; delay_start_spray_compost=millis(); bitSet(output_garden,SPRAY_COMPOST);}
-        else if (millis()- delay_start_spray_compost > delay_spray_compost)
-          {bitClear(output_garden,SPRAY_COMPOST);}
+        if (!start_pump_hydroponie==1) 
+          { start_pump_hydroponie==1; delay_start_pump_hydroponie=millis(); bitSet(output_garden,PUMP_HYDROPONIE);}
+        else if (millis()- delay_start_pump_hydroponie > delay_pump_hydroponie)
+          {bitClear(output_garden,PUMP_HYDROPONIE);last_pump_hydroponie=millis(); start_pump_hydroponie=0;}
   
-        if(!bitRead(output_garden,SPRAY_COMPOST)&& !start_pump_compost==1) // second step pump water
-          { start_pump_compost=1; delay_start_pump_compost=millis();bitSet(output_garden,PUMP_COMPOST);}
-        else if(!bitRead(output_garden,PUMP_COMPOST) &&  (millis() - delay_start_pump_compost > delay_pump_compost))
-          {bitClear(output_garden,PUMP_COMPOST); last_cleaning_compost=millis(); }        
       }
 }
 

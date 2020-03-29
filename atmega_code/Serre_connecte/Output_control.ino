@@ -102,17 +102,17 @@ if(bitRead(refresh_demand,REFRESH_DATA))
         }
       else {digitalWrite(EV_COMPOST_SPRAY,0);}
       
-      /* Compost drain post */
+      /* hydroponie pump */
       
-      if (!bitRead(desactive_garden, PUMP_COMPOST))
+      if (!bitRead(desactive_garden, PUMP_HYDROPONIE))
         {
-          if(bitRead(output_garden,PUMP_COMPOST) || bitRead(forced_garden,PUMP_COMPOST)){
-            analogWrite(COMPOST_DRAIN_PUMP, 100);
-            time_pump_compost=time_spray_compost+DELAY_REFRESH_SCREEN_SECONDS;
+          if(bitRead(output_garden,PUMP_HYDROPONIE) || bitRead(forced_garden,PUMP_HYDROPONIE)){
+            analogWrite(HYDROPONIE_PUMP, 100);
+            time_pump_hydroponie=time_pump_hydroponie+DELAY_REFRESH_SCREEN_SECONDS;
             }
-          else {analogWrite(COMPOST_DRAIN_PUMP, 0);} 
+          else {analogWrite(HYDROPONIE_PUMP, 0);} 
         }
-      else {analogWrite(COMPOST_DRAIN_PUMP, 0);}
+      else {analogWrite(HYDROPONIE_PUMP, 0);}
       
       
       /* heating Compost */

@@ -57,7 +57,7 @@
     
     #define CODE_TEMPERATURE_COMPOST                    10     
     #define CODE_HUMIDITY_COMPOST                       11
-    #define CODE_PUMP_COMPOST                           12
+    #define CODE_PUMP_HYDROPONIE                        12
     #define CODE_HEAT_COMPOST                           13
     #define CODE_SETTING_TEMPERATURE_COMPOST            14
     #define CODE_SETTING_HUMIDITY_COMPOST               15 
@@ -186,13 +186,13 @@
     unsigned int time_main_pump=0;
     unsigned int time_spray_compost=0;
     unsigned int time_heat_compost=0;
-    unsigned int time_pump_compost=0;
+    unsigned int time_pump_hydroponie=0;
     unsigned int time_spray_garden=0;
 
     unsigned int time_main_pump_1=0;
     unsigned int time_spray_compost_1=0;
     unsigned int time_heat_compost_1=0;
-    unsigned int time_pump_compost_1=0;
+    unsigned int time_pump_hydroponie_1=0;
     unsigned int time_spray_garden_1=0;
     
 /* String for commnunication */

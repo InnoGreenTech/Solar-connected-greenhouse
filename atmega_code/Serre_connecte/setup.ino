@@ -100,7 +100,7 @@ void setup(void){
   water_level.ping_median(5,200);
 
 
-  /*Set and start BME280 sensor, COMPOSTomposter*/
+  /*Set and start BME280 sensor, COMPOSTomposter
 
   compost_sensor.settings.commInterface = I2C_MODE;  // I have worked with the example of http://gilles.thebault.free.fr/
   compost_sensor.settings.I2CAddress = 0x76;
@@ -111,7 +111,7 @@ void setup(void){
   compost_sensor.settings.pressOverSample = 1;
   compost_sensor.settings.humidOverSample = 1;
 
-  delay(10);                                              // Necessary time to start sensor
+  delay(10);                                              // Necessary time to start sensor */
 
   
   /*Set and start BME280 sensor, sensor out*/
@@ -129,7 +129,7 @@ void setup(void){
 
   delay(10);                                              // Necessary time to start sensor
 
-  compost_sensor.begin();
+  //compost_sensor.begin();
   out_sensor.begin();
 
   /*cat proof sensor */
@@ -159,7 +159,7 @@ void setup(void){
   pinMode(EV_GREENHOUSE_SPRAY,OUTPUT);
   pinMode(EV_COMPOST_SPRAY,OUTPUT);
   pinMode(COMPOST_HEATING,OUTPUT);          // Note Pwm output
-  pinMode(COMPOST_DRAIN_PUMP,OUTPUT);       // Note Pwm output
+  pinMode(HYDROPONIE_PUMP,OUTPUT);       // Note Pwm output
 
   
   wdt_enable(WDTO_4S);
