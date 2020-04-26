@@ -7,7 +7,7 @@ void greenhouse_gest(){
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
              onewire_greenhouse.select(address_water_greenhouse);
              temperature_water_greenhouse=onewire_greenhouse.getTempC();
-             //get_water_level();
+             get_water_level();
              get_moisture_greenhouse();
              co2_greenhouse=readCO2();
              get_luminosity();
@@ -15,7 +15,7 @@ void greenhouse_gest(){
              
              vmc_control();
              cooling_system();
-             control_spray_greenhouse();
+             control_greenhouse_spray();
              lamp_run();
   }
 
@@ -26,7 +26,7 @@ void greenhouse_gest(){
     byte cooling_day=0;
     byte cooling_night=0;
     
-    if((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0){cooling_day=1;} // control cooling during the day
+    if(((temperature_greenhouse>temperature_water_greenhouse+10) && night_day==0)||(temperature_greenhouse>set_temperature_greenhouse-5 and temperature_water_greenhouse<temperature_greenhouse)){cooling_day=1;} // control cooling during the day
     else{cooling_day=0;}
 
 
@@ -56,8 +56,8 @@ void greenhouse_gest(){
 
 void get_water_level(){
   
-  int distance=water_level.ping_cm();
-  //Serial.println(distance);
+  int distance=water_level.convert_cm(water_level.ping_median());
+ // Serial.print(distance);Serial.println(" cm");
   if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
 
 
@@ -76,18 +76,26 @@ void get_moisture_greenhouse(){
   else if(moisture_greenhouse<0){moisture_greenhouse=0;}
   return moisture_greenhouse;}
 
-void control_spray_greenhouse(){
+void control_greenhouse_spray(){
 
-  
-  if (moisture_greenhouse<set_moisture_greenhouse and night_day==1){
-    if(start_timer_spray_greenhouse==0)
-      {start_timer_spray_greenhouse=1; start_timer_spray_greenhouse=millis();bitSet(output_greenhouse,SPRAY_GREENHOUSE); }
-    else if (millis()-start_timer_spray_greenhouse >DELAY_SPRAY and start_timer_spray_greenhouse==1)
-      {start_timer_spray_greenhouse=2;start_timer_spray_greenhouse=millis();bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
-    else if (millis()-start_timer_spray_greenhouse >DELAY_PAUSE_SPRAY and start_timer_spray_greenhouse==2)
-      {start_timer_spray_greenhouse=0;}  
+   if (night_day==1){
+    bitClear(output_greenhouse,greenhouse_spray);greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    delay_greenhouse_spray=(average_temperature_greenhouse-10)*60;    
   }
-  else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);start_timer_spray_greenhouse=0;}
+
+  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done){
+    bitSet(output_greenhouse,greenhouse_spray);
+    delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
+  }
+  else if (night_day==0 and !greenhouse_spray_done){
+    greenhouse_spray_done=1;
+  }
+  else if ( humidity_greenhouse<(set_humidity_greenhouse-10) || temperature_greenhouse>(set_temperature_greenhouse+5))
+    {
+      bitSet(output_greenhouse,greenhouse_spray); 
+    }
+  else{bitClear(output_greenhouse,greenhouse_spray);}
+  
 }
 
 void vmc_control(){
@@ -99,7 +107,7 @@ void vmc_control(){
   else if (humidity_out<95){calculate_humidity=(humidity_out*temperature_out/temperature_greenhouse);}  
   else{calculate_humidity=100;}
 
-  if (temperature_greenhouse>set_temperature_greenhouse || bitRead(forced_greenhouse,VMC_GREENHOUSE)){             // security to protect hot temperature
+  if (temperature_greenhouse>set_temperature_greenhouse){             // security to protect hot temperature
   bitSet(output_greenhouse,VMC_GREENHOUSE);
   servo_vmc.write(100);
   }

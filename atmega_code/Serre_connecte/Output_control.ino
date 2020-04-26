@@ -27,11 +27,11 @@ if(bitRead(refresh_demand,REFRESH_DATA))
              
         /* spray system */
         
-        if (!bitRead(desactive_greenhouse,SPRAY_GREENHOUSE))
+        if (!bitRead(desactive_greenhouse,greenhouse_spray))
           {
-            if(bitRead(output_greenhouse,SPRAY_GREENHOUSE) || bitRead(forced_greenhouse,SPRAY_GREENHOUSE)){
+            if(bitRead(output_greenhouse,greenhouse_spray) || bitRead(forced_greenhouse,greenhouse_spray)){
               digitalWrite(EV_GREENHOUSE_SPRAY,1);
-              time_spray_greenhouse=time_spray_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
+              time_greenhouse_spray=time_greenhouse_spray+DELAY_REFRESH_SCREEN_SECONDS;
               }
             else {digitalWrite(EV_GREENHOUSE_SPRAY,0);} 
           }
@@ -107,7 +107,7 @@ if(bitRead(refresh_demand,REFRESH_DATA))
       if (!bitRead(desactive_garden, PUMP_HYDROPONIE))
         {
           if(bitRead(output_garden,PUMP_HYDROPONIE) || bitRead(forced_garden,PUMP_HYDROPONIE)){
-            analogWrite(HYDROPONIE_PUMP, 100);
+            analogWrite(HYDROPONIE_PUMP, 120);
             time_pump_hydroponie=time_pump_hydroponie+DELAY_REFRESH_SCREEN_SECONDS;
             }
           else {analogWrite(HYDROPONIE_PUMP, 0);} 
@@ -136,5 +136,17 @@ if(bitRead(refresh_demand,REFRESH_DATA))
           else{digitalWrite(GARDEN_MAIN_PUMP,false);}
         }
       else{digitalWrite(GARDEN_MAIN_PUMP,false);}
+
+            /* out_garden spray*/
+      
+      if (!bitRead(desactive_garden, out_garden_spray))
+        {
+          if(bitRead(output_garden,out_garden_spray) || bitRead(forced_garden,out_garden_spray)){
+            digitalWrite(OUT_GARDEN_SPRAY,1);
+            time_out_garden_spray=time_out_garden_spray+DELAY_REFRESH_SCREEN_SECONDS;
+            }
+          else {digitalWrite(out_garden_spray,0);}    
+        }
+      else {digitalWrite(out_garden_spray,0);}
   }
 }

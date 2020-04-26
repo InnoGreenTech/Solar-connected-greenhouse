@@ -198,10 +198,9 @@
 /* String for commnunication */
 
     String  date;             
-    String  currently_time;         
-    String  ip_address;      
+    String  currently_time;            
     String  gate_way; 
-    String  mac_address;    
+ 
 
 
 

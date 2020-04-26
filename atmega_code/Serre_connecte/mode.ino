@@ -2,6 +2,7 @@ void mode(){
   if(bitRead(refresh_demand,REFRESH_DATA))
   {
     weather();
+    average_day();
     
     if (current_weather==SUNNY and forecasts_weather==SUNNY){bitClear(mode_flag,ECO_MODE);}
     else{bitSet(mode_flag,ECO_MODE);}
@@ -71,10 +72,10 @@ void average_day(){
         
         current_sample_day=0;    
   }
-  average_temperature_greenhouse=0;
-  average_humidity_greenhouse=0;
-  average_temperature_out=0;
-  average_humidity_out=0;
+  current_average_temperature_greenhouse=0;
+  current_average_humidity_greenhouse=0;
+  current_average_temperature_out=0;
+  current_average_humidity_out=0;
   for(int i=0;i<NUMBER_SAMPLES_DAY;i++){
         average_temperature_greenhouse=average_temperature_greenhouse+day_temperature_greenhouse[i]/NUMBER_SAMPLES_DAY;
         average_humidity_greenhouse=average_humidity_greenhouse+day_humidity_greenhouse[i]/NUMBER_SAMPLES_DAY;     

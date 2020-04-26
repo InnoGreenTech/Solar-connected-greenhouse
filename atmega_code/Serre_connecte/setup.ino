@@ -97,23 +97,8 @@ void setup(void){
   ***********************************************************************************************/
 
   greenhouse_dht.begin();
-  water_level.ping_median(5,200);
-
-
-  /*Set and start BME280 sensor, COMPOSTomposter
-
-  compost_sensor.settings.commInterface = I2C_MODE;  // I have worked with the example of http://gilles.thebault.free.fr/
-  compost_sensor.settings.I2CAddress = 0x76;
-  compost_sensor.settings.runMode = 3; 
-  compost_sensor.settings.tStandby = 0;
-  compost_sensor.settings.filter = 0;
-  compost_sensor.settings.tempOverSample = 1 ;
-  compost_sensor.settings.pressOverSample = 1;
-  compost_sensor.settings.humidOverSample = 1;
-
-  delay(10);                                              // Necessary time to start sensor */
-
-  
+  water_level.ping_cm(100);
+ 
   /*Set and start BME280 sensor, sensor out*/
 
   out_sensor.settings.commInterface = I2C_MODE;  // I have worked with the example of http://gilles.thebault.free.fr/
@@ -160,8 +145,18 @@ void setup(void){
   pinMode(EV_COMPOST_SPRAY,OUTPUT);
   pinMode(COMPOST_HEATING,OUTPUT);          // Note Pwm output
   pinMode(HYDROPONIE_PUMP,OUTPUT);       // Note Pwm output
+  pinMode(OUT_GARDEN_SPRAY,OUTPUT);
 
-  
+  /* init average day */
+
+  for (int i=0; i<NUMBER_SAMPLES_DAY;i++){
+    day_temperature_greenhouse[i]=25;
+    day_humidity_greenhouse[i]=70;
+    day_temperature_out[i]=20;
+    day_humidity_out[i]=50;   
+    
+  }
+
   wdt_enable(WDTO_4S);
 
 

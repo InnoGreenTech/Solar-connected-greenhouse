@@ -79,15 +79,20 @@ bitSet(flag_first_screen,MAIN_SCREEN);
 
 if(bitRead(refresh_demand,REFRESH_SCREEN)){
 
-  tft.setTextSize(2); 
+
+  tft.setFont(&Weathericon);
+  tft.setTextSize(2);
+  tft.setTextColor(WHITE,FOND);
+  tft.setCursor(200,45);
+ /* tft.setTextSize(2); 
   tft.setTextColor(CYAN,FOND); 
   tft.setCursor(175,5);
   tft.print (weather_string[current_weather-1]);   
   tft.setTextColor(ORANGE,FOND); 
-  tft.setCursor(175,25);
+  tft.setCursor(175,25);*/
   tft.print (weather_string[forecasts_weather-1]);
   
-    
+  tft.setFont();
   tft.setTextSize(1); 
   tft.setTextColor(GREEN,FOND);
   tft.setCursor(110,50);
@@ -179,7 +184,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
  
   if (four_buttons[INFORMATION].contains(x,y))
     { 
-      Serial.println("demande ecrans");  
+      //Serial.println("demande ecrans");  
       flag_screen=0;  
       flag_first_screen=0;
       refresh_demand=2;

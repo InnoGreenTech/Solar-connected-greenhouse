@@ -2,6 +2,21 @@
 void greenhouse_screen(){
 
 
+/**************************************************************************************************************************************  
+*  Forced buttons controle in first to imrpove naviguation
+ */
+
+  for (int a=0; a<6; a++){
+      if (six_buttons[a].contains(x,y))
+        {  
+          if(bitRead(forced_greenhouse,a)){bitSet(desactive_greenhouse,a);bitClear(forced_greenhouse,a);}
+          else if(bitRead(desactive_greenhouse,a)){bitClear(desactive_greenhouse,a);}
+          else{bitSet(forced_greenhouse,a);} 
+          greenhouse_buttons_design();
+        }
+    }
+
+
 /*********************************************************
 *                  Back screen                           *
 **********************************************************/
@@ -88,7 +103,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
     { 
       flag_screen=0;  
       flag_first_screen=0;
-      bitSet(flag_screen,MAIN_SCREEN); 
+      bitSet(flag_screen,MAIN_SCREEN);
      }
 
 /**************************************************************************************************************************************  
@@ -106,19 +121,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
 
 
 
-/**************************************************************************************************************************************  
-*  Forced buttons controle
- */
 
-  for (int a=0; a<6; a++){
-      if (six_buttons[a].contains(x,y))
-        {  
-          if(bitRead(forced_greenhouse,a)){bitSet(desactive_greenhouse,a);bitClear(forced_greenhouse,a);}
-          else if(bitRead(desactive_greenhouse,a)){bitClear(desactive_greenhouse,a);}
-          else{bitSet(forced_greenhouse,a);} 
-          refresh_demand=2;
-        }
-    }
     
    y=0;
    x=0;  

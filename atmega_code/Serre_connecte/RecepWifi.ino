@@ -30,10 +30,11 @@ void recep_wifi(){
                         
    
                         content = "";
-                        while (Serial1.available()>0){        //read content
+                        content = "";
+                        while (Serial1.available()>0 and a!='$'){        //read content
                         a=Serial1.read();
-                        //if (a!='\0') {content += (char) a;}}
-                        content += (char) a;}
+                        if (a!='$'){content += (char) a;}
+                        }
                         
 
 

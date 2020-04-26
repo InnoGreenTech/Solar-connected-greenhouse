@@ -9,6 +9,8 @@ int readCO2() {
   Serial3.write(cmd, 9); //request PPM CO2
 
   // The serial stream can get out of sync. The response starts with 0xff, try to resync.
+
+  if(Serial3.available()){
   while (Serial3.available() > 0 && (unsigned char)Serial3.peek() != 0xFF) {
     Serial3.read();
   }
@@ -18,10 +20,14 @@ int readCO2() {
 
   if (response[1] != 0x86)
   {
-    Serial.println("Invalid response from co2 sensor!");
+    //Serial.println("Invalid response from co2 sensor!");
     
     return ppm;
   }
+
+  }
+
+  else {return ppm;}
 
   byte crc = 0;
   for (int i = 1; i < 8; i++) {
@@ -36,7 +42,7 @@ int readCO2() {
     ppm = response[2] << 8 | response[3];
     return ppm;
   } else {
-    Serial.println("CRC error!");
+    //Serial.println("CRC error!");
     return -1;
   }
 }

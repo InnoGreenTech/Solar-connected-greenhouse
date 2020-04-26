@@ -11,7 +11,7 @@ void recep_data(){
                         float float_content;
                         int   int_content;
                                                 
-                        delay(2);                            // wait first to receive every data
+                        delay(2);// wait first to receive every data
                         for(int i=0;i<3;i++){
                             a=Serial.read();
                             command +=(char)a;
@@ -33,9 +33,10 @@ void recep_data(){
 
                         what_is=what.toInt();        
                         content = "";
-                        while (Serial.available()>0){        //read content
+                        while (Serial.available()>0 and (char)a!='$'){        //read content
                         a=Serial.read();
-                        content += (char) a;} 
+                        if ((char)a!='$'){content += (char) a;}
+                        }
                         int_content=content.toInt();
                         float_content=content.toFloat();
 

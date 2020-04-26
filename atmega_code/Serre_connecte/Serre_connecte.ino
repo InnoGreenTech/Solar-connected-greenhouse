@@ -64,6 +64,7 @@
 
     #include <Adafruit_GFX.h>                 // Disign library
     #include <Adafruit_TFTLCD.h>              //library of screen
+    #include <Fonts/WeatherIcon.h>
 
 
 //Setting the pins for the screen
@@ -109,17 +110,17 @@
     #define PUMP_COOLING_GREENHOUSE       2           // Manual mode  of the cooling system
     #define LAMP_GREENHOUSE               3           // Manual mode  of the horticol light
     #define HEATING_GREENHOUSE            4           // Manual mode  of the soil of the green house
-    #define SPRAY_GREENHOUSE              5           // Manual mode  of the humidity system
+    #define greenhouse_spray              5           // Manual mode  of the humidity system
 
     
-    char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","Hydro","HumGh"};
+    char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","Hydro","OutS"};
     
     #define SPRAY_GARDEN              0                    
     #define SPRAY_COMPOST             1          
     #define MAIN_PUMP                 2         
     #define HEATING_COMPOST           3
     #define PUMP_HYDROPONIE           4
-    #define HUMIDIFICATOR_GREENHOUSE  5
+    #define out_garden_spray          5
     #define CAT_PROOF_GARDEN          6
     
     Adafruit_GFX_Button four_buttons[4]; 
@@ -171,7 +172,7 @@
     TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
     
     unsigned long button_delay;          // delay of push buttom
-    #define BUTTON_DELAY 200    // delay filter for the buttom 
+    #define BUTTON_DELAY 100    // delay filter for the buttom 
     
     #define DELAY_REFRESH_SCREEN         5000
     #define DELAY_REFRESH_SCREEN_SECONDS 5
@@ -227,7 +228,7 @@
    
     
     int index_sent=0;                           //allow to sent data one by one with PERIOD_SENT bettween each
-    #define PERIOD_SENT 100                     //one information every 100 ms;
+    #define PERIOD_SENT 500                     //one information every 100 ms;
     unsigned long period_sent=0;                //control the last message
     unsigned long number_of_samples;            //Number of samples between two sender 
 
@@ -270,7 +271,7 @@
     #define CODE_HUMIDITY_GREENHOUSE                    31
     #define CODE_CO2_GREENHOUSE                         32
     #define CODE_LEVEL_WATER_GREENHOUSE                 33
-    #define CODE_SPRAY_GREENHOUSE                       34
+    #define CODE_greenhouse_spray                       34
     #define CODE_LAMP_GREENHOUSE                        35
     #define CODE_HEAT_GREENHOUSE                        36
     #define CODE_FAN_COOLING_GREENHOUSE                 37
@@ -348,7 +349,7 @@
 
     unsigned int time_heat_greenhouse;
     unsigned int time_cooling_greenhouse;
-    unsigned int time_spray_greenhouse;
+    unsigned int time_greenhouse_spray;
     unsigned int time_vmc_greenhouse;
     unsigned int time_lamp_greenhouse;
     unsigned int time_humidificator_greenhouse;
@@ -367,6 +368,7 @@
     unsigned int time_heat_compost;
     unsigned int time_pump_hydroponie;
     unsigned int time_spray_garden;
+    unsigned int time_out_garden_spray;
     
 /* String for commnunication with ESP8266 */
 
@@ -378,8 +380,8 @@
 
 /* memory for timing pump hydroponie*/
  
-    unsigned long  delay_hydroponie=600*1000;     // delay betwin two pump
-    unsigned long  delay_pump_hydroponie=30*1000;
+    unsigned long  delay_hydroponie=600000;     // delay betwin two pump
+    unsigned long  delay_pump_hydroponie=60000;
 
     unsigned long  last_pump_hydroponie=0;
     unsigned long  delay_start_pump_hydroponie=0;
@@ -413,11 +415,13 @@
     #define THUNDERSTORM       4
     #define UNKNOWN            5
 
-    String weather_string[4]={"SOLEIL ","COUVERT","PLUIE  ","PLUIE  "};
+    char weather_string[4]={char(49),char(51),char(56),char(56)};
+
 
 /* average day mesure */
 
     #define       NUMBER_SAMPLES_DAY   48
+    
     int           total_samples_day=int(((3600*24)/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_DAY);
     byte          rotate_day_index=0;
     int           current_sample_day;
@@ -442,15 +446,20 @@
     
 
 
-/* timer for spray garden and greenhouse, it allows to spray step by step */
+/* timer for spray garden and greenhouse  and  out_garden */
 
-    #define DELAY_SPRAY       60000            // Delay to spray
-    #define DELAY_PAUSE_SPRAY 300000    // Give the at the water to rich probe
+   
+    unsigned long   start_timer_spray_garden;
+    byte            garden_spray_done;    
+    int             delay_garden_spray;
     
-    unsigned long start_timer_spray_garden;
-    byte    step_spray_garden;                       // =0 spray =1 pause 
-    unsigned long start_timer_spray_greenhouse;
-    byte    step_spray_greenhouse;                       // =0 spray =1 pause
+    unsigned long   start_timer_greenhouse_spray;
+    byte            greenhouse_spray_done;  
+    int             delay_greenhouse_spray;     
+
+    unsigned long   start_timer_out_garden_spray;
+    byte            out_garden_spray_done;  
+    int             delay_out_garden_spray; 
 
 /**************************************************
  *                RAM Memory for setting          *
@@ -599,7 +608,7 @@
     //DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
     uint8_t address_soil_garden[] = {  0x28,  0x7D,  0x97,  0x79,  0x97,  0x7,  0x3,  0xCF};
-    uint8_t address_compost[] = {  0x28,  0x9C,  0xA5,  0x97,  0x13,  0x19,  0x1,  0xFA};
+    uint8_t address_compost[] =     {  0x28,  0x9C,  0xA5,  0x97,  0x13,  0x19, 0x1,  0xFA};
 
     /*BME280  compost_sensor; */            // BME280 sensor
     BME280  out_sensor;
@@ -617,15 +626,17 @@
     #define GREENHOUSE_HEATING       O2_0  
     #define GREENHOUSE_HUMIDIFICATOR O2_5 
     #define GREENHOUSE_SERVO_VMC     O2_6          // this a 5 V servo
+    
     Servo servo_vmc;
 
 /* Garden card output*/
 
-    #define GARDEN_MAIN_PUMP        O1_0
+    #define GARDEN_MAIN_PUMP        O1_2
     #define EV_GARDEN_SPRAY         O1_1
     #define EV_GREENHOUSE_SPRAY     O1_5
     #define EV_COMPOST_SPRAY        O1_4
     #define COMPOST_HEATING         O1_3
-    #define HYDROPONIE_PUMP         O1_2
+    #define HYDROPONIE_PUMP         O1_0
+    #define OUT_GARDEN_SPRAY        O1_10
 
     void(* resetFunc) (void) = 0;//declare reset function at address 0

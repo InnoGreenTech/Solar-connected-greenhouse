@@ -1,6 +1,19 @@
 
 void compost_screen(){
 
+/**************************************************************************************************************************************  
+*  Forced buttons controle
+ */
+  for (int a=0; a<6; a++){
+      if (six_buttons[a].contains(x,y))
+        {   
+          if(bitRead(forced_garden,a)){bitSet(desactive_garden,a);bitClear(forced_garden,a);}
+          else if(bitRead(desactive_garden,a)){bitClear(desactive_garden,a);}
+          else{bitSet(forced_garden,a);}
+          garden_buttons_design();
+        }
+    }
+    
 
 /*********************************************************
 *                  Back screen                           *
@@ -94,19 +107,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
     }
   
 
-/**************************************************************************************************************************************  
-*  Forced buttons controle
- */
-  for (int a=0; a<6; a++){
-      if (six_buttons[a].contains(x,y))
-        {   
-          if(bitRead(forced_garden,a)){bitSet(desactive_garden,a);bitClear(forced_garden,a);}
-          else if(bitRead(desactive_garden,a)){bitClear(desactive_garden,a);}
-          else{bitSet(forced_garden,a);}
-          refresh_demand=2;
-        }
-    }
-    
+
    y=0;
    x=0;  
  

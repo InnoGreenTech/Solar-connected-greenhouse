@@ -13,24 +13,28 @@ void loop(void){
       bitSet(refresh_demand,REFRESH_SCREEN);                  
       refresh_datas=millis();
       number_of_samples ++;      
-    }
-  
-  tactil ();
-  
+    }  
   greenhouse_gest();
-  
+  tactil ();
+
   garden_gest();
+  tactil ();
 
   mode();
+  tactil ();
 
   output_greenhouse_control();
+  tactil ();
 
   output_garden_control();
+  tactil ();
 
   recep_wifi();
-  
+  tactil ();
+
   send_data();
 
+  tactil ();
   switch(flag_screen){
 
              case B00000001:
@@ -60,10 +64,11 @@ void loop(void){
              default:
                   main_screen();
                   break;
-            } 
+            }
 
 
- if(bitRead(refresh_demand,REFRESH_SCREEN)){refresh_demand=0;}
+ if(bitRead(refresh_demand,REFRESH_SCREEN)){bitClear(refresh_demand,REFRESH_SCREEN);}
+ if(bitRead(refresh_demand,REFRESH_DATA)){bitClear(refresh_demand,REFRESH_DATA);}
 
  wdt_reset();
 
