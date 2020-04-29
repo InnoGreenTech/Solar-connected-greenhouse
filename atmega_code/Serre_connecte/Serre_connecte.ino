@@ -120,7 +120,7 @@
     #define MAIN_PUMP                 2         
     #define HEATING_COMPOST           3
     #define PUMP_HYDROPONIE           4
-    #define out_garden_spray          5
+    #define SPRAY_OUT_GARDEN          5
     #define CAT_PROOF_GARDEN          6
     
     Adafruit_GFX_Button four_buttons[4]; 
@@ -388,16 +388,16 @@
 
     byte           start_pump_hydroponie=0;  
 
+   #define         TIME_LAMP_DAY  3600000   // Time of work of lamp by day
+
+
+/* meteo memory */
+
 /* memory for  lamp of greenhouse */
 
    byte            night_day;                // 1 when the night is detect
    byte            light_use;
    unsigned long   time_lamp_day;
-
-   #define         TIME_LAMP_DAY  3600000   // Time of work of lamp by day
-
-
-/* meteo memory */
     #define         NUMBER_SAMPLES_HOUR 12
 
     float           average_pressure[NUMBER_SAMPLES_HOUR];            // take x samples per hour
@@ -422,7 +422,7 @@
 
     #define       NUMBER_SAMPLES_DAY   48
     
-    int           total_samples_day=int(((3600*24)/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_DAY);
+    int           total_samples_day=int((86400/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_DAY);
     byte          rotate_day_index=0;
     int           current_sample_day;
 

@@ -1,7 +1,7 @@
 void greenhouse_gest(){
   if(bitRead(refresh_demand,REFRESH_DATA))
   {
-             temperature_greenhouse= float(greenhouse_dht.readTemperature()); 
+             temperature_greenhouse= greenhouse_dht.readTemperature(); 
              humidity_greenhouse=float(greenhouse_dht.readHumidity()); 
              onewire_greenhouse.select(address_soil_greenhouse);
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
@@ -80,7 +80,7 @@ void control_greenhouse_spray(){
 
    if (night_day==1){
     bitClear(output_greenhouse,greenhouse_spray);greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_greenhouse_spray=(average_temperature_greenhouse-10)*60;    
+    delay_greenhouse_spray=int((average_temperature_greenhouse-10)*60);    
   }
 
   if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done){

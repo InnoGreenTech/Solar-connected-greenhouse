@@ -47,35 +47,38 @@ void average_day(){
 
     if (current_sample_day<total_samples_day){
         current_sample_day++;
-        
-        current_average_temperature_greenhouse =  current_average_temperature_greenhouse+(temperature_greenhouse/total_samples_day);
+        if (temperature_greenhouse<560){current_average_temperature_greenhouse =  current_average_temperature_greenhouse+(temperature_greenhouse/total_samples_day);}        
+
         current_average_humidity_greenhouse =  current_average_humidity_greenhouse+(humidity_greenhouse/total_samples_day);
 
         current_average_temperature_out =  current_average_temperature_out+(temperature_out/total_samples_day);
         current_average_humidity_out =  current_average_humidity_out+(humidity_out/total_samples_day);  
+
+        //Serial.print("prise d'un échantillon :");Serial.println(total_samples_day);
+        //Serial.println(int((average_temperature_greenhouse-10)*60));
              
         }
         
     else{
-        rotate_index++;
+        rotate_day_index++;
         if (rotate_index>NUMBER_SAMPLES_DAY){rotate_day_index=0;}
         
-        day_temperature_greenhouse[rotate_index]= current_average_temperature_greenhouse;
+        day_temperature_greenhouse[rotate_day_index]= current_average_temperature_greenhouse;
         current_average_temperature_greenhouse=0;
-        day_temperature_greenhouse[rotate_index]= current_average_humidity_greenhouse;
+        day_temperature_greenhouse[rotate_day_index]= current_average_humidity_greenhouse;
         current_average_humidity_greenhouse=0;
 
-        day_temperature_out[rotate_index]= current_average_temperature_out;
+        day_temperature_out[rotate_day_index]= current_average_temperature_out;
         current_average_temperature_out=0;
-        day_temperature_out[rotate_index]= current_average_humidity_out;
+        day_temperature_out[rotate_day_index]= current_average_humidity_out;
         current_average_humidity_out=0;
         
         current_sample_day=0;    
-  }
-  current_average_temperature_greenhouse=0;
-  current_average_humidity_greenhouse=0;
-  current_average_temperature_out=0;
-  current_average_humidity_out=0;
+        }
+        average_temperature_greenhouse=0;
+        average_humidity_greenhouse=0;
+        average_temperature_out=0;
+        average_humidity_out=0;
   for(int i=0;i<NUMBER_SAMPLES_DAY;i++){
         average_temperature_greenhouse=average_temperature_greenhouse+day_temperature_greenhouse[i]/NUMBER_SAMPLES_DAY;
         average_humidity_greenhouse=average_humidity_greenhouse+day_humidity_greenhouse[i]/NUMBER_SAMPLES_DAY;     
@@ -83,4 +86,12 @@ void average_day(){
         average_temperature_out=average_temperature_out+day_temperature_out[i]/NUMBER_SAMPLES_DAY;
         average_humidity_out=average_humidity_out+day_humidity_out[i]/NUMBER_SAMPLES_DAY;   
   }
+  /*Serial.println(average_temperature_greenhouse);
+  Serial.println(current_average_temperature_greenhouse);
+  
+  Serial.println(average_humidity_greenhouse);
+  Serial.println(current_average_humidity_greenhouse);
+  
+  Serial.println(average_temperature_out);
+  Serial.println(current_average_temperature_out);*/
 }

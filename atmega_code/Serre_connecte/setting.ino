@@ -67,7 +67,7 @@ if (new_setting==1){
   
   if(four_buttons[ESC].contains(x,y))
     { 
-      if (reset_demand=1){resetFunc();}
+      if (reset_demand==1){resetFunc();}
       flag_screen=0;  
       flag_first_screen=0;
       bitSet(flag_screen,MAIN_SCREEN); 

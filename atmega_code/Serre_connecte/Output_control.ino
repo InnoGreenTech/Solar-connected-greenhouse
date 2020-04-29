@@ -139,14 +139,14 @@ if(bitRead(refresh_demand,REFRESH_DATA))
 
             /* out_garden spray*/
       
-      if (!bitRead(desactive_garden, out_garden_spray))
+      if (!bitRead(desactive_garden, SPRAY_OUT_GARDEN))
         {
-          if(bitRead(output_garden,out_garden_spray) || bitRead(forced_garden,out_garden_spray)){
+          if(bitRead(output_garden,SPRAY_OUT_GARDEN) || bitRead(forced_garden,SPRAY_OUT_GARDEN)){
             digitalWrite(OUT_GARDEN_SPRAY,1);
             time_out_garden_spray=time_out_garden_spray+DELAY_REFRESH_SCREEN_SECONDS;
             }
-          else {digitalWrite(out_garden_spray,0);}    
+          else {digitalWrite(OUT_GARDEN_SPRAY,0);}    
         }
-      else {digitalWrite(out_garden_spray,0);}
+      else {digitalWrite(OUT_GARDEN_SPRAY,0);}
   }
 }

@@ -128,7 +128,7 @@ void spray_control_garden(){
 
    if (night_day==1){
     bitClear(output_garden,SPRAY_GARDEN);garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_garden_spray= (average_temperature_out-10)*60-(average_humidity_out-70)*30;;
+    delay_garden_spray= int((average_temperature_out-10)*60+(70-average_humidity_out)*30);
     
   }
 
@@ -145,19 +145,19 @@ void spray_control_garden(){
 void spray_control_out_garden(){
 
    if (night_day==1){
-    bitClear(output_garden,out_garden_spray);out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_out_garden_spray= (average_temperature_out-10)*90-(average_humidity_out-70)*30;
+    bitClear(output_garden,SPRAY_OUT_GARDEN);out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    delay_out_garden_spray= int((average_temperature_out-10)*90+(70-average_humidity_out)*30);
     
   }
 
   if (delay_out_garden_spray>0 and night_day==0 and !out_garden_spray_done){
-    bitSet(output_garden,out_garden_spray);
+    bitSet(output_garden,SPRAY_OUT_GARDEN);
     delay_out_garden_spray= delay_out_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !out_garden_spray_done){
     out_garden_spray_done=1;
   }
- else{bitClear(output_garden,out_garden_spray);}
+ else{bitClear(output_garden,SPRAY_OUT_GARDEN);}
 }
 
 void cat_proof_control(){
