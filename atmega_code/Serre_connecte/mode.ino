@@ -61,7 +61,7 @@ void average_day(){
         
     else{
         rotate_day_index++;
-        if (rotate_index>NUMBER_SAMPLES_DAY){rotate_day_index=0;}
+        if (rotate_day_index>NUMBER_SAMPLES_DAY){rotate_day_index=0;}
         
         day_temperature_greenhouse[rotate_day_index]= current_average_temperature_greenhouse;
         current_average_temperature_greenhouse=0;

@@ -111,14 +111,8 @@ void temperature_control_compost(){
   }
 
 void get_moisture_garden(){
-  //int read_pin=analogRead(MOISTURE_GARDEN);
-  float read_pin=0;
-  for (int i = 0; i <500; i ++) {
-  read_pin = read_pin +float( MOISTURE_GARDEN)/500; 
-  }
-  //read_pin=read_pin-80;
-  //moisture_garden= 100-(read_pin*10/90);
-  moisture_garden=int(float(set_k_moist_garden*100)/read_pin);
+  float read_pin=float(analogRead(MOISTURE_GARDEN));
+  moisture_garden= int(((read_pin*a_moist_garden)-b_moist_garden)/100);
   if(moisture_garden>100){moisture_garden=100;}
   else if(moisture_garden<0){moisture_garden=0;}
   return moisture_garden;}
@@ -132,7 +126,7 @@ void spray_control_garden(){
     
   }
 
-  if (delay_garden_spray>0 and night_day==0 and !garden_spray_done){
+  if (delay_garden_spray>0 and night_day==0 and !garden_spray_done and moisture_garden<70 ){
     bitSet(output_garden,SPRAY_GARDEN);
     delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }

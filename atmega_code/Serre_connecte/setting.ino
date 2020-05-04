@@ -34,8 +34,8 @@ char info_set[30][18]={"Temp COMPOST     ","Eco Temp COMPOST ","Hum COMPOST     
                        "V offset Battery ","A offset Battery ","Capacity Battery ","A offset load    ","Luminosity       ","Empty  25        ","Empty  26        ","Empty  27        ","Empty  28        ","Empty  29        "};
 
 int mem_address[30]={MEM_SETTING_TEMPEPARTURE_COMPOST ,MEM_SETTING_ECO_TEMPERATURE_COMPOST ,MEM_SETTING_HUMIDITY_COMPOST ,MEM_SETTING_MOISTURE_GARDEN,MEM_SETTING_ALTITUDE ,MEM_SETTING_K_MOIST_GARDEN,255,255,255,255,
-                       MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,MEM_SETTING_K_MOIST_GREENHOUSE,255,255,255,
-                       MEM_SETTING_V_OFFSET_BATTERY,MEM_SETTING_A_OFFSET_BATTERY,MEM_SETTING_CAPACITY_BATTERY,MEM_SETTING_A_OFFSET_LOAD,MEM_SETTING_LUMINOSITY,255,255,255,255,255};
+                     MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,MEM_SETTING_K_MOIST_GREENHOUSE,255,255,255,
+                     MEM_SETTING_V_OFFSET_BATTERY,MEM_SETTING_A_OFFSET_BATTERY,MEM_SETTING_CAPACITY_BATTERY,MEM_SETTING_A_OFFSET_LOAD,MEM_SETTING_LUMINOSITY,255,255,255,255,255};
                        
 if (!(new_index==index_setting)){
       index_setting=new_index;                      
@@ -44,6 +44,8 @@ if (!(new_index==index_setting)){
       tft.setCursor(30,50);
       String infos=info_set[index_setting];
       tft.print(infos);
+      if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GARDEN));}
+      if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GREENHOUSE));}
       byte read_mem[2];
       for (int a=0;a<2;a++){read_mem[a]=EEPROM.read (mem_address[index_setting]+a);}
       setting= read_mem[0] | read_mem[1] << 8;

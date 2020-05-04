@@ -391,13 +391,16 @@
    #define         TIME_LAMP_DAY  3600000   // Time of work of lamp by day
 
 
-/* meteo memory */
 
 /* memory for  lamp of greenhouse */
 
-   byte            night_day;                // 1 when the night is detect
-   byte            light_use;
-   unsigned long   time_lamp_day;
+     byte            night_day;                // 1 when the night is detect
+     byte            light_use;
+     unsigned long   time_lamp_day;
+
+
+/* meteo memory */
+     
     #define         NUMBER_SAMPLES_HOUR 12
 
     float           average_pressure[NUMBER_SAMPLES_HOUR];            // take x samples per hour
@@ -485,7 +488,10 @@
     int     set_altitude;
     int     set_k_moist_garden;
     int     set_k_moist_greenhouse;
-    
+    float   a_moist_garden;
+    float   b_moist_garden;
+    float   a_moist_greenhouse;
+    float   b_moist_greenhouse;
     int     setting;
 
 

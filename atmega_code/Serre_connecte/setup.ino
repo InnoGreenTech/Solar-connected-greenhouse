@@ -82,10 +82,14 @@ void setup(void){
   set_altitude = mem[0] | mem[1] << 8; 
 
   for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_K_MOIST_GARDEN  + a);} 
-  set_k_moist_garden = mem[0] | mem[1] << 8; 
+  set_k_moist_garden = mem[0] | mem[1] << 8;
+  a_moist_garden=10000/(float(set_k_moist_garden)-615); 
+  b_moist_garden=a_moist_garden*615;
 
   for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_K_MOIST_GREENHOUSE  + a);} 
   set_k_moist_greenhouse = mem[0] | mem[1] << 8; 
+  a_moist_greenhouse=10000/(float(set_k_moist_greenhouse)-615); 
+  b_moist_greenhouse=a_moist_greenhouse*615;
   
   Serial.begin(9600);     
   Serial1.begin(115200);    // set communication with ESP8266

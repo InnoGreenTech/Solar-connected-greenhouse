@@ -64,14 +64,8 @@ void get_water_level(){
   }
 
 void get_moisture_greenhouse(){
-  //int read_pin=analogRead(MOISTURE_GREENHOUSE);
-  float read_pin=0;
-  for (int i = 0; i <500; i ++) {
-  read_pin = read_pin +float( MOISTURE_GREENHOUSE)/500; 
-  }
-  //read_pin=read_pin-80;
-  //moisture_greenhouse= 100-(read_pin*10/90);
-  moisture_greenhouse=int(float(set_k_moist_greenhouse*100)/read_pin);
+  float read_pin=analogRead(MOISTURE_GREENHOUSE);
+  moisture_greenhouse= int(((read_pin*a_moist_greenhouse)-b_moist_greenhouse)/100);
   if(moisture_greenhouse>100){moisture_greenhouse=100;}
   else if(moisture_greenhouse<0){moisture_greenhouse=0;}
   return moisture_greenhouse;}
@@ -83,7 +77,7 @@ void control_greenhouse_spray(){
     delay_greenhouse_spray=int((average_temperature_greenhouse-10)*60);    
   }
 
-  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done){
+  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done and moisture_greenhouse<70){
     bitSet(output_greenhouse,greenhouse_spray);
     delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
