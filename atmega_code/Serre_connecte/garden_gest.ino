@@ -121,25 +121,32 @@ void spray_control_garden(){
 
 
    if (night_day==1){
-    bitClear(output_garden,SPRAY_GARDEN);garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    //bitClear(output_garden,SPRAY_GARDEN);garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_garden_spray= int((average_temperature_out-10)*60+(70-average_humidity_out)*30);
     
   }
 
-  if (delay_garden_spray>0 and night_day==0 and !garden_spray_done and moisture_garden<70 ){
+  if (delay_garden_spray>0 and night_day==0 and !garden_spray_done and moisture_garden<set_moisture_garden){
     bitSet(output_garden,SPRAY_GARDEN);
     delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !garden_spray_done){
     garden_spray_done=1;
   }
- else{bitClear(output_garden,SPRAY_GARDEN);}
+  else if ( wifi_spray_garden and delay_garden_spray>0){
+    bitSet(output_garden,SPRAY_GARDEN);
+    delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
+  }
+  else if (  wifi_spray_greenhouse ){
+    wifi_spray_garden=0;
+  }
+  else{bitClear(output_garden,SPRAY_GARDEN);}
 }
 
 void spray_control_out_garden(){
 
    if (night_day==1){
-    bitClear(output_garden,SPRAY_OUT_GARDEN);out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    //bitClear(output_garden,SPRAY_OUT_GARDEN);out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_out_garden_spray= int((average_temperature_out-10)*90+(70-average_humidity_out)*30);
     
   }
@@ -151,6 +158,13 @@ void spray_control_out_garden(){
   else if (night_day==0 and !out_garden_spray_done){
     out_garden_spray_done=1;
   }
+  else if ( wifi_spray_out_garden and delay_out_garden_spray>0){
+    bitSet(output_garden,SPRAY_OUT_GARDEN);
+    delay_out_garden_spray= delay_out_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
+  }
+  else if (  wifi_spray_out_garden ){
+    wifi_spray_out_garden=0;
+  }
  else{bitClear(output_garden,SPRAY_OUT_GARDEN);}
 }
 
@@ -159,6 +173,10 @@ void cat_proof_control(){
     bitSet(output_garden,CAT_PROOF_GARDEN);
   }
   else{bitClear(output_garden,CAT_PROOF_GARDEN);}
+ if(digitalRead(CAT_PROOF_OUT)){
+  bitSet(output_garden,CAT_PROOF_OUT_GARDEN);
+ }
+ else{bitClear(output_garden,CAT_PROOF_OUT_GARDEN);}
 }
 
 

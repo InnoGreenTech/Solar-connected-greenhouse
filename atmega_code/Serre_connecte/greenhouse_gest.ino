@@ -72,13 +72,13 @@ void get_moisture_greenhouse(){
 
 void control_greenhouse_spray(){
 
-   if (night_day==1){
-    bitClear(output_greenhouse,greenhouse_spray);greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+   if (night_day==1 and !wifi_spray_greenhouse){
+    //bitClear(output_greenhouse,SPRAY_GREENHOUSE);greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_greenhouse_spray=int((average_temperature_greenhouse-10)*60);    
   }
 
-  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done and moisture_greenhouse<70){
-    bitSet(output_greenhouse,greenhouse_spray);
+  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done and moisture_greenhouse<set_moisture_greenhouse){
+    bitSet(output_greenhouse,SPRAY_GREENHOUSE);
     delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !greenhouse_spray_done){
@@ -86,9 +86,16 @@ void control_greenhouse_spray(){
   }
   else if ( humidity_greenhouse<(set_humidity_greenhouse-10) || temperature_greenhouse>(set_temperature_greenhouse+5))
     {
-      bitSet(output_greenhouse,greenhouse_spray); 
+      bitSet(output_greenhouse,SPRAY_GREENHOUSE); 
     }
-  else{bitClear(output_greenhouse,greenhouse_spray);}
+  else if ( wifi_spray_greenhouse and delay_greenhouse_spray>0){
+    bitSet(output_greenhouse,SPRAY_GREENHOUSE);
+    delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
+  }
+  else if (  wifi_spray_greenhouse ){
+    wifi_spray_greenhouse=0;
+  }
+  else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
   
 }
 

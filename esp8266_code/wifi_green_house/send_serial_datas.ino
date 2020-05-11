@@ -31,3 +31,9 @@ if(millis()-period_sent>PERIOD_SENT){
     }  
   
 }
+
+void send_command(String command,byte code,String content){
+      Serial.print(command);
+      Serial.print(code);
+      Serial.print(content);
+}

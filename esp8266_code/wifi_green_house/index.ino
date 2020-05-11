@@ -1,5 +1,15 @@
 
 void indexRoot(){
+
+              if(server.hasArg("SPRAY_GREENHOUSE")){
+                send_command(CODE_COMMAND_WRITE,CODE_SPRAY_GREENHOUSE,server.arg("SPRAY_GREENHOUSE"));
+              }
+              if(server.hasArg("SPRAY_GARDEN")){
+                send_command(CODE_COMMAND_WRITE,CODE_SPRAY_GARDEN,server.arg("SPRAY_GARDEN"));
+              }
+              if(server.hasArg("SPRAY_OUT_GARDEN")){
+                send_command(CODE_COMMAND_WRITE,CODE_SPRAY_OUT_GARDEN,server.arg("SPRAY_OUT_GARDEN"));
+              }
               if ( server.hasArg("envoi")) 
               {      
                 send_data();
@@ -50,7 +60,9 @@ String indexPage(){
                            page +=temperature_soil_greenhouse;
                            page +=F(" °C</td></tr><tr><td>Température eau:</td><td></td><td>");
                            page +=temperature_water_greenhouse;
-                           page +=F(" °C</td></tr></table></section>");   
+                           page +=F(" °C</td></tr><tr><td>Arrosage serre en secondes :");
+                           page +=F("</td><td></td><td><form method='get'><input type='number' name='SPRAY_GREENHOUSE' value='300'/><input type='submit' value='envoi'/>");                      
+                           page +=F("</form></td></tr></table></section>");   
                                        
                            page +=F("<section id='garden'><h2> Garden </h2><table><tr><td>Température:</td><td></td><td>");
                            page +=temperature_out;
@@ -60,7 +72,11 @@ String indexPage(){
                            page +=temperature_soil_garden;
                            page +=F(" °C</td></tr><tr><td>Humidité sol:</td><td></td><td>");
                            page +=moisture_garden;
-                           page +=F(" %</td></tr></table></section>");
+                           page +=F(" %</td></tr><tr><td>Arrosage jardiniére en secondes :");
+                           page +=F("</td><td></td><td><form method='get'><input type='number' name='SPRAY_GARDEN' value='300'/><input type='submit' value='valide'/>");                      
+                           page +=F("</form></td></tr><tr><td>Arrosage jardin en secondes :");
+                           page +=F("</td><td></td><td><form method='get'><input type='number' name='SPRAY_OUT_GARDEN' value='300'/><input type='submit' value='valide'/>");                      
+                           page +=F("</form></td></tr></table></section>");
                            
                            page +=F("<section id='compost'><h2> Compost  </h2><table><tr><td>Battery voltage:</td><td></td><td>");
                            page +=average_v_battery;
@@ -69,10 +85,8 @@ String indexPage(){
                            page +=F(" A</td></tr><tr><td>Courant load:</td><td></td><td>");
                            page +=average_a_load;
                            page +=F(" A</td></tr><tr><td>Température compost:</td><td></td><td>");
-                           page +=temperature_compost;
-                           page +=F(" °C</td></tr><tr><td>Humidité compost:</td><td></td><td>");
-                           page +=humidity_compost;                           
-                           page +=F("  %</td></tr></table></section>");
+                           page +=temperature_compost;                         
+                           page +=F("  °C</td></tr></table></section>");
 
                            page +=F("<section id='sent'><h2> Envoi des données  </h2><table><tr><td>Périodicité actuelle ");
                            page +=period;

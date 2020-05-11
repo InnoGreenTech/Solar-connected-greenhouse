@@ -30,7 +30,7 @@ void recep_wifi(){
                         
    
                         content = "";
-                        content = "";
+                        
                         while (Serial1.available()>0 and a!='$'){        //read content
                         a=Serial1.read();
                         if (a!='$'){content += (char) a;}
@@ -55,6 +55,20 @@ void recep_wifi(){
                                 case CODE_MAC:                               // adresse MAC
                                    mac_address=content;           
                                    break;
+                                case CODE_SPRAY_GREENHOUSE:
+                                   delay_greenhouse_spray= content.toInt();
+                                   wifi_spray_greenhouse=1;
+                                   break;                           
+                                case CODE_SPRAY_GARDEN:
+                                   delay_garden_spray= content.toInt();
+                                   wifi_spray_garden=1;
+                                   break;                           
+                                case CODE_SPRAY_OUT_GARDEN:
+                                   delay_out_garden_spray= content.toInt();
+                                   wifi_spray_out_garden=1;
+                                   break;                           
+
+                                
 
                                                                                               
                                 default :

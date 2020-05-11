@@ -5,7 +5,7 @@ void send_data(){
      
 if(millis()-period_sent>PERIOD_SENT){
   
-     int code[34]={
+     int code[35]={
             CODE_TEMPERATURE_COMPOST,    
             CODE_HUMIDITY_COMPOST,
             CODE_PUMP_HYDROPONIE,
@@ -20,13 +20,14 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_TEMPERATURE_SOIL_GARDEN,
             CODE_MOISTURE_GARDEN,
             CODE_OUTPUT_GARDEN,
+            CODE_SPRAY_OUT_GARDEN,
+            
             CODE_LUMINOSITY_GREENHOUSE,   
-    
             CODE_TEMPERATURE_GREENHOUSE,
             CODE_HUMIDITY_GREENHOUSE,
             CODE_CO2_GREENHOUSE,
             CODE_LEVEL_WATER_GREENHOUSE,
-            CODE_greenhouse_spray,
+            CODE_SPRAY_GREENHOUSE,
             CODE_LAMP_GREENHOUSE,
             CODE_HEAT_GREENHOUSE,
             CODE_FAN_COOLING_GREENHOUSE,
@@ -45,7 +46,7 @@ if(millis()-period_sent>PERIOD_SENT){
             CODE_AVERAGE_A_LOAD  
             }; 
                 
-       String  valeur[34]={
+       String  valeur[35]={
             String(temperature_compost),    
             String(humidity_compost),
             String(time_pump_hydroponie),
@@ -60,8 +61,9 @@ if(millis()-period_sent>PERIOD_SENT){
             String(temperature_soil_garden),
             String(moisture_garden),
             String(output_garden),
-            String(luminosity_greenhouse),   
+            String(time_out_garden_spray),
             
+            String(luminosity_greenhouse),              
             String(temperature_greenhouse),
             String(humidity_greenhouse),
             String(co2_greenhouse),
@@ -84,7 +86,7 @@ if(millis()-period_sent>PERIOD_SENT){
             String(a_battery),
             String(a_load)                     
        } ;  
-       if (index_sent<35){  
+       if (index_sent<36){  
        Serial1.print(CODE_COMMAND_INFO);
        //Serial.print(CODE_COMMAND_INFO);       
        Serial1.print(code[index_sent]);    // Envoi des valeurs au module Wifi

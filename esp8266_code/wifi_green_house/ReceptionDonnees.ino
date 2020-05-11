@@ -80,6 +80,10 @@ void recep_data(){
                                   if (time_spray_garden_1==0){time_spray_garden_1=int_content;}
                                   else if (int_content>=time_spray_garden_1){time_spray_garden=int_content- time_spray_garden_1;}
                                   break;
+                               case CODE_SPRAY_OUT_GARDEN:
+                                  if (time_spray_out_garden_1==0){time_spray_out_garden_1=int_content;}
+                                  else if (int_content>=time_spray_out_garden_1){time_spray_out_garden=int_content- time_spray_out_garden_1;}
+                                  break;                               
                                case CODE_TEMPERATURE_SOIL_GARDEN:
                                   temperature_soil_garden=float_content;
                                   break;

@@ -1,4 +1,4 @@
-/************************************************************************************
+ /************************************************************************************
     
     <Automatic greenhouse and greengarden control,>
     Copyright (C) <2019>  <Fabrice BAUDIN>
@@ -110,7 +110,7 @@
     #define PUMP_COOLING_GREENHOUSE       2           // Manual mode  of the cooling system
     #define LAMP_GREENHOUSE               3           // Manual mode  of the horticol light
     #define HEATING_GREENHOUSE            4           // Manual mode  of the soil of the green house
-    #define greenhouse_spray              5           // Manual mode  of the humidity system
+    #define SPRAY_GREENHOUSE              5           // Manual mode  of the humidity system
 
     
     char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","Hydro","OutS"};
@@ -122,6 +122,7 @@
     #define PUMP_HYDROPONIE           4
     #define SPRAY_OUT_GARDEN          5
     #define CAT_PROOF_GARDEN          6
+    #define CAT_PROOF_OUT_GARDEN      7
     
     Adafruit_GFX_Button four_buttons[4]; 
                       
@@ -265,13 +266,13 @@
     #define CODE_SETTING_MOISTURE_GARDEN                26
     #define CODE_LUMINOSITY_GREENHOUSE                  27   
     #define CODE_PRESSURE_OUT                           28
-    #define CODE_SETTING_ALTITUDE                       30
+    #define CODE_SETTING_ALTITUDE                       29
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
     #define CODE_CO2_GREENHOUSE                         32
     #define CODE_LEVEL_WATER_GREENHOUSE                 33
-    #define CODE_greenhouse_spray                       34
+    #define CODE_SPRAY_GREENHOUSE                       34
     #define CODE_LAMP_GREENHOUSE                        35
     #define CODE_HEAT_GREENHOUSE                        36
     #define CODE_FAN_COOLING_GREENHOUSE                 37
@@ -303,6 +304,8 @@
     #define CODE_SETTING_A_OFFSET_BATTERIE              65
     #define CODE_SETTING_A_OFFSET_LOAD                  66
     #define CODE_SETTING_CAPACITY_BATTERIE              67
+
+    #define CODE_SPRAY_OUT_GARDEN                       70
 
 /**************************************************
  *                RAM Memory map                  *
@@ -453,15 +456,18 @@
 
    
     unsigned long   start_timer_spray_garden;
-    byte            garden_spray_done;    
+    byte            garden_spray_done; 
+    byte            wifi_spray_garden;   
     int             delay_garden_spray;
     
     unsigned long   start_timer_greenhouse_spray;
-    byte            greenhouse_spray_done;  
+    byte            greenhouse_spray_done; 
+    byte            wifi_spray_greenhouse;
     int             delay_greenhouse_spray;     
 
     unsigned long   start_timer_out_garden_spray;
-    byte            out_garden_spray_done;  
+    byte            out_garden_spray_done; 
+    byte            wifi_spray_out_garden; 
     int             delay_out_garden_spray; 
 
 /**************************************************
@@ -610,6 +616,7 @@
     #define INTENSITY_BATTERY   A1_1
     #define INTENSITY_LOAD      A1_2   
     #define CAT_PROOF_DETECT    I1_1
+    #define CAT_PROOF_OUT       I1_0
     
     //DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
@@ -643,6 +650,6 @@
     #define EV_COMPOST_SPRAY        O1_4
     #define COMPOST_HEATING         O1_3
     #define HYDROPONIE_PUMP         O1_0
-    #define OUT_GARDEN_SPRAY        O1_10
+    #define OUT_GARDEN_SPRAY        O1_9
 
     void(* resetFunc) (void) = 0;//declare reset function at address 0

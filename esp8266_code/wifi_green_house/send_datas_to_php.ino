@@ -10,7 +10,7 @@ void send_data(){
 
       
        
-      const size_t bufferSize =JSON_OBJECT_SIZE(34);
+      const size_t bufferSize =JSON_OBJECT_SIZE(35);
       DynamicJsonDocument root(bufferSize);
       //DynamicJsonBuffer jsonBuffer(bufferSize);                             
       //JsonObject& root = jsonBuffer.createObject();
@@ -53,6 +53,7 @@ void send_data(){
      root["a11"]=time_heat_compost;
      root["a12"]=time_spray_compost;
      root["a13"]=time_pump_hydroponie;
+     root["a14"]=time_spray_out_garden;
 
 
      
@@ -89,7 +90,8 @@ void send_data(){
      time_pump_cooling_greenhouse_1=0;
      time_vmc_greenhouse_1=0;
      time_humidificator_greenhouse_1=0;
-     time_main_pump_1 =0;        
+     time_main_pump_1 =0;
+     time_spray_out_garden_1=0;        
      time_pump_hydroponie=0;
      time_heat_compost=0;
      time_spray_compost=0;   
@@ -100,6 +102,7 @@ void send_data(){
      time_pump_cooling_greenhouse=0;
      time_vmc_greenhouse=0;
      time_humidificator_greenhouse=0;
-     time_main_pump=0;  
+     time_main_pump=0;
+     time_spray_out_garden=0;  
   
 }

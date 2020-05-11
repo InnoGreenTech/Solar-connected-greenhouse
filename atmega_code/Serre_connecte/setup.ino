@@ -124,6 +124,7 @@ void setup(void){
   /*cat proof sensor */
 
   pinMode(CAT_PROOF_DETECT, INPUT);
+  pinMode(CAT_PROOF_OUT,INPUT);
 
 
    /*********************************************************************************************** 

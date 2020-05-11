@@ -91,6 +91,7 @@ String answer_add_module(){
          page +=F("actuator;a11;heating_compost;MOSFET\r\n");
          page +=F("actuator;a12;spray_compost;MOSFET\r\n");
          page +=F("actuator;a13;pump_compost;MOSFET\r\n");
+         page +=F("actuator;a14;spray_out_garden;MOSFET\r\n");
          
          return page;
   }

@@ -75,7 +75,8 @@
     #define CODE_MOISTURE_GARDEN                        25
     #define CODE_SETTING_MOISTURE_GARDEN                26
     #define CODE_LUMINOSITY_GREENHOUSE                  27
-    #define CODE_PRESSURE_OUT                           28   
+    #define CODE_PRESSURE_OUT                           28  
+    #define CODE_SETTING_ALTITUDE                       29 
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -113,6 +114,8 @@
     #define CODE_SETTING_A_OFFSET_BATTERIE              65
     #define CODE_SETTING_A_OFFSET_LOAD                  66
     #define CODE_SETTING_CAPACITY_BATTERIE              67
+
+    #define CODE_SPRAY_OUT_GARDEN                       70
 
 
 /**************************************************
@@ -188,12 +191,14 @@
     unsigned int time_heat_compost=0;
     unsigned int time_pump_hydroponie=0;
     unsigned int time_spray_garden=0;
+    unsigned int time_spray_out_garden=0;
 
     unsigned int time_main_pump_1=0;
     unsigned int time_spray_compost_1=0;
     unsigned int time_heat_compost_1=0;
     unsigned int time_pump_hydroponie_1=0;
     unsigned int time_spray_garden_1=0;
+    unsigned int time_spray_out_garden_1=0;
     
 /* String for commnunication */
 
