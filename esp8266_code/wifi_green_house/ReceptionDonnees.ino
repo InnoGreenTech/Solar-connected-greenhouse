@@ -44,13 +44,13 @@ void recep_data(){
        
                                 case CODE_TEMPERATURE_COMPOST:
                                    index_average++;                           // it use use to do average beetween two send.
-                                   temperature_compost=float_content;           
+                                   if (float_content>(-20) and float_content<70){temperature_compost=float_content;}           
                                    break;
                                 case CODE_HUMIDITY_COMPOST:                              
-                                   humidity_compost=int_content;            
+                                   if (int_content>=0 and float_content<=100){humidity_compost=int_content;}            
                                    break;
                                 case CODE_PUMP_HYDROPONIE:                      //calcul the time of work between two sent              
-                                   if (time_pump_hydroponie_1==0){ time_pump_hydroponie_1= int_content;} 
+                                   if (time_pump_hydroponie_1==0){time_pump_hydroponie_1= int_content;} 
                                    else if (int_content>=time_pump_hydroponie_1){time_pump_hydroponie=int_content-time_pump_hydroponie_1;}          
                                    break;
                                 case CODE_HEAT_COMPOST:
@@ -64,14 +64,14 @@ void recep_data(){
                                   
 
                                 case CODE_TEMPERATURE_OUT:
-                                  temperature_out=float_content;
+                                  if (float_content>(-20) and float_content<70){temperature_out=float_content;}
                                   if (temperature_out != temperature_out){temperature_out=0;}
                                   break;
                                case CODE_HUMIDITY_OUT:
-                                  humidity_out=int_content;
+                                  if (int_content>=0 and float_content<=100){humidity_out=int_content;}
                                   break;
                                case CODE_PRESSURE_OUT:
-                                  pressure_out=int_content;
+                                  if (int_content>=0 and float_content<=5000){pressure_out=int_content;}
                                   break;                                  
                                case CODE_LEVEL_WATER_GARDEN:
                                   level_water_garden=int_content;
@@ -85,10 +85,10 @@ void recep_data(){
                                   else if (int_content>=time_spray_out_garden_1){time_spray_out_garden=int_content- time_spray_out_garden_1;}
                                   break;                               
                                case CODE_TEMPERATURE_SOIL_GARDEN:
-                                  temperature_soil_garden=float_content;
+                                  if (float_content>(-20) and float_content<70){temperature_soil_garden=float_content;}
                                   break;
                                case CODE_MOISTURE_GARDEN:
-                                  moisture_garden=float_content;
+                                  if (int_content>=0 and float_content<=100){moisture_garden=float_content;}
                                   break;
                                case CODE_OUTPUT_GARDEN:
                                   output_garden=int_content;
@@ -99,14 +99,14 @@ void recep_data(){
                       
 
                               case CODE_TEMPERATURE_GREENHOUSE:
-                                  temperature_greenhouse=float_content;
+                                  if (float_content>(-20) and float_content<70){temperature_greenhouse=float_content;}
                                   if (temperature_greenhouse != temperature_greenhouse){temperature_greenhouse=0;}
                                   break;
                               case CODE_HUMIDITY_GREENHOUSE:
-                                  humidity_greenhouse=int_content;
+                                  if (int_content>=0 and float_content<=100){humidity_greenhouse=int_content;}
                                   break;
                               case CODE_CO2_GREENHOUSE:
-                                  co2_greenhouse=int_content;
+                                  if (int_content>=0 and float_content<=5000){co2_greenhouse=int_content;}
                                   break;
                               case CODE_LEVEL_WATER_GREENHOUSE:
                                   level_water_greenhouse=int_content;
@@ -132,13 +132,13 @@ void recep_data(){
                                   else if (int_content>=time_pump_cooling_greenhouse_1){time_pump_cooling_greenhouse=int_content- time_pump_cooling_greenhouse_1;}
                                   break;                               
                               case CODE_TEMPERATURE_WATER_GREENHOUSE:
-                                  temperature_water_greenhouse=float_content;
+                                  if (float_content>(-20) and float_content<70){temperature_water_greenhouse=float_content;}
                                   break;
                               case CODE_TEMPERATURE_SOIL_GREENHOUSE:
-                                  temperature_soil_greenhouse=content.toFloat();
+                                  if (float_content>(-20) and float_content<70){temperature_soil_greenhouse=content.toFloat();}
                                   break;
                               case CODE_MOISTURE_GREENHOUSE:
-                                  moisture_greenhouse=float_content;
+                                  if (int_content>=0 and float_content<=100){moisture_greenhouse=float_content;}
                                   break;
                               case CODE_VMC_GREENHOUSE:
                                   if (time_vmc_greenhouse_1==0){time_vmc_greenhouse_1=int_content;}

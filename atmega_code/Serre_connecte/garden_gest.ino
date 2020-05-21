@@ -137,7 +137,7 @@ void spray_control_garden(){
     bitSet(output_garden,SPRAY_GARDEN);
     delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
-  else if (  wifi_spray_greenhouse ){
+  else if (  wifi_spray_garden ){
     wifi_spray_garden=0;
   }
   else{bitClear(output_garden,SPRAY_GARDEN);}
