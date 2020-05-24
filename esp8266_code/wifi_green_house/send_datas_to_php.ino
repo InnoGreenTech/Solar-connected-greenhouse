@@ -10,7 +10,7 @@ void send_data(){
 
       
        
-      const size_t bufferSize =JSON_OBJECT_SIZE(35);
+      const size_t bufferSize =JSON_OBJECT_SIZE(37);
       DynamicJsonDocument root(bufferSize);
       //DynamicJsonBuffer jsonBuffer(bufferSize);                             
       //JsonObject& root = jsonBuffer.createObject();

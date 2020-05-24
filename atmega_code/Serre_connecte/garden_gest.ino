@@ -100,9 +100,15 @@ void hydroponie_control(){
   else{ bitClear(output_garden,PUMP_HYDROPONIE);}   
 }
 
+/* Control temperature compost with cooling system */
+
 void temperature_control_compost(){
-    if ((temperature_compost<set_temperature_compost))
+    if ((temperature_compost<set_temperature_compost) and  bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) and (temperature_water_greenhouse>temperature_compost))
       {
+        bitSet(output_garden,HEATING_COMPOST);
+      }
+    else if ( temperature_compost>set_temperature_compost and  bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) and (temperature_water_greenhouse<temperature_compost))
+       {
         bitSet(output_garden,HEATING_COMPOST);
       }
     else{
