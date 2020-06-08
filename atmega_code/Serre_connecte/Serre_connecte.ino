@@ -48,15 +48,16 @@
     #define MEM_SETTING_A_OFFSET_BATTERY                    19       
     #define MEM_SETTING_LUMINOSITY                          21      // Set luminosity detect night
     #define MEM_SETTING_DEEP_WATER                          23      // Set the deep of tank water
-    #define MEM_SETTING_TEMPERATURE_GREENHOUSE              25      // Set the max temperature of the green house
+    #define MEM_SETTING_TEMPERATURE_GREENHOUSE              25      // Set the max temperature of the greenhouse
     #define MEM_SETTING_MAX_INTENSITY                       27      
     #define MEM_SETTING_A_OFFSET_LOAD                       29
     #define MEM_SETTING_CAPACITY_BATTERY                    31
     #define MEM_SETTING_ALTITUDE                            33      // altitude in meters
-    #define MEM_SETTING_K_MOIST_GARDEN                      35
-    #define MEM_SETTING_K_MOIST_GREENHOUSE                  37
-    
-
+    #define MEM_SETTING_K_MOIST_GARDEN                      35       // Valu of moisture sensor at 100% humidity of soil
+    #define MEM_SETTING_K_MOIST_GREENHOUSE                  37      // Valu of moisture sensor at 100% humidity of soil
+    #define MEM_SETTING_SCALE_WATER                         39      // scale of the sensor to measure the level of water (
+    #define MEM_SETTING_TARE_WATER                          41      // Tare zero level sensor of water
+    #define MEM_SETTING_INITIAL_PRESSURE                    42      // Tare zero level sensor of water
 
 /****************************
  *      Screen setting      *
@@ -491,6 +492,9 @@
     int     set_max_intensity;
     int     set_luminosity;
     int     set_deep_water;
+    int     set_scale_water;
+    int     set_tare_water;
+    int     set_initial_pressure;
     int     set_altitude;
     int     set_k_moist_garden;
     int     set_k_moist_greenhouse;
@@ -602,13 +606,11 @@
     uint8_t address_soil_greenhouse[] ={ 0x28, 0x2F, 0xBC, 0x79, 0x97, 0x08, 0x03, 0x1F};
     uint8_t address_water_greenhouse[] = { 0x28, 0xBF, 0x7B, 0x79, 0x97, 0x05, 0x03, 0x54};
 
-    //Broches sonar for level of water
+    //Broches for level of water by pressure detect
 
-    #define   TRIGGER_SONAR   I2_3// Broche TRIGGER
-    #define   ECHO_SONAR      I2_2// Broche ECHO
-    NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
-
-
+    #define   SCK_WATER   I2_3// Broche TRIGGER
+    #define   DATA_WATER      I2_2// Broche ECHO
+    
 
 /* Garden and lompricomposte sensors */
 

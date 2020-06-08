@@ -30,11 +30,11 @@ if (!bitRead(flag_first_screen,SETTING_SCREEN)){
 
 
 char info_set[30][18]={"Temp COMPOST     ","Eco Temp COMPOST ","Hum COMPOST      ","Moist Garden     ","Altitude         ","Kmoist  garden   ","Empty  6         ","Empty  7         ","Empty  8         ","Empty  9         ",
-                       "Moist Greenhouse ","Temp soil House  ","Hum Greenhouse   ","Temp greenhouse  ","C02 Greenhouse   ","Deep tank water  ","Kmoist greenhouse","Empty  17        ","Empty  18        ","Empty  19        ",
+                       "Moist Greenhouse ","Temp soil House  ","Hum Greenhouse   ","Temp greenhouse  ","C02 Greenhouse   ","Deep tank water  ","Scale water senso","Tare water sensor","Kmoist greenhouse","Empty  19        ",
                        "V offset Battery ","A offset Battery ","Capacity Battery ","A offset load    ","Luminosity       ","Empty  25        ","Empty  26        ","Empty  27        ","Empty  28        ","Empty  29        "};
 
 int mem_address[30]={MEM_SETTING_TEMPEPARTURE_COMPOST ,MEM_SETTING_ECO_TEMPERATURE_COMPOST ,MEM_SETTING_HUMIDITY_COMPOST ,MEM_SETTING_MOISTURE_GARDEN,MEM_SETTING_ALTITUDE ,MEM_SETTING_K_MOIST_GARDEN,255,255,255,255,
-                     MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,MEM_SETTING_K_MOIST_GREENHOUSE,255,255,255,
+                     MEM_SETTING_MOISTURE_GREENHOUSE,MEM_SETTING_TEMPERATURE_GROUND_GREENHOUSE,MEM_SETTING_HUMIDITY_GREENHOUSE,MEM_SETTING_TEMPERATURE_GREENHOUSE,MEM_SETTING_CO2_GREENHOUSE,MEM_SETTING_DEEP_WATER,MEM_SETTING_SCALE_WATER, MEM_SETTING_TARE_WATER,MEM_SETTING_K_MOIST_GREENHOUSE,255,
                      MEM_SETTING_V_OFFSET_BATTERY,MEM_SETTING_A_OFFSET_BATTERY,MEM_SETTING_CAPACITY_BATTERY,MEM_SETTING_A_OFFSET_LOAD,MEM_SETTING_LUMINOSITY,255,255,255,255,255};
                        
 if (!(new_index==index_setting)){
@@ -44,8 +44,10 @@ if (!(new_index==index_setting)){
       tft.setCursor(30,50);
       String infos=info_set[index_setting];
       tft.print(infos);
-      if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GARDEN));}
-      if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GREENHOUSE));}
+      if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GARDEN));}                 // display information to help to adjust values
+      if(index_setting==18){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GREENHOUSE));}
+      if(index_setting==16){tft.setCursor(30,60);tft.print(level_water_greenhouse*set_scale_water);}
+      if(index_setting==17){tft.setCursor(30,60);tft.print(F("sortir le capillaire"));}
       byte read_mem[2];
       for (int a=0;a<2;a++){read_mem[a]=EEPROM.read (mem_address[index_setting]+a);}
       setting= read_mem[0] | read_mem[1] << 8;
@@ -93,7 +95,14 @@ if (new_setting==1){
       tft.setTextColor(GREEN,FOND);
       new_setting=1;
       int data=setting;
-      for (int a=0;a<2;a++){EEPROM.write(mem_address[index_setting]+a,data);data=data>>8;}
+      if (index_setting==17){
+        data=get_water_level()+set_tare_water;
+        for (int a=0;a<2;a++){EEPROM.write(mem_address[index_setting]+a,data);data=data>>8;}
+        data=int(pressure_out);
+        for (int a=0;a<2;a++){EEPROM.write(MEM_SETTING_INITIAL_PRESSURE+a,data);data=data>>8;}        
+        
+      }
+      else{for (int a=0;a<2;a++){EEPROM.write(mem_address[index_setting]+a,data);data=data>>8;}}
       reset_demand=1;
 
      }

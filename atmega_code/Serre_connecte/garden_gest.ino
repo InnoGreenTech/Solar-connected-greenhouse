@@ -127,7 +127,8 @@ void spray_control_garden(){
 
 
    if (night_day==1){
-    //bitClear(output_garden,SPRAY_GARDEN);garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    //bitClear(output_garden,SPRAY_GARDEN);
+    garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_garden_spray= int((average_temperature_out-10)*60+(70-average_humidity_out)*30);
     
   }
@@ -152,7 +153,8 @@ void spray_control_garden(){
 void spray_control_out_garden(){
 
    if (night_day==1){
-    //bitClear(output_garden,SPRAY_OUT_GARDEN);out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    //bitClear(output_garden,SPRAY_OUT_GARDEN);
+    out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_out_garden_spray= int((average_temperature_out-10)*90+(70-average_humidity_out)*30);
     
   }

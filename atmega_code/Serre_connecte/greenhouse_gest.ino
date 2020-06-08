@@ -7,7 +7,7 @@ void greenhouse_gest(){
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
              onewire_greenhouse.select(address_water_greenhouse);
              temperature_water_greenhouse=onewire_greenhouse.getTempC();
-             get_water_level();
+             level_water_greenhouse=get_water_level()+(int(pressure_out)-set_initial_pressure)/10;
              get_moisture_greenhouse();
              co2_greenhouse=readCO2();
              get_luminosity();
@@ -54,16 +54,40 @@ void greenhouse_gest(){
   }
 
 
-void get_water_level(){
-  
-  int distance=water_level.convert_cm(water_level.ping_median());
- // Serial.print(distance);Serial.println(" cm");
-  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
+int get_water_level(){
 
+  #define GAIN 3 // 1 = 128, 2 = 64, 3 =32
+  unsigned long data = 0;
+  uint8_t dout;
+
+  for (uint8_t i = 0; i < (24 + GAIN); i++)  {     
+    digitalWrite(SCK_WATER, 1);
+    if (i < (24))                      // read data
+    {
+      dout = digitalRead(DATA_WATER);
+      data = data << 1;
+      if (dout) 
+      {
+        data++;
+      }
+    }
+    digitalWrite(SCK_WATER, 0);
+  }
+  data = data ^ 0x800000; // if the 24th bit is '1', change 24th bit to 0 
+  data=data/set_scale_water;
+  if (data>set_tare_water){
+    data=round(data-set_tare_water);
+  }
+  else {data=0;}  // automatique tare level water
+  
+  return int(data/10);
 
   }
 
+
+
 void get_moisture_greenhouse(){
+  
   float read_pin=analogRead(MOISTURE_GREENHOUSE);
   moisture_greenhouse= int(((read_pin*a_moist_greenhouse)-b_moist_greenhouse)/100);
   if(moisture_greenhouse>100){moisture_greenhouse=100;}
@@ -73,7 +97,8 @@ void get_moisture_greenhouse(){
 void control_greenhouse_spray(){
 
    if (night_day==1 and !wifi_spray_greenhouse){
-    //bitClear(output_greenhouse,SPRAY_GREENHOUSE);greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
+    //bitClear(output_greenhouse,SPRAY_GREENHOUSE);
+    greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
     delay_greenhouse_spray=int((average_temperature_greenhouse-10)*60);    
   }
 
@@ -84,7 +109,7 @@ void control_greenhouse_spray(){
   else if (night_day==0 and !greenhouse_spray_done){
     greenhouse_spray_done=1;
   }
-  else if ( humidity_greenhouse<(set_humidity_greenhouse-10) || temperature_greenhouse>(set_temperature_greenhouse+5))
+  else if ( humidity_greenhouse<(set_humidity_greenhouse-5) || temperature_greenhouse>(set_temperature_greenhouse+5))
     {
       bitSet(output_greenhouse,SPRAY_GREENHOUSE); 
     }
