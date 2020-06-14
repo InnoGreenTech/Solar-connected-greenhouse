@@ -113,7 +113,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
   tft.print F(" C ");
   tft.setCursor(110,135);
   tft.print (level_water_greenhouse,1);
-  tft.print F(" Cm ");
+  tft.print F(" mm ");
   tft.setCursor(110,155);
   tft.print (v_battery,2);
   tft.print F(" V ");

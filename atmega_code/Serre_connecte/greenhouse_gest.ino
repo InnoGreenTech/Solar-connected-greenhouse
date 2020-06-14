@@ -7,12 +7,11 @@ void greenhouse_gest(){
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
              onewire_greenhouse.select(address_water_greenhouse);
              temperature_water_greenhouse=onewire_greenhouse.getTempC();
-             level_water_greenhouse=get_water_level()+(int(pressure_out)-set_initial_pressure)/10;
+             level_water_greenhouse=set_deep_water*10-get_water_level();
              get_moisture_greenhouse();
              co2_greenhouse=readCO2();
              get_luminosity();
              day_detect();
-             
              vmc_control();
              cooling_system();
              control_greenhouse_spray();
@@ -62,6 +61,7 @@ int get_water_level(){
 
   for (uint8_t i = 0; i < (24 + GAIN); i++)  {     
     digitalWrite(SCK_WATER, 1);
+    //delayMicroseconds(1);
     if (i < (24))                      // read data
     {
       dout = digitalRead(DATA_WATER);
@@ -72,15 +72,21 @@ int get_water_level(){
       }
     }
     digitalWrite(SCK_WATER, 0);
+    //delayMicroseconds(1);
   }
-  data = data ^ 0x800000; // if the 24th bit is '1', change 24th bit to 0 
-  data=data/set_scale_water;
-  if (data>set_tare_water){
-    data=round(data-set_tare_water);
-  }
-  else {data=0;}  // automatique tare level water
   
-  return int(data/10);
+  data = data ^ 0x800000; // if the 24th bit is '1', change 24th bit to 0 
+
+  //Serial.println(data);
+  //Serial.println(set_scale_water);
+  int level=int(data/set_scale_water);
+
+  level=(set_tare_water-level);
+  //Serial.println(set_tare_water);
+  //Serial.println(level);
+  //Serial.println();
+  
+  return level;
 
   }
 

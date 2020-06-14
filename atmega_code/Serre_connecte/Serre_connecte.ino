@@ -609,7 +609,7 @@
     //Broches for level of water by pressure detect
 
     #define   SCK_WATER   I2_3// Broche TRIGGER
-    #define   DATA_WATER      I2_2// Broche ECHO
+    #define   DATA_WATER  I2_2// Broche ECHO
     
 
 /* Garden and lompricomposte sensors */

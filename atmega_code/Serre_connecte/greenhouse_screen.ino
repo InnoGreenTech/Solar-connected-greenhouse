@@ -86,7 +86,7 @@ if(bitRead(refresh_demand,REFRESH_SCREEN)){
   tft.print F(" C ");
   tft.setCursor(110,140);
   tft.print (level_water_greenhouse);
-  tft.print F(" Cm ");
+  tft.print F(" mm ");
   tft.setCursor(110,160);
   tft.print (luminosity_greenhouse);
   tft.print F(" Lux ");

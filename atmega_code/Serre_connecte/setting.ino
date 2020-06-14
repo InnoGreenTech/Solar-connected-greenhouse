@@ -47,7 +47,7 @@ if (!(new_index==index_setting)){
       if(index_setting==5){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GARDEN));}                 // display information to help to adjust values
       if(index_setting==18){tft.setCursor(30,60);tft.print(analogRead(MOISTURE_GREENHOUSE));}
       if(index_setting==16){tft.setCursor(30,60);tft.print(level_water_greenhouse*set_scale_water);}
-      if(index_setting==17){tft.setCursor(30,60);tft.print(F("sortir le capillaire"));}
+      if(index_setting==17){tft.setCursor(30,60);tft.print(level_water_greenhouse);}
       byte read_mem[2];
       for (int a=0;a<2;a++){read_mem[a]=EEPROM.read (mem_address[index_setting]+a);}
       setting= read_mem[0] | read_mem[1] << 8;
