@@ -61,6 +61,7 @@ int get_water_level(){
 
   for (uint8_t i = 0; i < (24 + GAIN); i++)  {     
     digitalWrite(SCK_WATER, 1);
+    _NOP();
     //delayMicroseconds(1);
     if (i < (24))                      // read data
     {
@@ -72,6 +73,7 @@ int get_water_level(){
       }
     }
     digitalWrite(SCK_WATER, 0);
+    _NOP();
     //delayMicroseconds(1);
   }
   
@@ -79,12 +81,10 @@ int get_water_level(){
 
   //Serial.println(data);
   //Serial.println(set_scale_water);
-  int level=int(data/set_scale_water);
+  int level=int((data/set_scale_water)+(150-5*temperature_greenhouse));
 
   level=(set_tare_water-level);
-  //Serial.println(set_tare_water);
-  //Serial.println(level);
-  //Serial.println();
+
   
   return level;
 
@@ -105,17 +105,16 @@ void control_greenhouse_spray(){
    if (night_day==1 and !wifi_spray_greenhouse){
     //bitClear(output_greenhouse,SPRAY_GREENHOUSE);
     greenhouse_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_greenhouse_spray=int((average_temperature_greenhouse-10)*60);    
+    delay_greenhouse_spray=int((average_temperature_greenhouse-10)*15);    
   }
-
-  if (delay_greenhouse_spray>0 and night_day==0 and !greenhouse_spray_done and moisture_greenhouse<set_moisture_greenhouse){
+  if ((delay_greenhouse_spray>0 || moisture_greenhouse<set_moisture_greenhouse)and night_day==0 and !greenhouse_spray_done){
     bitSet(output_greenhouse,SPRAY_GREENHOUSE);
     delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !greenhouse_spray_done){
     greenhouse_spray_done=1;
   }
-  else if ( humidity_greenhouse<(set_humidity_greenhouse-5) || temperature_greenhouse>(set_temperature_greenhouse+5))
+  else if ( humidity_greenhouse<(set_humidity_greenhouse-20) || temperature_greenhouse>(set_temperature_greenhouse+10))
     {
       bitSet(output_greenhouse,SPRAY_GREENHOUSE); 
     }

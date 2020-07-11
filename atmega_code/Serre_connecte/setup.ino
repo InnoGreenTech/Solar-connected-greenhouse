@@ -182,5 +182,12 @@ void setup(void){
 
   wdt_enable(WDTO_4S);
 
+      for (int test=0; test<NUMBER_SAMPLES_DAY; test++){
+      day_temperature_greenhouse[test]=30;
+      day_humidity_greenhouse[test]=80;
+      day_temperature_out[test]=20;
+      day_humidity_out[test]=50;
+    }
+
 
 }

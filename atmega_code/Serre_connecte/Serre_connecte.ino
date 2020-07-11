@@ -427,7 +427,7 @@
 
 /* average day mesure */
 
-    #define       NUMBER_SAMPLES_DAY   48
+    #define       NUMBER_SAMPLES_DAY   48    //48
     
     int           total_samples_day=int((86400/DELAY_REFRESH_SCREEN_SECONDS)/NUMBER_SAMPLES_DAY);
     byte          rotate_day_index=0;
@@ -449,7 +449,7 @@
     float         current_average_humidity_out;
     float         average_humidity_out;
 
-    
+
     
 
 

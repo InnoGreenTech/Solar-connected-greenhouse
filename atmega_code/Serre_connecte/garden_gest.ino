@@ -42,7 +42,7 @@ void read_values_out(){
   if (current_sample_pressure<total_samples_pressure){current_sample_pressure++;current_average_pressure=current_average_pressure+(pressure_corrected/total_samples_pressure);}
   else{
     rotate_index++;
-    if (rotate_index>NUMBER_SAMPLES_HOUR){rotate_index=0;}
+    if (rotate_index>=NUMBER_SAMPLES_HOUR){rotate_index=0;}
     average_pressure[rotate_index]= current_average_pressure;
     current_average_pressure=0;
     current_sample_pressure=0;    
@@ -129,11 +129,12 @@ void spray_control_garden(){
    if (night_day==1){
     //bitClear(output_garden,SPRAY_GARDEN);
     garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_garden_spray= int((average_temperature_out-10)*60+(70-average_humidity_out)*30);
+    delay_garden_spray= int((average_temperature_out-10)*30+(70-average_humidity_out)*30);
+
     
   }
 
-  if (delay_garden_spray>0 and night_day==0 and !garden_spray_done and moisture_garden<set_moisture_garden){
+  if ((delay_garden_spray>0 || moisture_garden<set_moisture_garden) and night_day==0 and !garden_spray_done){
     bitSet(output_garden,SPRAY_GARDEN);
     delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
@@ -155,7 +156,7 @@ void spray_control_out_garden(){
    if (night_day==1){
     //bitClear(output_garden,SPRAY_OUT_GARDEN);
     out_garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_out_garden_spray= int((average_temperature_out-10)*90+(70-average_humidity_out)*30);
+    delay_out_garden_spray= int((average_temperature_out-10)*60+(70-average_humidity_out)*30);
     
   }
 
