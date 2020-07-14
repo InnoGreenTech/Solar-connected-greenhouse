@@ -81,7 +81,7 @@ int get_water_level(){
 
   //Serial.println(data);
   //Serial.println(set_scale_water);
-  int level=int((data/set_scale_water)+(150-5*temperature_greenhouse));
+  int level=int((data/set_scale_water)-(150-5*temperature_greenhouse));
 
   level=(set_tare_water-level);
 
