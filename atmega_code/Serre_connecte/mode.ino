@@ -49,9 +49,9 @@ void average_day(){
         current_sample_day++;
         if (temperature_greenhouse<560){current_average_temperature_greenhouse =  current_average_temperature_greenhouse+(temperature_greenhouse/total_samples_day);}        
 
-        current_average_humidity_greenhouse =  current_average_humidity_greenhouse+(humidity_greenhouse/total_samples_day);
+        current_average_humidity_greenhouse =  current_average_humidity_greenhouse+(float(humidity_greenhouse)/total_samples_day);
         current_average_temperature_out =  current_average_temperature_out+(temperature_out/total_samples_day);
-        current_average_humidity_out =  current_average_humidity_out+(humidity_out/total_samples_day);  
+        current_average_humidity_out =  current_average_humidity_out+(float(humidity_out)/total_samples_day);  
 
         //Serial.print("moyenne actuelle :");Serial.println(current_average_temperature_greenhouse);
         //Serial.println(int((average_temperature_greenhouse-10)*60));
