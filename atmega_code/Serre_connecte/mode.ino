@@ -47,7 +47,7 @@ void average_day(){
 
     if (current_sample_day<total_samples_day){
         current_sample_day++;
-        if (temperature_greenhouse<560){current_average_temperature_greenhouse =  current_average_temperature_greenhouse+(temperature_greenhouse/total_samples_day);}        
+        current_average_temperature_greenhouse =  current_average_temperature_greenhouse+(temperature_greenhouse/total_samples_day);
 
         current_average_humidity_greenhouse =  current_average_humidity_greenhouse+(float(humidity_greenhouse)/total_samples_day);
         current_average_temperature_out =  current_average_temperature_out+(temperature_out/total_samples_day);

@@ -91,17 +91,7 @@ void setup(void){
   a_moist_greenhouse=10000/(float(set_k_moist_greenhouse)-615); 
   b_moist_greenhouse=a_moist_greenhouse*615;
 
-  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_SCALE_WATER  + a);} 
-  set_scale_water = mem[0] | mem[1] << 8;
-  if (set_scale_water<4000){set_scale_water=7300;}     // default value  
-  
-  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_TARE_WATER  + a);} 
-  set_tare_water = mem[0] | mem[1] << 8;  
-  if (set_tare_water<500){set_tare_water=1450;}       // default value
 
-  for (int a = 0; a < 2; a++) {mem[a] = EEPROM.read(MEM_SETTING_INITIAL_PRESSURE  + a);} 
-  set_initial_pressure = mem[0] | mem[1] << 8;  
-  if (set_initial_pressure<500){set_initial_pressure=1013;}       // default value
     
   Serial.begin(9600);     
   Serial1.begin(115200);    // set communication with ESP8266
@@ -115,11 +105,9 @@ void setup(void){
   greenhouse_dht.begin();
 
   /* water level measure */
+
+  water_level.ping_cm(100);
   
-  pinMode(SCK_WATER, OUTPUT);
-  pinMode(DATA_WATER, INPUT_PULLUP);
-   
-  digitalWrite(SCK, LOW); // start module
  
   /*Set and start BME280 sensor, sensor out*/
 

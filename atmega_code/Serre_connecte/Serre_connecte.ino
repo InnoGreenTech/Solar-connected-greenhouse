@@ -55,9 +55,7 @@
     #define MEM_SETTING_ALTITUDE                            33      // altitude in meters
     #define MEM_SETTING_K_MOIST_GARDEN                      35       // Valu of moisture sensor at 100% humidity of soil
     #define MEM_SETTING_K_MOIST_GREENHOUSE                  37      // Valu of moisture sensor at 100% humidity of soil
-    #define MEM_SETTING_SCALE_WATER                         39      // scale of the sensor to measure the level of water (
-    #define MEM_SETTING_TARE_WATER                          41      // Tare zero level sensor of water
-    #define MEM_SETTING_INITIAL_PRESSURE                    42      // Tare zero level sensor of water
+
 
 /****************************
  *      Screen setting      *
@@ -606,10 +604,13 @@
     uint8_t address_soil_greenhouse[] ={ 0x28, 0x2F, 0xBC, 0x79, 0x97, 0x08, 0x03, 0x1F};
     uint8_t address_water_greenhouse[] = { 0x28, 0xBF, 0x7B, 0x79, 0x97, 0x05, 0x03, 0x54};
 
-    //Broches for level of water by pressure detect
+    //Broches sonar for level of water
 
-    #define   SCK_WATER   I2_3// Broche TRIGGER
-    #define   DATA_WATER  I2_2// Broche ECHO
+    #define   TRIGGER_SONAR   I2_3// Broche TRIGGER
+    #define   ECHO_SONAR      I2_2// Broche ECHO
+    
+    NewPing   water_level(TRIGGER_SONAR,ECHO_SONAR);
+
     
 
 /* Garden and lompricomposte sensors */
@@ -620,7 +621,7 @@
     #define CAT_PROOF_DETECT    I1_1
     #define CAT_PROOF_OUT       I1_0
     
-    //DHT     outdoor_dht(I1_0,DHT22);    //Outdoor sensor
+
     DS18B20 onewire_garden(I1_4);       //define the bus of the one Wire of the garden
     uint8_t address_soil_garden[] = {  0x28,  0x7D,  0x97,  0x79,  0x97,  0x7,  0x3,  0xCF};
     uint8_t address_compost[] =     {  0x28,  0x9C,  0xA5,  0x97,  0x13,  0x19, 0x1,  0xFA};

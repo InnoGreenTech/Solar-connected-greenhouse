@@ -7,7 +7,7 @@ void greenhouse_gest(){
              temperature_soil_greenhouse=onewire_greenhouse.getTempC();
              onewire_greenhouse.select(address_water_greenhouse);
              temperature_water_greenhouse=onewire_greenhouse.getTempC();
-             level_water_greenhouse=set_deep_water*10-get_water_level();
+             get_water_level();
              get_moisture_greenhouse();
              co2_greenhouse=readCO2();
              get_luminosity();
@@ -52,41 +52,13 @@ void greenhouse_gest(){
     }
   }
 
+void get_water_level(){
 
-int get_water_level(){
-
-  #define GAIN 3 // 1 = 128, 2 = 64, 3 =32
-  unsigned long data = 0;
-  uint8_t dout;
-
-  for (uint8_t i = 0; i < (24 + GAIN); i++)  {     
-    digitalWrite(SCK_WATER, 1);
-    _NOP();
-    //delayMicroseconds(1);
-    if (i < (24))                      // read data
-    {
-      dout = digitalRead(DATA_WATER);
-      data = data << 1;
-      if (dout) 
-      {
-        data++;
-      }
-    }
-    digitalWrite(SCK_WATER, 0);
-    _NOP();
-    //delayMicroseconds(1);
-  }
-  
-  data = data ^ 0x800000; // if the 24th bit is '1', change 24th bit to 0 
-
-  //Serial.println(data);
-  //Serial.println(set_scale_water);
-  int level=int((data/set_scale_water)-(105-2.5*temperature_greenhouse)); 
-
-  level=(set_tare_water-level);
-
-  
-  return level;
+  int distance=water_level.convert_cm(water_level.ping_median());
+ // Serial.print(distance);Serial.println(" cm");
+  if (distance<set_deep_water and distance!=0){level_water_greenhouse = set_deep_water-distance;}
+ 
+  return;
 
   }
 
