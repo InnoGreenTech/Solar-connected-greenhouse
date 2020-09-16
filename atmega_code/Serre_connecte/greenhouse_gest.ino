@@ -12,7 +12,7 @@ void greenhouse_gest(){
              co2_greenhouse=readCO2();
              get_luminosity();
              day_detect();
-             vmc_control();
+             vmc_controller();
              cooling_system();
              control_greenhouse_spray();
              lamp_run();
@@ -80,7 +80,7 @@ void control_greenhouse_spray(){
     delay_greenhouse_spray=int((average_temperature_greenhouse-10)*15);    
   }
   if ((delay_greenhouse_spray>0 || moisture_greenhouse<set_moisture_greenhouse)and night_day==0 and !greenhouse_spray_done){
-    bitSet(output_greenhouse,SPRAY_GREENHOUSE);
+    if(moisture_greenhouse<set_moisture_greenhouse){bitSet(output_greenhouse,SPRAY_GREENHOUSE);}else{bitClear(output_greenhouse,SPRAY_GREENHOUSE);}
     delay_greenhouse_spray= delay_greenhouse_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !greenhouse_spray_done){
@@ -101,7 +101,7 @@ void control_greenhouse_spray(){
   
 }
 
-void vmc_control(){
+void vmc_controller(){
   
   int calculate_humidity;
   int difference_humidity= humidity_greenhouse-set_humidity_greenhouse;
@@ -159,3 +159,31 @@ void day_detect(){
   if (luminosity_greenhouse<50 and night_day==0){night_day=1;}
   else if (luminosity_greenhouse>200 and night_day==1){night_day=0;}
 }
+
+
+/* Use the water tank to catch the solar energy available */
+
+void energy_saver(){
+  if (average_temperature_greenhouse<24){
+    if (v_battery>27.1 and a_battery>-0.5 and v_battery<0.5 and !bitRead(output_greenhouse,HEATING_WATER_TANK))
+      {
+        bitSet(output_greenhouse,HEATING_WATER_TANK);
+      }
+    else if (v_battery<26)
+       {
+        bitClear(output_garden,HEATING_WATER_TANK);
+        pwm_heat_water_tank=0;
+        return;
+      }
+    if (bitRead(output_greenhouse,HEATING_WATER_TANK))
+      { 
+        tension_battery();
+        intensity_battery();
+        if (a_battery<-1 and pwm_heat_water_tank<255 )
+        {pwm_heat_water_tank=pwm_heat_water_tank+1;}
+        else if(a_battery>-0.5 and pwm_heat_water_tank>0)
+        {pwm_heat_water_tank= pwm_heat_water_tank-1;}  
+        heating_water_tank(0);      
+      }
+  }
+  } 

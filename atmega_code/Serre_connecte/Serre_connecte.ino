@@ -102,22 +102,23 @@
 
     Adafruit_GFX_Button six_buttons[6]; 
                       
-    char greenhouse_buttons[6][6]={"VMC","FanC","PumpC","Light","Heat","Spray"};
+    char greenhouse_buttons[6][6]={"VMC","FanC","PumpC","Light","HeatW","Spray"};
     
     #define VMC_GREENHOUSE                0           // Manual mode  of ventilation
     #define FAN_COOLING_GREENHOUSE        1           // Manual mode  of the cooling sytem
     #define PUMP_COOLING_GREENHOUSE       2           // Manual mode  of the cooling system
     #define LAMP_GREENHOUSE               3           // Manual mode  of the horticol light
-    #define HEATING_GREENHOUSE            4           // Manual mode  of the soil of the green house
+    #define HEATING_GREENHOUSE            4           // Currrently not use
     #define SPRAY_GREENHOUSE              5           // Manual mode  of the humidity system
+    #define HEATING_WATER_TANK            4           // PWM Solar convert in eat in the water
 
     
-    char garden_buttons[6][7]={"GardS","CompoS","PumpM","HeatC","Hydro","OutS"};
+    char garden_buttons[6][7]={"GardS","CompoS","PumpM","CoolW","Hydro","OutS"};
     
     #define SPRAY_GARDEN              0                    
     #define SPRAY_COMPOST             1          
     #define MAIN_PUMP                 2         
-    #define HEATING_COMPOST           3
+    #define COOLING_OUT               3
     #define PUMP_HYDROPONIE           4
     #define SPRAY_OUT_GARDEN          5
     #define CAT_PROOF_GARDEN          6
@@ -247,7 +248,7 @@
     #define CODE_TEMPERATURE_COMPOST                    10     
     #define CODE_HUMIDITY_COMPOST                       11
     #define CODE_PUMP_HYDROPONIE                        12
-    #define CODE_HEAT_COMPOST                           13
+    #define CODE_OUT_COOLING                            13
     #define CODE_SETTING_TEMPERATURE_COMPOST            14
     #define CODE_SETTING_HUMIDITY_COMPOST               15 
     #define CODE_ECO_TEMPERATURE_COMPOST                16
@@ -266,6 +267,7 @@
     #define CODE_LUMINOSITY_GREENHOUSE                  27   
     #define CODE_PRESSURE_OUT                           28
     #define CODE_SETTING_ALTITUDE                       29
+    #define CODE_HEAT_TANK_WATER                        13
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -273,7 +275,7 @@
     #define CODE_LEVEL_WATER_GREENHOUSE                 33
     #define CODE_SPRAY_GREENHOUSE                       34
     #define CODE_LAMP_GREENHOUSE                        35
-    #define CODE_HEAT_GREENHOUSE                        36
+    #define CODE_HEAT_TANK_WATER                        36
     #define CODE_FAN_COOLING_GREENHOUSE                 37
     #define CODE_PUMP_COOLING_GREENHOUSE                38
     #define CODE_TEMPERATURE_WATER_GREENHOUSE           39
@@ -349,12 +351,15 @@
     byte    forced_greenhouse=0;                  // control if the forced mode is activate
     byte    desactive_greenhouse=0;
 
-    unsigned int time_heat_greenhouse;
+    unsigned int pwm_heat_water_tank;
+
+    //unsigned int time_heat_greenhouse;
     unsigned int time_cooling_greenhouse;
     unsigned int time_greenhouse_spray;
     unsigned int time_vmc_greenhouse;
     unsigned int time_lamp_greenhouse;
     unsigned int time_humidificator_greenhouse;
+    unsigned int time_heat_water_tank;
 
     int          flap_ventilation_greenhouse;
     
@@ -367,10 +372,10 @@
 
     unsigned int time_main_pump;
     unsigned int time_spray_compost;
-    unsigned int time_heat_compost;
     unsigned int time_pump_hydroponie;
     unsigned int time_spray_garden;
     unsigned int time_out_garden_spray;
+    unsigned int time_out_cooling;
     
 /* String for commnunication with ESP8266 */
 
@@ -527,7 +532,7 @@
     #define I1_4  40
     
     #define O1_0  44      //pwm output connected on a mofset
-    #define O1_1  31        //Power output connected on a mofset
+    #define O1_1  31      //Power output connected on a mofset
     #define O1_2  33
     #define O1_3  29
     #define O1_4  35
@@ -635,11 +640,11 @@
 
 /* Greenhouse card output*/
 
-    #define GREENHOUSE_VMC           O2_2         
+    #define GREENHOUSE_VMC           O2_0         
     #define GREENHOUSE_PUMP_COOLING  O2_3
     #define GREENHOUSE_FAN_COOLING   O2_4
     #define GREENHOUSE_LAMP          O2_1
-    #define GREENHOUSE_HEATING       O2_0  
+    #define WATER_TANK_HEATING       O2_2  
     #define GREENHOUSE_HUMIDIFICATOR O2_5 
     #define GREENHOUSE_SERVO_VMC     O2_6          // this a 5 V servo
     
@@ -651,7 +656,7 @@
     #define EV_GARDEN_SPRAY         O1_1
     #define EV_GREENHOUSE_SPRAY     O1_5
     #define EV_COMPOST_SPRAY        O1_4
-    #define COMPOST_HEATING         O1_3
+    #define OUT_COOLING             O1_3
     #define HYDROPONIE_PUMP         O1_0
     #define OUT_GARDEN_SPRAY        O1_9
 

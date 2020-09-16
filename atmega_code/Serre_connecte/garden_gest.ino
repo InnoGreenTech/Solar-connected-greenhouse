@@ -11,8 +11,6 @@ void garden_gest(){
     get_moisture_garden();
     cat_proof_control();
     hydroponie_control();
-
-    temperature_control_compost();
     spray_control_garden(); 
     spray_control_out_garden();   
   }
@@ -100,21 +98,6 @@ void hydroponie_control(){
   else{ bitClear(output_garden,PUMP_HYDROPONIE);}   
 }
 
-/* Control temperature compost with cooling system */
-
-void temperature_control_compost(){
-    if ((temperature_compost<set_temperature_compost) and  bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) and (temperature_water_greenhouse>temperature_compost))
-      {
-        bitSet(output_garden,HEATING_COMPOST);
-      }
-    else if ( temperature_compost>set_temperature_compost and  bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) and (temperature_water_greenhouse<temperature_compost))
-       {
-        bitSet(output_garden,HEATING_COMPOST);
-      }
-    else{
-        bitClear(output_garden,HEATING_COMPOST);
-    }
-  }
 
 void get_moisture_garden(){
   float read_pin=float(analogRead(MOISTURE_GARDEN));
@@ -125,17 +108,14 @@ void get_moisture_garden(){
 
 void spray_control_garden(){
 
-
    if (night_day==1){
     //bitClear(output_garden,SPRAY_GARDEN);
     garden_spray_done=0;                                 // reset memory use,wait day morning to switch on spray
-    delay_garden_spray= int((average_temperature_out-10)*15+(70-average_humidity_out)*10);
-
-    
+    delay_garden_spray= int((average_temperature_out-10)*15+(70-average_humidity_out)*10);    
   }
 
   if ((delay_garden_spray>0 || moisture_garden<set_moisture_garden) and night_day==0 and !garden_spray_done){
-    bitSet(output_garden,SPRAY_GARDEN);
+    if (moisture_garden<set_moisture_garden){bitSet(output_garden,SPRAY_GARDEN);}else{bitClear(output_garden,SPRAY_GARDEN);}
     delay_garden_spray= delay_garden_spray-DELAY_REFRESH_SCREEN_SECONDS;
   }
   else if (night_day==0 and !garden_spray_done){
@@ -188,5 +168,10 @@ void cat_proof_control(){
  else{bitClear(output_garden,CAT_PROOF_OUT_GARDEN);}
 }
 
-
+void cooling_water(){
+  if (average_temperature_greenhouse>24 and temperature_water_greenhouse>(temperature_out+3)){
+    bitSet(output_garden, COOLING_OUT);    
+  }
+  else{bitClear(output_garden,COOLING_OUT);}
+  }
   

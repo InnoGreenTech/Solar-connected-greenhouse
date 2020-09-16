@@ -140,10 +140,10 @@ void setup(void){
   /* Greenhouse output*/
 
   pinMode(GREENHOUSE_VMC ,OUTPUT);
-  pinMode(GREENHOUSE_PUMP_COOLING,OUTPUT);  // Note Pwm output
+  pinMode(GREENHOUSE_PUMP_COOLING,OUTPUT);   // Note Pwm output
   pinMode(GREENHOUSE_FAN_COOLING,OUTPUT);
   pinMode(GREENHOUSE_LAMP,OUTPUT);
-  pinMode(GREENHOUSE_HEATING,OUTPUT);
+  pinMode(WATER_TANK_HEATING,OUTPUT);        // Note Pwm output
   pinMode(GREENHOUSE_HUMIDIFICATOR,OUTPUT);  
 
   servo_vmc.attach(GREENHOUSE_SERVO_VMC);
@@ -154,7 +154,7 @@ void setup(void){
   pinMode(EV_GARDEN_SPRAY,OUTPUT);
   pinMode(EV_GREENHOUSE_SPRAY,OUTPUT);
   pinMode(EV_COMPOST_SPRAY,OUTPUT);
-  pinMode(COMPOST_HEATING,OUTPUT);          // Note Pwm output
+  pinMode(OUT_COOLING,OUTPUT);    
   pinMode(HYDROPONIE_PUMP,OUTPUT);       // Note Pwm output
   pinMode(OUT_GARDEN_SPRAY,OUTPUT);
 

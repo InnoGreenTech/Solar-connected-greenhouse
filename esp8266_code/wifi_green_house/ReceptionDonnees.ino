@@ -53,10 +53,10 @@ void recep_data(){
                                    if (time_pump_hydroponie_1==0){time_pump_hydroponie_1= int_content;} 
                                    else if (int_content>=time_pump_hydroponie_1){time_pump_hydroponie=int_content-time_pump_hydroponie_1;}          
                                    break;
-                                case CODE_HEAT_COMPOST:
-                                  if (time_heat_compost_1==0){ time_heat_compost_1=int_content;}
-                                  else if (int_content>=time_heat_compost_1){time_heat_compost=int_content- time_heat_compost_1;}
-                                  break;
+                               case CODE_OUT_COOLING:
+                                  if (time_out_cooling_1==0){time_out_cooling_1=int_content;}
+                                  else if (int_content>=time_out_cooling_1){time_out_cooling=int_content- time_out_cooling_1;}
+                                  break; 
                                 case CODE_SPRAY_COMPOST:
                                   if (time_spray_compost_1==0){time_spray_compost_1=int_content;}
                                   else if (int_content>=time_spray_compost_1){time_spray_compost=int_content- time_spray_compost_1;}
@@ -79,11 +79,7 @@ void recep_data(){
                                case CODE_SPRAY_GARDEN:
                                   if (time_spray_garden_1==0){time_spray_garden_1=int_content;}
                                   else if (int_content>=time_spray_garden_1){time_spray_garden=int_content- time_spray_garden_1;}
-                                  break;
-                               case CODE_SPRAY_OUT_GARDEN:
-                                  if (time_spray_out_garden_1==0){time_spray_out_garden_1=int_content;}
-                                  else if (int_content>=time_spray_out_garden_1){time_spray_out_garden=int_content- time_spray_out_garden_1;}
-                                  break;                               
+                                  break;                             
                                case CODE_TEMPERATURE_SOIL_GARDEN:
                                   if (float_content>(-20) and float_content<70){temperature_soil_garden=float_content;}
                                   break;
@@ -119,10 +115,10 @@ void recep_data(){
                                   if (time_lamp_greenhouse_1==0){time_lamp_greenhouse_1=int_content;}
                                   else if (int_content>=time_lamp_greenhouse_1){time_lamp_greenhouse=int_content- time_lamp_greenhouse_1;}
                                   break;                              
-                              case CODE_HEAT_GREENHOUSE:
-                                  if (time_heat_greenhouse_1==0){time_heat_greenhouse_1=int_content;}
-                                  else if (int_content>=time_heat_greenhouse){time_heat_greenhouse=int_content- time_heat_greenhouse_1;}
-                                  break;                                  
+                              case CODE_HEAT_TANK_WATER:
+                                  if (time_heat_tank_water_1==0){ time_heat_tank_water_1=int_content;}
+                                  else if (int_content>=time_heat_tank_water_1){time_heat_tank_water=int_content- time_heat_tank_water_1;}
+                                  break;                                
                               case CODE_FAN_COOLING_GREENHOUSE:
                                   if (time_fan_cooling_greenhouse_1==0){time_fan_cooling_greenhouse_1=int_content;}
                                   else if (int_content>=time_fan_cooling_greenhouse_1){time_fan_cooling_greenhouse=int_content- time_fan_cooling_greenhouse_1;}

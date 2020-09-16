@@ -53,12 +53,13 @@
 
     #define CODE_COMMAND_INFO                           "$I$"
     #define CODE_COMMAND_READ                           "$R$" 
-    #define CODE_COMMAND_WRITE                          "$W$"       
+    #define CODE_COMMAND_WRITE                          "$W$"
+     
     
     #define CODE_TEMPERATURE_COMPOST                    10     
     #define CODE_HUMIDITY_COMPOST                       11
     #define CODE_PUMP_HYDROPONIE                        12
-    #define CODE_HEAT_COMPOST                           13
+    #define CODE_OUT_COOLING                            13
     #define CODE_SETTING_TEMPERATURE_COMPOST            14
     #define CODE_SETTING_HUMIDITY_COMPOST               15 
     #define CODE_ECO_TEMPERATURE_COMPOST                16
@@ -74,9 +75,10 @@
     #define CODE_TEMPERATURE_SOIL_GARDEN                24
     #define CODE_MOISTURE_GARDEN                        25
     #define CODE_SETTING_MOISTURE_GARDEN                26
-    #define CODE_LUMINOSITY_GREENHOUSE                  27
-    #define CODE_PRESSURE_OUT                           28  
-    #define CODE_SETTING_ALTITUDE                       29 
+    #define CODE_LUMINOSITY_GREENHOUSE                  27   
+    #define CODE_PRESSURE_OUT                           28
+    #define CODE_SETTING_ALTITUDE                       29
+    #define CODE_HEAT_TANK_WATER                        13
     
     #define CODE_TEMPERATURE_GREENHOUSE                 30
     #define CODE_HUMIDITY_GREENHOUSE                    31
@@ -84,7 +86,7 @@
     #define CODE_LEVEL_WATER_GREENHOUSE                 33
     #define CODE_SPRAY_GREENHOUSE                       34
     #define CODE_LAMP_GREENHOUSE                        35
-    #define CODE_HEAT_GREENHOUSE                        36
+    #define CODE_HEAT_TANK_WATER                        36
     #define CODE_FAN_COOLING_GREENHOUSE                 37
     #define CODE_PUMP_COOLING_GREENHOUSE                38
     #define CODE_TEMPERATURE_WATER_GREENHOUSE           39
@@ -162,23 +164,25 @@
     byte    forced_greenhouse=0;                  // control if the forced mode is activate
     byte    desactive_greenhouse=0;
 
-    unsigned int time_heat_greenhouse;
+    //unsigned int time_heat_greenhouse;
     unsigned int time_fan_cooling_greenhouse;
     unsigned int time_pump_cooling_greenhouse;
     unsigned int time_spray_greenhouse;
     unsigned int time_vmc_greenhouse;
     unsigned int time_lamp_greenhouse;
     unsigned int time_humidificator_greenhouse;
+    unsigned int time_heat_water_tank;
     
     int          flap_ventilation_greenhouse;
 
-    unsigned int time_heat_greenhouse_1;
+    //unsigned int time_heat_greenhouse_1;
     unsigned int time_fan_cooling_greenhouse_1;
     unsigned int time_pump_cooling_greenhouse_1;
     unsigned int time_spray_greenhouse_1;
     unsigned int time_vmc_greenhouse_1;
     unsigned int time_lamp_greenhouse_1;
     unsigned int time_humidificator_greenhouse_1;
+    unsigned int time_heat_water_tank_1;
     
 /* output modul garden mode */
 
@@ -188,17 +192,19 @@
 
     unsigned int time_main_pump=0;
     unsigned int time_spray_compost=0;
-    unsigned int time_heat_compost=0;
+    unsigned int time_heat_tank_water=0;
     unsigned int time_pump_hydroponie=0;
     unsigned int time_spray_garden=0;
     unsigned int time_spray_out_garden=0;
+    unsigned int time_out_cooling;
 
     unsigned int time_main_pump_1=0;
     unsigned int time_spray_compost_1=0;
-    unsigned int time_heat_compost_1=0;
+    unsigned int time_heat_tank_water_1=0;
     unsigned int time_pump_hydroponie_1=0;
     unsigned int time_spray_garden_1=0;
     unsigned int time_spray_out_garden_1=0;
+    unsigned int time_out_cooling_1=0;
     
 /* String for commnunication */
 

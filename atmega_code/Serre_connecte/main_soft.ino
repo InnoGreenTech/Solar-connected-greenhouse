@@ -70,6 +70,9 @@ void loop(void){
  if(bitRead(refresh_demand,REFRESH_SCREEN)){bitClear(refresh_demand,REFRESH_SCREEN);}
  if(bitRead(refresh_demand,REFRESH_DATA)){bitClear(refresh_demand,REFRESH_DATA);}
 
+ /* save solar energy in the water */
+   energy_saver();
+
  wdt_reset();
 
 }

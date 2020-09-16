@@ -81,14 +81,14 @@ String answer_add_module(){
          page +=F("actuator;a2;vmc_greenhouse;MOSFET\r\n");
          page +=F("actuator;a3;fan_cooling_greenhouse;MOSFET\r\n");
          page +=F("actuator;a4;pump_cooling_greenhouse;MOSFET\r\n");
-         page +=F("actuator;a5;heating_greenhouse;MOSFET\r\n");
+         page +=F("actuator;a5;heating_tank_water;MOSFET\r\n");
          page +=F("actuator;a6;spray_greenhouse;MOSFET\r\n"); 
          page +=F("actuator;a7;lamp_greenhouse;MOSFET\r\n");
          page +=F("actuator;a8;flap_venti_greenhouse;SERVO\r\n");
          page +=F("actuator;a9;humidificator_greenhouse;MOSFET\r\n");           
 
          page +=F("actuator;a10;spray_garden;MOSFET\r\n");
-         page +=F("actuator;a11;heating_compost;MOSFET\r\n");
+         page +=F("actuator;a11;out_cooling;MOSFET\r\n");
          page +=F("actuator;a12;spray_compost;MOSFET\r\n");
          page +=F("actuator;a13;pump_compost;MOSFET\r\n");
          page +=F("actuator;a14;spray_out_garden;MOSFET\r\n");
