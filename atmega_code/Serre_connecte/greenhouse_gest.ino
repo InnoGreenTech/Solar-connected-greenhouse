@@ -164,25 +164,30 @@ void day_detect(){
 /* Use the water tank to catch the solar energy available */
 
 void energy_saver(){
+  //Serial.println(average_temperature_greenhouse);
   if (average_temperature_greenhouse<24){
-    if (v_battery>27.1 and a_battery>-0.5 and v_battery<0.5 and !bitRead(output_greenhouse,HEATING_WATER_TANK))
+    //Serial.println(pwm_heat_water_tank);
+    //Serial.println(v_battery);
+    if (v_battery>27.1 and a_battery>-0.5 and a_battery<0.5 and !bitRead(output_greenhouse,HEATING_WATER_TANK))
       {
         bitSet(output_greenhouse,HEATING_WATER_TANK);
+        //Serial.println("set");
       }
-    else if (v_battery<26)
+    else if (v_battery<26.5)
        {
-        bitClear(output_garden,HEATING_WATER_TANK);
+        bitClear(output_greenhouse,HEATING_WATER_TANK);
         pwm_heat_water_tank=0;
-        return;
+       // Serial.println("reset");
       }
     if (bitRead(output_greenhouse,HEATING_WATER_TANK))
       { 
-        tension_battery();
+        //tension_battery();
+        //Serial.println("adjust");
         intensity_battery();
-        if (a_battery<-1 and pwm_heat_water_tank<255 )
-        {pwm_heat_water_tank=pwm_heat_water_tank+1;}
-        else if(a_battery>-0.5 and pwm_heat_water_tank>0)
-        {pwm_heat_water_tank= pwm_heat_water_tank-1;}  
+        if (a_battery<-0.7 and pwm_heat_water_tank>0 )
+        {pwm_heat_water_tank=pwm_heat_water_tank-1;}
+        else if(a_battery>-0.5 and pwm_heat_water_tank<255)
+        {pwm_heat_water_tank= pwm_heat_water_tank+1;}  
         heating_water_tank(0);      
       }
   }

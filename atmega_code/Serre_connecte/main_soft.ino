@@ -19,6 +19,11 @@ void loop(void){
 
   garden_gest();
   tactil ();
+  
+   /* save solar energy in the water */
+  energy_saver();
+  tactil ();
+
 
   mode();
   tactil ();
@@ -27,10 +32,13 @@ void loop(void){
   tactil ();
 
   output_garden_control();
+
   tactil ();
 
   recep_wifi();
+  
   tactil ();
+
 
   send_data();
 
@@ -70,8 +78,7 @@ void loop(void){
  if(bitRead(refresh_demand,REFRESH_SCREEN)){bitClear(refresh_demand,REFRESH_SCREEN);}
  if(bitRead(refresh_demand,REFRESH_DATA)){bitClear(refresh_demand,REFRESH_DATA);}
 
- /* save solar energy in the water */
-   energy_saver();
+
 
  wdt_reset();
 

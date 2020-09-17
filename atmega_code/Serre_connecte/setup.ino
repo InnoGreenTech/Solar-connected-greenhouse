@@ -161,7 +161,7 @@ void setup(void){
   /* init average day */
 
   for (int i=0; i<NUMBER_SAMPLES_DAY;i++){
-    day_temperature_greenhouse[i]=25;
+    day_temperature_greenhouse[i]=24;
     day_humidity_greenhouse[i]=70;
     day_temperature_out[i]=20;
     day_humidity_out[i]=50;   
@@ -170,12 +170,12 @@ void setup(void){
 
   wdt_enable(WDTO_4S);
 
-      for (int test=0; test<NUMBER_SAMPLES_DAY; test++){
+     /* for (int test=0; test<NUMBER_SAMPLES_DAY; test++){
       day_temperature_greenhouse[test]=30;
       day_humidity_greenhouse[test]=80;
       day_temperature_out[test]=20;
       day_humidity_out[test]=50;
-    }
+    }*/
 
 
 }
