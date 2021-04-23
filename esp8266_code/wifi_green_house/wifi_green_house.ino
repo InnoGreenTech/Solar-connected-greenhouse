@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-    info@InnoGreenTech.fr
+    info@innogreentech.fr
 
 ****************************************************************************************/
 
@@ -390,7 +390,7 @@ void setup() {
              {
            
               
-              /*Read the houre and date on internet */
+              /*Read the hour and date on internet */
             
               NTP.begin("pool.ntp.org", 1, true);  //configuration de la récupération de la date,  Serveur+1 heure, Heure été/hivers
               NTP.setInterval(3600);                // Toutes les heures
@@ -425,7 +425,7 @@ void setup() {
               httpUpdater.setup(&server, update_path, update_username, update_password);
              }
               
-              /*listen on the server*/
+              /*listen the server*/
               
               server.begin();
 

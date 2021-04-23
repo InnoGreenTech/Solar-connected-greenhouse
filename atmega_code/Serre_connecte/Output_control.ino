@@ -46,7 +46,7 @@ void output_garden_control(){
           {
             if (bitRead(output_greenhouse,PUMP_COOLING_GREENHOUSE) || bitRead(forced_greenhouse,PUMP_COOLING_GREENHOUSE)) 
                     {
-                      analogWrite(GREENHOUSE_PUMP_COOLING,120);                                          
+                      analogWrite(GREENHOUSE_PUMP_COOLING,80);                                          
                     }
             else{analogWrite(GREENHOUSE_PUMP_COOLING,0);}
           }
@@ -89,7 +89,7 @@ void output_garden_control(){
         
         if (!bitRead(desactive_greenhouse,LAMP_GREENHOUSE))
           {
-            if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>24) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
+            if ((bitRead(output_greenhouse,LAMP_GREENHOUSE)and v_battery>25) || bitRead(forced_greenhouse,LAMP_GREENHOUSE)){
               digitalWrite(GREENHOUSE_LAMP,1);
               time_lamp_greenhouse=time_lamp_greenhouse+DELAY_REFRESH_SCREEN_SECONDS;
             }
